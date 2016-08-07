@@ -1,0 +1,19 @@
+Changelog v1.1 (04/12/2014)
+- Update to bootstrap v3.1.1
+- Add FontAwesome v4.0.1
+- Add Masonry js
+- Add Imagesloaded js
+- Add html5shiv js
+- Add respond js
+- Add responsive css
+- Fix bug in sub dropdown menu
+- Add animation in subdropdown menu
+- Change home slider style
+- Change layout list product and category with masonry
+- Add badge new and sale
+- Change nav style in sidebar
+- Change slider product in product detail
+- Add tabable in product detail for product description description
+- Add related product in product detail
+- Change footer style
+- Add social icon in copyright
