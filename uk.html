@@ -78,9 +78,13 @@
 			</div>
 
 			<div class="col-md-6 col-sm-6 col-xs-6">
-		
+				<a href="javascript:;" class="simpleCart_checkout"></a>
+				<!-- button to empty the cart -->
+				<a href="javascript:;" class="simpleCart_empty"></a>
+				<!-- show the cart -->
+				<div class="simpleCart_items"></div>
 
-			
+				<!--End #cartPopover-->
 			</div>
 		</div>
       <!-- end:logo -->
@@ -124,41 +128,28 @@
                 <ul class="cart list-unstyled">
                   <li>
                     <div class="row">
-                   <script>
-                      simpleCart({
-                        checkout: {
-                          type: "PayPal",
-                          email: "you@yours.com"
-                        }
-                      });
-                       
-                    </script>
-                        
-                        	<a href="javascript:;" class="simpleCart_checkout"></a>
-                            <!-- button to empty the cart -->
-                           
-                        <a href="javascript:;" class="simpleCart_empty"><i class="fa fa-trash-o"></i></a>
-                            <!-- show the cart -->
-                            <div class="simpleCart_items"></div>
-                        
+                      <div class="col-sm-7 col-xs-7">1 <a href="#">Canada Disc Flag T-shirt</a> <span>[ 26 ]</span></div>
+                      <div class="col-sm-5 col-xs-5 text-right"><strong>$54.00</strong> <a href="#"><i class="fa fa-trash-o"></i></a></div>
                     </div>
                   </li>
                   <li>
                     <div class="row">
-              
-                 
+                      <div class="col-sm-7 col-xs-7">1 <a href="#">Jamaica H-track T-shirt</a> <span>[ M ]</span></div>
+                      <div class="col-sm-5 col-sm-5 text-right"><strong>$26.00</strong> <a href="#"><i class="fa fa-trash-o"></i></a></div>
                     </div>
                   </li>
                 </ul>
                 <ul class="list-unstyled total-price">
                   <li>
                     <div class="row">
-                    <span class="simpleCart_quantity"></span> items - <span class="simpleCart_total"></span>
+                      <div class="col-sm-8 col-xs-8">Shipping</div>
+                      <div class="col-sm-4 col-xs-4 text-right">$1.00</div>
                     </div>
                   </li>
                   <li>
                     <div class="row">
-             
+                      <div class="col-sm-8 col-xs-8">Total</div>
+                      <div class="col-sm-4 col-xs-4 text-right">$71.00</div>
                     </div>
                   </li>
                   <li>
@@ -167,7 +158,7 @@
                         <a class="btn btn-default" href="cart.html">Cart</a>
                       </div>
                       <div class="col-sm-6 col-xs-6 text-right">
-                           <a href="javascript:;" class="simpleCart_checkout btn btn-primary">Checkout</a>
+                        <a class="btn btn-primary" href="login.html">Checkout</a>
                       </div>
                     </div>
                   </li>
@@ -199,141 +190,125 @@
         <!-- end:sidebar -->
 
         <!-- begin:content -->
-        <div class="col-md-9 col-sm-8 content ">
-            <div class="simpleCart_shelfItem">
+        <div class="col-md-9 col-sm-8 content">
           
           <div class="row">
-            <div class="col-md-12">
-              <div class="heading-title">
-                <h3><span class="item_name">Trinidad and Tobago Disc Flag Tshirt</span></h3>
-                </div>
-              <div class="row">
-                <!-- begin:product-image-slider -->
-                <div class="col-md-6 col-sm-6">
-                    <img src="img/products/Men/JaredB_ver2_web.png" >
-                </div>
-                <!-- end:product-image-slider -->
+            <div class="col-md-12">                
+              <h3>U.K</h3>
+              <hr />
 
-                <!-- begin:product-spesification -->
-                <div class="col-md-6 col-sm-6">
-                  <div class="single-desc">
-                    <form>
-                      
-
-                      <table>
-                        <tbody>
-                          
-                          <tr class="hidden-xs">
-                              <td><strong>Availability</strong></td>
-                              <td>:</td>
-                              <td>In Stock</td>
-                          </tr>
-                          <tr>
-                              <td colspan="3"> <span class="price item_price">$21.42</span></td>
-                          </tr>
-                          
-                          <tr>
-                              <td><strong>Size</strong></td>
-                              <td>:</td>
-                              <td>
-                                <select class="form-control item_size">
-                                  
-                                  <option>S</option>
-                                  <option>M</option>
-                                  <option>L</option>
-                                  <option>XL</option><option>XXL</option>
-                                </select>
-                              </td>
-                          </tr>
-                          <tr>
-                              <td><strong>Quantity</strong></td>
-                              <td>:</td>
-                              <td>
-                                <input type="text" class="form-control item_Quantity" value="1">
-                              </td>
-                          </tr>
-                          <tr>
-                              <td colspan="3">
-                                <a  href="javascript:;" class="btn btn-sm btn-primary item_add">Add to Cart</a>
-                              </td>  
-                          </tr>
-                        </tbody>
-                      </table>
-                    </form>
-                  </div>
-                </div>
-                  </div>
-                <!-- end:product-spesification -->
-              </div>
-              <!-- break -->
-              <!-- begin:product-detail -->
-              <div class="row">
-                <div class="col-md-6 content-detail">
-                    <div class="panel panel-default">
-                  <div class="panel-heading">
-                    <h3 class="panel-title">Details</h3>
-                  </div>
-                  <div class="panel-body">
-                    Made from 100% pre-shrunk cotton
-                  </div>
-                    </div>
+              <!-- begind:item -->
+              <div class="row product-container">
+                <div class="col-md-4 col-sm-4 col-xs-6">
+                  <div class="thumbnail product-item">
+                   <div class="simpleCart_shelfItem">
+						<img src="/img/products/Men/AustinW_ver5_web.png" class="item_thumb" />
+						<h4 class="item_name">U.K Disc Flag T-shirt</h4>
+                          <div class="btn-group">
+                            <button type="button" class="btn btn-primary">S</button>
+                            <button type="button" class="btn btn-primary">M</button>
+                            <button type="button" class="btn btn-primary">L</button>
+                          </div>
+                        <br>
+						<span class="item_price">$35.99</span>
+                         <button type="button" class="btn btn-default" aria-label="Left Align">
+                        <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
+                        </button>
+					</div>
                 </div>
               </div>
-              <!-- end:product-detail -->
-
-              <!-- begin:related-product -->
-              <div class="row">
+                  
+                  <div class="col-md-4 col-sm-4 col-xs-6">
+                  <div class="thumbnail product-item">
+                   <div class="simpleCart_shelfItem">
+						<img src="/img/products/Women/Missy-ver4_web.png" class="item_thumb" />
+						<h4 class="item_name">U.K Disc Flag T-shirt</h4>
+                          <div class="btn-group">
+                            <button type="button" class="btn btn-primary">S</button>
+                            <button type="button" class="btn btn-primary">M</button>
+                            <button type="button" class="btn btn-primary">L</button>
+                          </div>
+                        <br>
+						<span class="item_price">$35.99</span>
+                         <button type="button" class="btn btn-default" aria-label="Left Align">
+                        <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
+                        </button>
+					</div>
+                </div>
+              </div>
+                  
+                  <div class="col-md-4 col-sm-4 col-xs-6">
+                  <div class="thumbnail product-item">
+                   <div class="simpleCart_shelfItem">
+						<img src="/img/products/Men/JaredB_ver4_web.png" class="item_thumb" />
+						<h4 class="item_name">U.K Disc Flag T-shirt</h4>
+                          <div class="btn-group">
+                            <button type="button" class="btn btn-primary">S</button>
+                            <button type="button" class="btn btn-primary">M</button>
+                            <button type="button" class="btn btn-primary">L</button>
+                          </div>
+                        <br>
+						<span class="item_price">$35.99</span>
+                         <button type="button" class="btn btn-default" aria-label="Left Align">
+                        <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
+                        </button>
+					</div>
+                </div>
+              </div>
+                
+                <div class="col-md-4 col-sm-4 col-xs-6">
+                  <div class="thumbnail product-item">
+                    <div class="simpleCart_shelfItem">
+						<img src="/img/products/Women/ANNA-P7_ver4_web.png" class="item_thumb" />
+						<h4 class="item_name">U.K Disc Flag T-shirt</h4>
+                          <div class="btn-group">
+                            <button type="button" class="btn btn-primary">S</button>
+                            <button type="button" class="btn btn-primary">M</button>
+                            <button type="button" class="btn btn-primary">L</button>
+                          </div>
+                        <br>
+						<span class="item_price">$35.99</span>
+                         <button type="button" class="btn btn-default" aria-label="Left Align">
+                        <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
+                        </button>
+					</div>
+                  </div>
+                </div>
+                
+                  
+                
+                
+                
+                
+                  
+                  
+              </div>
+              <!-- end:item -->
+              
+              <!-- begin:pagination -->
+             <!-- <div class="row">
                 <div class="col-md-12">
-                  <div class="heading-title">
-                    <h3>Related Products</h3>
-                  </div>
-
-                  <div class="row product-container" style="position: relative; height: 463.75px;">
-                    <div class="col-md-4 col-sm-4 col-xs-6">
-                  <div class="thumbnail product-item">
-                   <div class="simpleCart_shelfItem">
-						<img src="/img/products/Men/AustinW_ver6_web.png" class="item_thumb" />
-						<span class="item_name">Jamaica H-track T-shirt</span>
-                       <span class="item_price">$35.99</span><br>
-                          
-					</div>
+                  <ul class="pagination">
+                  <li class="disabled"><a href="#">&lsaquo;</a></li>
+                  <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
+                  <li><a href="#">2</a></li>
+                  <li><a href="#">3</a></li>
+                  <li><a href="#">4</a></li>
+                  <li><a href="#">5</a></li>
+                  <li><a href="#">&rsaquo;</a></li>
+                </ul>
                 </div>
-                  </div>
-                    <div class="col-md-4 col-sm-4 col-xs-6">
-                  <div class="thumbnail product-item">
-                   <div class="simpleCart_shelfItem">
-						<img src="/img/products/Men/JaredB_web.png" class="item_thumb" />
-						<span class="item_name">Jamaica H-track T-shirt</span>
-                       <span class="item_price">$35.99</span><br>
-                          
-					</div>
-                </div>
-                  </div>
-                    <div class="col-md-4 col-sm-4 col-xs-6">
-                  <div class="thumbnail product-item">
-                   <div class="simpleCart_shelfItem">
-						<img src="/img/products/Men/AustinW_ver2_web.png" class="item_thumb" />
-						<span class="item_name">Jamaica H-track T-shirt</span>
-                       <span class="item_price">$35.99</span><br>
-                          
-					</div>
-                </div>
-                  </div>
-                    
-                  </div>
-                </div>
-              </div>
-              <!-- end:related-product -->
-
+              </div>-->
+              <!-- end:pagination -->
             </div>
           </div>
         </div>
         <!-- end:content -->
       </div>
       <!-- end:article -->
-      
+
       <!-- begin:footer -->
-       <div class="row footer">
+        <div class="row footer">
         <div class="col-md-12 copyright">
           <div class="row">
             <div class="col-md-6 col-sm-6 copyright-left">

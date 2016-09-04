@@ -78,13 +78,9 @@
 			</div>
 
 			<div class="col-md-6 col-sm-6 col-xs-6">
-				<a href="javascript:;" class="simpleCart_checkout"></a>
-				<!-- button to empty the cart -->
-				<a href="javascript:;" class="simpleCart_empty"></a>
-				<!-- show the cart -->
-				<div class="simpleCart_items"></div>
+		
 
-				<!--End #cartPopover-->
+			
 			</div>
 		</div>
       <!-- end:logo -->
@@ -94,13 +90,13 @@
 			<div class="col-md-12">
 				<div class="nav-menus">
 					<ul class="nav nav-pills">
-						<li><a href="index.html">Home</a></li>
-						<li class="active"><a href="men.html">Men</a></li>
+						<li ><a href="index.html">Home</a></li>
+						<li ><a href="men.html">Men</a></li>
                         <li><a href="women.html">Women</a></li>
 						<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="men.html">Nationality</a>
 							<ul class="dropdown-menu" id="menu1">
 								<li><a href="#">Canada</a></li>								
-								<li><a href="Jamaica.html">Jamaica</a></li>
+								<li class="active"><a href="Jamaica.html">Jamaica</a></li>
 								<li><a href="categories.html">Mexico</a></li>
 								<li><a href="#">Trinidad and Tobago</a></li>
 								<li><a href="#">U.S.A</a></li>
@@ -128,28 +124,41 @@
                 <ul class="cart list-unstyled">
                   <li>
                     <div class="row">
-                      <div class="col-sm-7 col-xs-7">1 <a href="#">Canada Disc Flag T-shirt</a> <span>[ 26 ]</span></div>
-                      <div class="col-sm-5 col-xs-5 text-right"><strong>$54.00</strong> <a href="#"><i class="fa fa-trash-o"></i></a></div>
+                   <script>
+                      simpleCart({
+                        checkout: {
+                          type: "PayPal",
+                          email: "you@yours.com"
+                        }
+                      });
+                       
+                    </script>
+                        
+                        	<a href="javascript:;" class="simpleCart_checkout"></a>
+                            <!-- button to empty the cart -->
+                           
+                        <a href="javascript:;" class="simpleCart_empty"><i class="fa fa-trash-o"></i></a>
+                            <!-- show the cart -->
+                            <div class="simpleCart_items"></div>
+                        
                     </div>
                   </li>
                   <li>
                     <div class="row">
-                      <div class="col-sm-7 col-xs-7">1 <a href="#">Jamaica H-track T-shirt</a> <span>[ M ]</span></div>
-                      <div class="col-sm-5 col-sm-5 text-right"><strong>$26.00</strong> <a href="#"><i class="fa fa-trash-o"></i></a></div>
+              
+                 
                     </div>
                   </li>
                 </ul>
                 <ul class="list-unstyled total-price">
                   <li>
                     <div class="row">
-                      <div class="col-sm-8 col-xs-8">Shipping</div>
-                      <div class="col-sm-4 col-xs-4 text-right">$1.00</div>
+                    <span class="simpleCart_quantity"></span> items - <span class="simpleCart_total"></span>
                     </div>
                   </li>
                   <li>
                     <div class="row">
-                      <div class="col-sm-8 col-xs-8">Total</div>
-                      <div class="col-sm-4 col-xs-4 text-right">$71.00</div>
+             
                     </div>
                   </li>
                   <li>
@@ -158,7 +167,7 @@
                         <a class="btn btn-default" href="cart.html">Cart</a>
                       </div>
                       <div class="col-sm-6 col-xs-6 text-right">
-                        <a class="btn btn-primary" href="login.html">Checkout</a>
+                           <a href="javascript:;" class="simpleCart_checkout btn btn-primary">Checkout</a>
                       </div>
                     </div>
                   </li>
@@ -194,7 +203,7 @@
           
           <div class="row">
             <div class="col-md-12">                
-              <h3>Men T-shirts</h3>
+              <h3>Jamaica</h3>
               <hr />
 
               <!-- begind:item -->
@@ -202,285 +211,20 @@
                 <div class="col-md-4 col-sm-4 col-xs-6">
                   <div class="thumbnail product-item">
                     <div class="simpleCart_shelfItem">
-						<img src="/img/products/Men/AustinW_ver2_web.png" class="item_thumb" />
-						<span class="item_name">Canada Disc Flag T-shirt</span>
-                           <span class="item_price">$35.99</span><br>
-                          <div class="btn-group btn-group-xs">                            
-                            <button value="Small" type="button" class="btn btn-primary">S</button>
-                            <button value="Medium" type="button" class="btn btn-primary">M</button>
-                            <button value="Large" type="button" class="btn btn-primary">L</button>
-                            <button value="XL" type="button" class="btn btn-primary">XL</button>
-                            <button value="XXL" type="button" class="btn btn-primary">XXL</button>
-                          </div>
-                        <br>
-						 
-                         <button type="button" class="btn btn-default" aria-label="Left Align">
-                       <a class="item_add" href="javascript:;"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span></a>
-                        </button>
+						<img src="/img/products/Women/ANNA-P7_ver6_web.png" class="item_thumb" />
+						<span class="item_name">Jamaica V-track T-shirt</span>
+                        <span class="item_price">$35.99</span><br>
+                       
+                          
 					</div>
                   </div>
                 </div>
-                <div class="col-md-4 col-sm-4 col-xs-6">
-                  <div class="thumbnail product-item">
-                    <div class="simpleCart_shelfItem">
-						<img src="/img/products/Men/JaredB_web.png" class="item_thumb" />
-						<span class="item_name">Canada Disc Flag T-shirt</span>
-                           <span class="item_price">$35.99</span><br>
-                          <div class="btn-group btn-group-xs">                            
-                            <button value="Small" type="button" class="btn btn-primary">S</button>
-                            <button value="Medium" type="button" class="btn btn-primary">M</button>
-                            <button value="Large" type="button" class="btn btn-primary">L</button>
-                            <button value="XL" type="button" class="btn btn-primary">XL</button>
-                            <button value="XXL" type="button" class="btn btn-primary">XXL</button>
-                          </div>
-                        <br>
-						 
-                         <button type="button" class="btn btn-default" aria-label="Left Align">
-                       <a class="item_add" href="javascript:;"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span></a>
-                        </button>
-					</div>
-                  </div>
-                </div>
-                <div class="col-md-4 col-sm-4 col-xs-6">
-                  <div class="thumbnail product-item">
-                   <div class="simpleCart_shelfItem">
-						<img src="/img/products/Men/AustinB_web.png" class="item_thumb" />
-						<span class="item_name">Mexico Disc Flag T-shirt</span>
-                           <span class="item_price">$35.99</span><br>
-                          <div class="btn-group btn-group-xs">                            
-                            <button value="Small" type="button" class="btn btn-primary">S</button>
-                            <button value="Medium" type="button" class="btn btn-primary">M</button>
-                            <button value="Large" type="button" class="btn btn-primary">L</button>
-                            <button value="XL" type="button" class="btn btn-primary">XL</button>
-                            <button value="XXL" type="button" class="btn btn-primary">XXL</button>
-                          </div>
-                        <br>
-						 
-                         <button type="button" class="btn btn-default" aria-label="Left Align">
-                       <a class="item_add" href="javascript:;"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span></a>
-                        </button>
-					</div>
-                </div>
-                  </div>
-                <div class="col-md-4 col-sm-4 col-xs-6">
-                  <div class="thumbnail product-item">
-                    <div class="simpleCart_shelfItem">
-						<img src="/img/products/Men/AustinW_web.png" class="item_thumb" />
-						<span class="item_name">Mexico Disc Flag T-shirt</span>
-                          <span class="item_price">$35.99</span><br>
-                          <div class="btn-group btn-group-xs">                            
-                            <button value="Small" type="button" class="btn btn-primary">S</button>
-                            <button value="Medium" type="button" class="btn btn-primary">M</button>
-                            <button value="Large" type="button" class="btn btn-primary">L</button>
-                            <button value="XL" type="button" class="btn btn-primary">XL</button>
-                            <button value="XXL" type="button" class="btn btn-primary">XXL</button>
-                          </div>
-                        <br>
-						 
-                         <button type="button" class="btn btn-default" aria-label="Left Align">
-                       <a class="item_add" href="javascript:;"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span></a>
-                        </button>
-                        
-					</div>
-                  </div>
-                </div>
-                <div class="col-md-4 col-sm-4 col-xs-6">
-                  <div class="thumbnail product-item">
-                    <div class="simpleCart_shelfItem">
-						<img src="/img/products/Men/AustinW_ver3_web.png" class="item_thumb" />
-						<span class="item_name">Trinidad and Tobago Disc Flag T-shirt</span>
-                         <span class="item_price">$35.99</span><br>
-                          <div class="btn-group btn-group-xs">                            
-                            <button value="Small" type="button" class="btn btn-primary">S</button>
-                            <button value="Medium" type="button" class="btn btn-primary">M</button>
-                            <button value="Large" type="button" class="btn btn-primary">L</button>
-                            <button value="XL" type="button" class="btn btn-primary">XL</button>
-                            <button value="XXL" type="button" class="btn btn-primary">XXL</button>
-                          </div>
-                        <br>
-						 
-                         <button type="button" class="btn btn-default" aria-label="Left Align">
-                       <a class="item_add" href="javascript:;"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span></a>
-                        </button>
-					</div>
-                  </div>
-                </div>
-                <div class="col-md-4 col-sm-4 col-xs-6">
-                  <div class="thumbnail product-item">
-                   <div class="simpleCart_shelfItem">
-						<img src="/img/products/Men/JaredB_ver2_web.png" class="item_thumb" />
-						<span class="item_name">Trinidad and Tobago Disc Flag T-shirt</span>
-                          <span class="item_price">$35.99</span><br>
-                          <div class="btn-group btn-group-xs">                            
-                            <button value="Small" type="button" class="btn btn-primary">S</button>
-                            <button value="Medium" type="button" class="btn btn-primary">M</button>
-                            <button value="Large" type="button" class="btn btn-primary">L</button>
-                            <button value="XL" type="button" class="btn btn-primary">XL</button>
-                            <button value="XXL" type="button" class="btn btn-primary">XXL</button>
-                          </div>
-                        <br>
-						 
-                         <button type="button" class="btn btn-default" aria-label="Left Align">
-                       <a class="item_add" href="javascript:;"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span></a>
-                        </button>
-					</div>
-                </div>
-              </div>
                   
-                  
-                   <div class="col-md-4 col-sm-4 col-xs-6">
-                  <div class="thumbnail product-item">
-                    <div class="simpleCart_shelfItem">
-						<img src="/img/products/Men/AustinW_ver6_web.png" class="item_thumb" />
-						<span class="item_name">Jamaica Disc Flag T-shirt</span>
-                          <span class="item_price">$35.99</span><br>
-                          <div class="btn-group btn-group-xs">                            
-                            <button value="Small" type="button" class="btn btn-primary">S</button>
-                            <button value="Medium" type="button" class="btn btn-primary">M</button>
-                            <button value="Large" type="button" class="btn btn-primary">L</button>
-                            <button value="XL" type="button" class="btn btn-primary">XL</button>
-                            <button value="XXL" type="button" class="btn btn-primary">XXL</button>
-                          </div>
-                        <br>
-						 
-                         <button type="button" class="btn btn-default" aria-label="Left Align">
-                       <a class="item_add" href="javascript:;"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span></a>
-                        </button>
-					</div>
-                  </div>
-                </div>
-                <div class="col-md-4 col-sm-4 col-xs-6">
+                  <div class="col-md-4 col-sm-4 col-xs-6">
                   <div class="thumbnail product-item">
                     <div class="simpleCart_shelfItem">
 						<img src="/img/products/Men/JaredB_ver5_web.png" class="item_thumb" />
-				        <span class="item_name">Jamaica Disc Flag T-shirt</span>
-                          <span class="item_price">$35.99</span><br>
-                          <div class="btn-group btn-group-xs">                            
-                            <button value="Small" type="button" class="btn btn-primary">S</button>
-                            <button value="Medium" type="button" class="btn btn-primary">M</button>
-                            <button value="Large" type="button" class="btn btn-primary">L</button>
-                            <button value="XL" type="button" class="btn btn-primary">XL</button>
-                            <button value="XXL" type="button" class="btn btn-primary">XXL</button>
-                          </div>
-                        <br>
-						 
-                         <button type="button" class="btn btn-default" aria-label="Left Align">
-                       <a class="item_add" href="javascript:;"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span></a>
-                        </button>
-					</div>
-                  </div>
-                </div>
-                <div class="col-md-4 col-sm-4 col-xs-6">
-                  <div class="thumbnail product-item">
-                   <div class="simpleCart_shelfItem">
-						<img src="/img/products/Men/AustinW_ver7_web.png" class="item_thumb" />
-						<span class="item_name">Jamaica H-track T-shirt</span>
-                         <span class="item_price">$35.99</span><br>
-                          <div class="btn-group btn-group-xs">                            
-                            <button value="Small" type="button" class="btn btn-primary">S</button>
-                            <button value="Medium" type="button" class="btn btn-primary">M</button>
-                            <button value="Large" type="button" class="btn btn-primary">L</button>
-                            <button value="XL" type="button" class="btn btn-primary">XL</button>
-                            <button value="XXL" type="button" class="btn btn-primary">XXL</button>
-                          </div>
-                        <br>
-						 
-                         <button type="button" class="btn btn-default" aria-label="Left Align">
-                       <a class="item_add" href="javascript:;"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span></a>
-                        </button>
-					</div>
-                </div>
-                  </div>
-                <div class="col-md-4 col-sm-4 col-xs-6">
-                  <div class="thumbnail product-item">
-                    <div class="simpleCart_shelfItem">
-						<img src="/img/products/Men/JaredB_ver9_web.png" class="item_thumb" />
-						<span class="item_name">Jamaica V-track T-shirt</span>
-                          <span class="item_price">$35.99</span><br>
-                          <div class="btn-group btn-group-xs">                            
-                            <button value="Small" type="button" class="btn btn-primary">S</button>
-                            <button value="Medium" type="button" class="btn btn-primary">M</button>
-                            <button value="Large" type="button" class="btn btn-primary">L</button>
-                            <button value="XL" type="button" class="btn btn-primary">XL</button>
-                            <button value="XXL" type="button" class="btn btn-primary">XXL</button>
-                          </div>
-                        <br>
-						 
-                         <button type="button" class="btn btn-default" aria-label="Left Align">
-                       <a class="item_add" href="javascript:;"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span></a>
-                        </button>
-					</div>
-                  </div>
-                </div>
-                <div class="col-md-4 col-sm-4 col-xs-6">
-                  <div class="thumbnail product-item">
-                    <div class="simpleCart_shelfItem">
-						<img src="/img/products/Men/AustinW_ver10_web.png" class="item_thumb" />
-						<span class="item_name">Jamaica V-track T-shirt</span>
-                          <span class="item_price">$35.99</span><br>
-                          <div class="btn-group btn-group-xs">                            
-                            <button value="Small" type="button" class="btn btn-primary">S</button>
-                            <button value="Medium" type="button" class="btn btn-primary">M</button>
-                            <button value="Large" type="button" class="btn btn-primary">L</button>
-                            <button value="XL" type="button" class="btn btn-primary">XL</button>
-                            <button value="XXL" type="button" class="btn btn-primary">XXL</button>
-                          </div>
-                        <br>
-						 
-                         <button type="button" class="btn btn-default" aria-label="Left Align">
-                       <a class="item_add" href="javascript:;"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span></a>
-                        </button>
-					</div>
-                  </div>
-                </div>
-                <div class="col-md-4 col-sm-4 col-xs-6">
-                  <div class="thumbnail product-item">
-                   <div class="simpleCart_shelfItem">
-						<img src="/img/products/Men/JaredB_ver7_web.png" class="item_thumb" />
-						<span class="item_name">Jamaica H-track T-shirt</span>
-                           <span class="item_price">$35.99</span><br>
-                          <div class="btn-group btn-group-xs">                            
-                            <button value="Small" type="button" class="btn btn-primary">S</button>
-                            <button value="Medium" type="button" class="btn btn-primary">M</button>
-                            <button value="Large" type="button" class="btn btn-primary">L</button>
-                            <button value="XL" type="button" class="btn btn-primary">XL</button>
-                            <button value="XXL" type="button" class="btn btn-primary">XXL</button>
-                          </div>
-                        <br>
-						 
-                         <button type="button" class="btn btn-default" aria-label="Left Align">
-                       <a class="item_add" href="javascript:;"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span></a>
-                        </button>
-					</div>
-                </div>
-              </div>
-                 
-                   <div class="col-md-4 col-sm-4 col-xs-6">
-                  <div class="thumbnail product-item">
-                    <div class="simpleCart_shelfItem">
-						<img src="/img/products/Men/AustinW_ver4_web.png" class="item_thumb" />
-						<span class="item_name">U.S Disc Flag T-shirt</span>
-                         <span class="item_price">$35.99</span><br>
-                          <div class="btn-group btn-group-xs">                            
-                            <button value="Small" type="button" class="btn btn-primary">S</button>
-                            <button value="Medium" type="button" class="btn btn-primary">M</button>
-                            <button value="Large" type="button" class="btn btn-primary">L</button>
-                            <button value="XL" type="button" class="btn btn-primary">XL</button>
-                            <button value="XXL" type="button" class="btn btn-primary">XXL</button>
-                          </div>
-                        <br>
-						 
-                         <button type="button" class="btn btn-default" aria-label="Left Align">
-                       <a class="item_add" href="javascript:;"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span></a>
-                        </button>
-					</div>
-                  </div>
-                </div>
-                <div class="col-md-4 col-sm-4 col-xs-6">
-                  <div class="thumbnail product-item">
-                    <div class="simpleCart_shelfItem">
-						<img src="/img/products/Men/JaredB_ver3_web.png" class="item_thumb" />
-						<span class="item_name">U.S Disc Flag T-shirt</span>
+				        <span class="item_name">Jamaica V-track T-shirt</span>                         
                         <span class="item_price">$35.99</span><br>
                           <div class="btn-group btn-group-xs">                            
                             <button value="Small" type="button" class="btn btn-primary">S</button>
@@ -497,18 +241,30 @@
 					</div>
                   </div>
                 </div>
+                
                 <div class="col-md-4 col-sm-4 col-xs-6">
                   <div class="thumbnail product-item">
                    <div class="simpleCart_shelfItem">
-						<img src="/img/products/Men/AustinW_ver8_web.png" class="item_thumb" />
-						<span class="item_name">U.S H-track T-shirt</span>
-                          <span class="item_price">$35.99</span><br>
-                          <div class="btn-group btn-group-xs">                            
+						<img src="/img/products/Women/MissyB-ver1_web.png" class="item_thumb" />
+						<span class="item_name">Jamaica H-track T-shirt</span>
+                       <span class="item_price">$35.99</span><br>
+                          
+					</div>
+                </div>
+                  </div>
+                  
+                  <div class="col-md-4 col-sm-4 col-xs-6">
+                  <div class="thumbnail product-item">
+                    <div class="simpleCart_shelfItem">
+						<img src="/img/products/Men/JaredB_ver9_web.png" class="item_thumb" />
+						<span class="item_name">Jamaica V-track T-shirt</span>
+                        <span class="item_price">$35.99</span><br>
+                          <div class="btn-group btn-group-xs">
                             <button value="Small" type="button" class="btn btn-primary">S</button>
                             <button value="Medium" type="button" class="btn btn-primary">M</button>
                             <button value="Large" type="button" class="btn btn-primary">L</button>
                             <button value="XL" type="button" class="btn btn-primary">XL</button>
-                            <button value="XXL" type="button" class="btn btn-primary">XXL</button>
+                            
                           </div>
                         <br>
 						 
@@ -516,15 +272,38 @@
                        <a class="item_add" href="javascript:;"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span></a>
                         </button>
 					</div>
-                </div>
                   </div>
+                </div>
+                  
                 <div class="col-md-4 col-sm-4 col-xs-6">
                   <div class="thumbnail product-item">
                     <div class="simpleCart_shelfItem">
-						<img src="/img/products/Men/JaredB_ver6_web.png" class="item_thumb" />
-						<span class="item_name">U.S H-track T-shirt</span>
-                           <span class="item_price">$35.99</span><br>
-                          <div class="btn-group btn-group-xs">                            
+						<img src="/img/products/Women/MissyB-ver4_web.png" class="item_thumb" />
+						<span class="item_name">Jamaica V-track T-shirt</span>                         
+                        <span class="item_price">$35.99</span><br>
+                          <div class="btn-group btn-group-xs">
+                            <button value="Small" type="button" class="btn btn-primary">S</button>
+                            <button value="Medium" type="button" class="btn btn-primary">M</button>
+                            <button value="Large" type="button" class="btn btn-primary">L</button>
+                            <button value="XL" type="button" class="btn btn-primary">XL</button>
+                            
+                          </div>
+                        <br>
+						 
+                         <button type="button" class="btn btn-default" aria-label="Left Align">
+                       <a class="item_add" href="javascript:;"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span></a>
+                        </button>
+					</div>
+                  </div>
+                </div>
+                  
+                  <div class="col-md-4 col-sm-4 col-xs-6">
+                  <div class="thumbnail product-item">
+                    <div class="simpleCart_shelfItem">
+						<img src="/img/products/Men/AustinW_ver10_web.png" class="item_thumb" />
+						<span class="item_name">Jamaica V-track T-shirt</span>
+                        <span class="item_price">$35.99</span><br>
+                          <div class="btn-group btn-group-xs">
                             <button value="Small" type="button" class="btn btn-primary">S</button>
                             <button value="Medium" type="button" class="btn btn-primary">M</button>
                             <button value="Large" type="button" class="btn btn-primary">L</button>
@@ -539,13 +318,36 @@
 					</div>
                   </div>
                 </div>
+                  
                 <div class="col-md-4 col-sm-4 col-xs-6">
                   <div class="thumbnail product-item">
                     <div class="simpleCart_shelfItem">
-						<img src="/img/products/Men/AustinW_ver9_web.png" class="item_thumb" />
-						<span class="item_name">U.S V-track T-shirt</span>
-                          <span class="item_price">$35.99</span><br>
-                          <div class="btn-group btn-group-xs">                            
+						<img src="/img/products/Women/MissyW-ver1_web.png" class="item_thumb" />
+						<span class="item_name">Jamaica H-track T-shirt</span>
+                        <span class="item_price">$35.99</span><br>
+                          <div class="btn-group btn-group-xs">
+                            <button value="Small" type="button" class="btn btn-primary">S</button>
+                            <button value="Medium" type="button" class="btn btn-primary">M</button>
+                            <button value="Large" type="button" class="btn btn-primary">L</button>
+                            <button value="XL" type="button" class="btn btn-primary">XL</button>
+                            
+                          </div>
+                        <br>
+						 
+                         <button type="button" class="btn btn-default" aria-label="Left Align">
+                       <a class="item_add" href="javascript:;"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span></a>
+                        </button>
+					</div>
+                  </div>
+                </div>
+                  
+                  <div class="col-md-4 col-sm-4 col-xs-6">
+                  <div class="thumbnail product-item">
+                    <div class="simpleCart_shelfItem">
+						<img src="/img/products/Men/AustinW_ver6_web.png" class="item_thumb" />
+						<span class="item_name">Jamaica V-track T-shirt</span>                         
+                        <span class="item_price">$35.99</span><br>
+                          <div class="btn-group btn-group-xs">
                             <button value="Small" type="button" class="btn btn-primary">S</button>
                             <button value="Medium" type="button" class="btn btn-primary">M</button>
                             <button value="Large" type="button" class="btn btn-primary">L</button>
@@ -560,18 +362,19 @@
 					</div>
                   </div>
                 </div>
+                  
                 <div class="col-md-4 col-sm-4 col-xs-6">
                   <div class="thumbnail product-item">
                    <div class="simpleCart_shelfItem">
-						<img src="/img/products/Men/JaredB_ver8_web.png" class="item_thumb" />
-						<span class="item_name">U.S V-track T-shirt</span>
-                           <span class="item_price">$35.99</span><br>
-                          <div class="btn-group btn-group-xs">                            
+						<img src="/img/products/Women/MissyW-ver5_web.png" class="item_thumb" />
+						<span class="item_name">Jamaica V-track T-shirt</span>                         
+                       <span class="item_price">$35.99</span><br>
+                          <div class="btn-group btn-group-xs">
                             <button value="Small" type="button" class="btn btn-primary">S</button>
                             <button value="Medium" type="button" class="btn btn-primary">M</button>
                             <button value="Large" type="button" class="btn btn-primary">L</button>
                             <button value="XL" type="button" class="btn btn-primary">XL</button>
-                            <button value="XXL" type="button" class="btn btn-primary">XXL</button>
+                        
                           </div>
                         <br>
 						 
@@ -581,13 +384,17 @@
 					</div>
                 </div>
               </div>
-                  <div class="col-md-4 col-sm-4 col-xs-6">
+                  
+                  
+                   
+                
+                <div class="col-md-4 col-sm-4 col-xs-6">
                   <div class="thumbnail product-item">
                    <div class="simpleCart_shelfItem">
-						<img src="/img/products/Men/AustinW_ver5_web.png" class="item_thumb" />
-						<span class="item_name">U.K Disc Flag T-shirt</span>
-                         <span class="item_price">$35.99</span><br>
-                          <div class="btn-group btn-group-xs">                            
+						<img src="/img/products/Men/AustinW_ver7_web.png" class="item_thumb" />
+						<span class="item_name">Jamaica H-track T-shirt</span>
+                       <span class="item_price">$35.99</span><br>
+                          <div class="btn-group btn-group-xs">
                             <button value="Small" type="button" class="btn btn-primary">S</button>
                             <button value="Medium" type="button" class="btn btn-primary">M</button>
                             <button value="Large" type="button" class="btn btn-primary">L</button>
@@ -601,14 +408,40 @@
                         </button>
 					</div>
                 </div>
-              </div>
-                  <div class="col-md-4 col-sm-4 col-xs-6">
+                  </div>
+                
+                
+               
+                 
+                   <div class="col-md-4 col-sm-4 col-xs-6">
+                  <div class="thumbnail product-item">
+                    <div class="simpleCart_shelfItem">
+						<img src="/img/products/Women/MissyW-ver7_web.png" class="item_thumb" />
+						<span class="item_name">Jamaica V-track T-shirt</span>
+                        <span class="item_price">$35.99</span><br>
+                          <div class="btn-group btn-group-xs">
+                            <button value="Small" type="button" class="btn btn-primary">S</button>
+                            <button value="Medium" type="button" class="btn btn-primary">M</button>
+                            <button value="Large" type="button" class="btn btn-primary">L</button>
+                            <button value="XL" type="button" class="btn btn-primary">XL</button>
+                         
+                          </div>
+                        <br>
+						 
+                         <button type="button" class="btn btn-default" aria-label="Left Align">
+                       <a class="item_add" href="javascript:;"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span></a>
+                        </button>
+					</div>
+                  </div>
+                </div>
+                  
+                   <div class="col-md-4 col-sm-4 col-xs-6">
                   <div class="thumbnail product-item">
                    <div class="simpleCart_shelfItem">
-						<img src="/img/products/Men/JaredB_ver4_web.png" class="item_thumb" />
-						<span class="item_name">U.K Disc Flag T-shirt</span>
-                          <span class="item_price">$35.99</span><br>
-                          <div class="btn-group btn-group-xs">                            
+						<img src="/img/products/Men/JaredB_ver7_web.png" class="item_thumb" />
+						<span class="item_name">Jamaica H-track T-shirt</span>
+                       <span class="item_price">$35.99</span><br>
+                          <div class="btn-group btn-group-xs">
                             <button value="Small" type="button" class="btn btn-primary">S</button>
                             <button value="Medium" type="button" class="btn btn-primary">M</button>
                             <button value="Large" type="button" class="btn btn-primary">L</button>
@@ -623,6 +456,11 @@
 					</div>
                 </div>
               </div>
+                
+                
+                
+                  
+                  
               </div>
               <!-- end:item -->
               
@@ -649,7 +487,7 @@
       <!-- end:article -->
 
       <!-- begin:footer -->
-   <div class="row footer">
+     <div class="row footer">
         <div class="col-md-12 copyright">
           <div class="row">
             <div class="col-md-6 col-sm-6 copyright-left">
