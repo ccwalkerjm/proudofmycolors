@@ -67,6 +67,13 @@ function formatDataPart(dp) {
     }
 }
 
+
+function getRandomIntInclusive(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
 //display message
 function display(message, err) {
     _$message.removeAttr('class');

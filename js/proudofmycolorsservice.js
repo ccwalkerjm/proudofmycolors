@@ -64,28 +64,6 @@ var proudOfMyColorsService = (function() {
     };
 
 
-    //get user
-    var getUserData = function(username, callback) {
-        var jsonRequest = {};
-        jsonRequest.request = {
-            'cmd': 'getUser',
-            'data': {
-                'username': username
-            }
-        };
-        jsonRequest.auth = _getAuth();
-        var requestSerialized = JSON.stringify(jsonRequest);
-        var params = {
-            FunctionName: 'ironrockAdminFunc',
-            Payload: requestSerialized
-        };
-        var _lambda = new AWS.Lambda();
-        _lambda.invoke(params, function(err, results) {
-            callback(err, results);
-        });
-    };
-
-
 
     //get session details
     var _updateSession = function(session) {
@@ -127,6 +105,22 @@ var proudOfMyColorsService = (function() {
         });
     }
 
+    var getSValue = function(value) {
+        try {
+            return value.S;
+        } catch (err) {
+            return "";
+        }
+    };
+
+    var getNValue = function(value) {
+        try {
+            return value.N;
+        } catch (err) {
+            return 0;
+        }
+    };
+
 
 
 
@@ -153,13 +147,6 @@ var proudOfMyColorsService = (function() {
 
     };
 
-
-    proudOfMyColorsService.prototype.getUser = function(username, callback) {
-        getUserData(username, function(err, data) {
-            callback(err, data);
-        });
-
-    };
 
 
     // Instance methods
@@ -275,9 +262,6 @@ var proudOfMyColorsService = (function() {
             },
             inputVerificationCode: function() {
                 callback(null, true, this);
-                /*var verificationCode = prompt('Please input verification code ', '');
-                var newPassword = prompt('Enter new password ', '');
-                cognitoUser.confirmPassword(verificationCode, newPassword, this);*/
             }
         });
     };
@@ -288,10 +272,71 @@ var proudOfMyColorsService = (function() {
     };
 
 
+    var lambdaJsonValue = function(data) {
+        return JSON.parse(data.Payload);
+    };
+
+    //admin functions
+    //get user
+    proudOfMyColorsService.prototype.createProduct = function(data, callback) {
+        var jsonRequest = {};
+        jsonRequest.request = {
+            'cmd': 'createProduct',
+            'data': data
+        };
+        jsonRequest.auth = _getAuth();
+        var requestSerialized = JSON.stringify(jsonRequest);
+        var params = {
+            FunctionName: 'proudofmycolorsAdminFunc',
+            Payload: requestSerialized
+        };
+        var _lambda = new AWS.Lambda();
+        _lambda.invoke(params, function(err, results) {
+            callback(err);
+        });
+    };
+
+    proudOfMyColorsService.prototype.updateProduct = function(data, callback) {
+        var jsonRequest = {};
+        jsonRequest.request = {
+            'cmd': 'updateProduct',
+            'data': data
+        };
+        jsonRequest.auth = _getAuth();
+        var requestSerialized = JSON.stringify(jsonRequest);
+        var params = {
+            FunctionName: 'proudofmycolorsAdminFunc',
+            Payload: requestSerialized
+        };
+        var _lambda = new AWS.Lambda();
+        _lambda.invoke(params, function(err, results) {
+            callback(err);
+        });
+    };
+
+    proudOfMyColorsService.prototype.deleteProduct = function(id, callback) {
+        var jsonRequest = {};
+        jsonRequest.request = {
+            'cmd': 'deleteProduct',
+            'id': id
+        };
+        jsonRequest.auth = _getAuth();
+        var requestSerialized = JSON.stringify(jsonRequest);
+        var params = {
+            FunctionName: 'proudofmycolorsAdminFunc',
+            Payload: requestSerialized
+        };
+        var _lambda = new AWS.Lambda();
+        _lambda.invoke(params, function(err, results) {
+            callback(err);
+        });
+    };
+
+
 
     //public acccess
     //get Product details----public access
-    proudOfMyColorsService.prototype.listProducts = function(gender, country, callback) {
+    proudOfMyColorsService.prototype.listProducts = function(callback) {
         var dynamodb = new AWS.DynamoDB({
             apiVersion: '2012-08-10'
         });
@@ -307,9 +352,17 @@ var proudOfMyColorsService = (function() {
                 var list = [];
                 for (var i = 0; i < data.Items.length; i++) {
                     var result = {};
-                    result.code = data.Items[i].code.S;
-                    result.name = data.Items[i].name.S;
-                    result.trn = data.Items[i].trn ? data.Items[i].trn.S : '';
+                    result.id = data.Items[i].id.N;
+                    result.productName = data.Items[i].productName.S;
+                    result.country = getSValue(data.Items[i].country);
+                    result.gender = getSValue(data.Items[i].gender);
+                    result.price = getNValue(data.Items[i].price);
+                    result.smallImageName = getSValue(data.Items[i].smallImageName);
+                    result.largeImageName = getSValue(data.Items[i].largeImageName);
+                    result.description = getSValue(data.Items[i].description);
+
+
+
                     list.push(result);
                 }
                 callback(null, list);
@@ -319,15 +372,15 @@ var proudOfMyColorsService = (function() {
 
 
     //get Product details----public access
-    proudOfMyColorsService.prototype.getProduct = function(code, callback) {
+    proudOfMyColorsService.prototype.getProduct = function(id, callback) {
         var dynamodb = new AWS.DynamoDB({
             apiVersion: '2012-08-10'
         });
         var params = {
             TableName: 'proudofmycolors_products',
             Key: {
-                code: {
-                    S: code
+                id: {
+                    N: id
                 }
             }
         };
@@ -340,18 +393,15 @@ var proudOfMyColorsService = (function() {
                 console.log(data);
                 var result = {};
                 if (data.Item) {
-                    result.code = data.Item.code.S;
-                    result.name = data.Item.name.S;
-                    try {
-                        result.globalName = data.Item.globalName.S;
-                    } catch (err1) {
-                        result.globalName = '';
-                    }
-                    try {
-                        result.logo = data.Item.logo.S;
-                    } catch (err2) {
-                        result.logo = '';
-                    }
+                    result.id = data.Item.id.N;
+                    result.productName = data.Item.productName.S ? data.Item.productName.S : '';
+                    result.smallImageName = data.Item.smallImageName ? data.Item.smallImageName.S : '';
+                    result.largeImageName = data.Item.largeImageName ? data.Item.largeImageName.S : '';
+                    result.description = getSValue(data.Item.description);
+                    result.gender = getSValue(data.Item.gender);
+                    result.availability = getNValue(data.Item.availability);
+                    result.price = getNValue(data.Item.price);
+                    result.country = getSValue(data.Item.country);
                 }
                 console.log(result);
                 callback(null, result);

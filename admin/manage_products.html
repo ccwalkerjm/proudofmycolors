@@ -10,14 +10,14 @@
 	<link href="img/favicon.png" rel="shortcut icon" />
 	<title>ProudOfMyColors</title>
 	<!-- Bootstrap core CSS -->
-	<link href="css/bootstrap.css" rel="stylesheet" />
+	<link href="/css/bootstrap.css" rel="stylesheet" />
 	<!-- Custom styles for this template -->
-	<link href="css/style.css" rel="stylesheet" />
-	<link href="css/responsive.css" rel="stylesheet" />
+	<link href="/css/style.css" rel="stylesheet" />
+	<link href="/css/responsive.css" rel="stylesheet" />
 	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 	<!--[if lt IE 9]>
-      <script src="js/html5shiv.js"></script>
-      <script src="js/respond.min.js"></script>
+      <script src="/js/html5shiv.js"></script>
+      <script src="/js/respond.min.js"></script>
     <![endif]-->
 </head>
 
@@ -39,7 +39,7 @@
 		<div class="row">
 			<div class="col-md-6 col-sm-6 col-xs-6">
 				<div class="logo">
-					<img src="img/logos/Proud-O-My-Colours_TEXTONLY-02-02.png" class="img-responsive" alt="Proud Of My Colors">
+					<img src="/img/logos/Proud-O-My-Colours_TEXTONLY-02-02.png" class="img-responsive" alt="Proud Of My Colors">
 				</div>
 			</div>
 			<div class="col-md-6 col-sm-6 col-xs-6" id="admin">
@@ -63,7 +63,7 @@
 			<div class="col-md-12">
 				<div class="nav-menus">
 					<ul class="nav nav-pills">
-						<li class="active"><a href="index.html">Home</a></li>
+						<li class="active"><a href="/index.html">Home</a></li>
 						<li><a href="men.html">Men</a></li>
 						<li><a href="women.html">Women</a></li>
 						<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="men.html">Nationality</a>
@@ -86,18 +86,17 @@
 
 		<div class="row">
 			<dov class="col-md-12">
-				<h1>Users</h1>
+				<h1>Products</h1>
 				<div class="message"></div>
-				<button type="button" id="btnCreateNewUser" class="btn btn-link select">Create User</button>
-				<table class="table table-striped" id="userTable">
+				<button type="button" id="btnCreateNewProduct" class="btn btn-link select">Create Product</button>
+				<table class="table table-striped" id="productTable">
 					<thead>
 						<tr>
-							<th>Username</th>
-							<th>First Name</th>
-							<th>Last Name</th>
-							<th>Verified</th>
-							<th>Role</th>
-							<th>Broker</th>
+							<th>Code</th>
+							<th>Name</th>
+							<th>Country</th>
+							<th>Gender</th>
+							<th>Price</th>
 							<th></th>
 						</tr>
 					</thead>
@@ -106,62 +105,87 @@
 
 
 				<!-- Modal -->
-				<div id="userModal" class="modal fade" role="dialog">
+				<div id="productModal" class="modal fade" role="dialog">
 					<div class="modal-dialog">
 						<!-- Modal content-->
 						<div class="modal-content">
 							<div class="modal-header">
 								<button type="button" class="close" data-dismiss="modal">&times;</button>
-								<h4 class="modal-title">Manage User</h4>
+								<h4 class="modal-title">Manage Product</h4>
 							</div>
 							<div class="modal-body">
 								<div class="message"></div>
+
 								<form class="form-horizontal" role="form">
 									<div class="form-group">
-										<label class="control-label col-sm-4" for="username">Username:</label>
+										<label class="control-label col-sm-4" for="id">Product Code:</label>
 										<div class="col-sm-8">
-											<input type="text" class="form-control" id="username" readonly>
+											<input type="number" class="form-control" id="id" readonly>
 										</div>
 									</div>
 
 									<div class="form-group">
-										<label class="control-label col-sm-4" for="firstName">FirstName:</label>
+										<label class="control-label col-sm-4" for="productName">Product Name:</label>
 										<div class="col-sm-8">
-											<input type="text" class="form-control" id="firstName" readonly>
+											<input type="text" class="form-control" id="productName" readonly>
 										</div>
 									</div>
 									<div class="form-group">
-										<label class="control-label col-sm-4" for="lastName">Last Name:</label>
+										<label class="control-label col-sm-4" for="description">Description:</label>
 										<div class="col-sm-8">
-											<input type="text" class="form-control" id="lastName" readonly>
-										</div>
-									</div>
-
-									<div class="form-group">
-										<label class="control-label col-sm-4" for="email">Email:</label>
-										<div class="col-sm-8">
-											<input type="email" class="form-control" id="email" readonly>
+											<input type="text" class="form-control" id="description" readonly>
 										</div>
 									</div>
 
 									<div class="form-group">
-										<label class="control-label col-sm-4" for="phone">Phone:</label>
+										<label class="control-label col-sm-4" for="country">Country:</label>
 										<div class="col-sm-8">
-											<input type="text" class="form-control" id="phone" readonly>
+											<select class="form-control" id="country">
+												<option value="US">USA</option>
+												<option value="JM">Jamaica</option>
+											</select>
 										</div>
 									</div>
 
 									<div class="form-group">
-										<label class="control-label col-sm-4" for="role">Role:</label>
+										<label class="control-label col-sm-4" for="smallImageName">Small Image Path:</label>
 										<div class="col-sm-8">
-											<select id="role" class="form-control"></select>
+											<input type="text" class="form-control" id="smallImageName" readonly>
 										</div>
 									</div>
 
 									<div class="form-group">
-										<label class="control-label col-sm-4" for="broker">Broker:</label>
+										<label class="control-label col-sm-4" for="largeImageName">large Image Path:</label>
 										<div class="col-sm-8">
-											<select id="broker" class="form-control"></select>
+											<input type="text" class="form-control" id="largeImageName" readonly>
+										</div>
+									</div>
+
+									<div class="form-group">
+										<label class="control-label col-sm-4" for="availability">Availability:</label>
+										<div class="col-sm-8">
+											<select class="form-control" id="availability">
+												<option value="0">Out of Stock</option>
+												<option value="1">In Stock</option>
+											</select>
+										</div>
+									</div>
+
+									<div class="form-group">
+										<label class="control-label col-sm-4" for="gender">Gender:</label>
+										<div class="col-sm-8">
+											<select class="form-control" id="gender">
+												<option value="male">Male</option>
+												<option value="female">Female</option>
+											</select>
+										</div>
+									</div>
+
+
+									<div class="form-group">
+										<label class="control-label col-sm-4" for="price">Price:</label>
+										<div class="col-sm-8">
+											<input type="number" class="form-control" id="price" readonly>
 										</div>
 									</div>
 
@@ -169,8 +193,9 @@
 							</div>
 							<div class="modal-footer">
 								<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-								<button type="button" class="btn btn-primary" id="update-user">Update</button>
-								<button type="button" class="btn btn-primary" id="create-user">Create</button>
+								<button type="button" class="btn btn-primary" id="update-product">Update</button>
+								<button type="button" class="btn btn-primary" id="create-product">Create</button>
+								<button type="button" class="btn btn-primary" id="delete-product">Delete</button>
 							</div>
 						</div>
 
@@ -208,16 +233,16 @@
 	</div>
 	<!-- end:content -->
 	<div class="loadingModal">
-			<!-- Place at bottom of page -->
+		<!-- Place at bottom of page -->
 	</div>
 	<!-- Le javascript
     ================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
-	<script src="js/jquery.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-	<script src="js/masonry.pkgd.min.js"></script>
-	<script src="js/imagesloaded.pkgd.min.js"></script>
-	<script src="js/script.js"></script>
+	<script src="/js/jquery.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
+	<script src="/js/masonry.pkgd.min.js"></script>
+	<script src="/js/imagesloaded.pkgd.min.js"></script>
+	<script src="/js/script.js"></script>
 	<script src="/js/bootbox.js"></script>
 	<!--aws-->
 	<script src="/js/aws/jsbn.js"></script>
@@ -234,102 +259,116 @@
 	<script type="text/javascript">
 		$(document).ready(function() {
 			initPage(function(err, obj) {
-				listUsers(null, null, obj);
+				listProducts(obj);
 			});
 
-			$('#update-user').click(function () {
-				var username = $('#username').val();
-				var role = $('#role').val();
-				var broker = $('#broker').val();
+			$('#update-product').click(function() {
+				var product_data = {};
+				product_data.id = $('#id').val();
+				product_data.productName = $('#productName').val();
+				product_data.smallImageName = $('#smallImageName').val();
+				product_data.largeImageName = $('#largeImageName').val();
+				product_data.description = $('#description').val();
+				product_data.gender = $('#gender').val();
+				product_data.availability = $('#availability').val();
+				product_data.country = $('#country').val();
+				product_data.price = $('#price').val();
 				setLoadingState(true);
-				g_ironrock_service.updateUser(username, role, broker, function (err, data) {
+				g_proudOfMyColorsService.updateProduct(product_data, function(err, data) {
 					setLoadingState(false);
-					listUsers();
-					$('#userModal').modal('hide');
+					listProducts();
+					$('#productModal').modal('hide');
+				});
+			});
+
+			$('#delete-product').click(function() {
+				var id = $('#id').val();
+				bootbox.confirm("Are you sure?", function(ans) {
+					if (ans) {
+						setLoadingState(true);
+						g_proudOfMyColorsService.deleteProduct(id, function(err, data) {
+							setLoadingState(false);
+							listProducts();
+							$('#productModal').modal('hide');
+						});
+					}
 				});
 			});
 
 
-			$('#userTable tbody').on('click', '.select', function (e) {
-				var username = e.target.id;
+			$('#productTable tbody').on('click', '.select', function(e) {
+				var id = e.target.id;
 				setLoadingState(true);
-				g_ironrock_service.getUser(username, function (err, data) {
+				g_proudOfMyColorsService.getProduct(id, function(err, item) {
 					setLoadingState(false);
-					var item = JSON.parse(data.Payload);
-					$('#username').val(item.username).prop("readonly", true);
-					$('#firstName').val(item.given_name).prop("readonly", true);
-					$('#lastName').val(item.family_name).prop("readonly", true);
-					$('#email').val(item.email).prop("readonly", true);
-					$('#phone').val(item.phone_number).prop("readonly", true);
-					$('#role').val(item.role).parent().parent().show();
-					$('#broker').val(item.broker).parent().parent().show();
-					$('#update-user').show();
-					$('#create-user').hide();
-					$('#userModal .modal-title').text('Update Agent');
-					$('#userModal').modal('show');
+					$('#id').val(item.id).prop("readonly", true);
+					$('#productName').val(item.productName).prop("readonly", false);
+					$('#description').val(item.description).prop("readonly", false);
+					$('#smallImageName').val(item.smallImageName).prop("readonly", false);
+					$('#largeImageName').val(item.largeImageName).prop("readonly", false);
+					$('#country').val(item.country).prop("readonly", false);
+					$('#gender').val(item.gender).prop("readonly", false);
+					$('#price').val(item.price).prop("readonly", false);
+					$('#update-product').show();
+					$('#delete-product').show();
+					$('#create-product').hide();
+					$('#productModal .modal-title').text('Update Product');
+					$('#productModal').modal('show');
 				});
 			});
 
 
-			$('#btnCreateNewUser').click(function () {
-				$('#username').val('').prop("readonly", false);
-				$('#firstName').val('').prop("readonly", false);
-				$('#lastName').val('').prop("readonly", false);
-				$('#email').val('').prop("readonly", false);
-				$('#phone').val('').prop("readonly", false);
-				$('#role').parent().parent().hide();
-				$('#broker').parent().parent().hide();
-				$('#update-user').hide();
-				$('#create-user').show();
-				$('#userModal .modal-title').text('Create Agent');
-				$('#userModal').modal('show');
+			$('#btnCreateNewProduct').click(function() {
+				$('#id').val('').prop("readonly", false);
+				$('#productName').val('').prop("readonly", false);
+				$('#description').val('').prop("readonly", false);
+				$('#smallImageName').val('').prop("readonly", false);
+				$('#largeImageName').val('').prop("readonly", false);
+				$('#price').val('').prop("readonly", false);
+				$('#update-product').hide();
+				$('#delete-product').hide();
+				$('#create-product').show();
+				$('#productModal .modal-title').text('Create Product');
+				$('#productModal').modal('show');
 			});
 
 
-			//save new user
-			//username, password, email, phone_number, given_name, family_name, gender
-			$("#create-user").click(function (e) {
-				var password = g_ironrock_service.generateRandomCode();
-				password = password.replace(/[^A-Z]/ig, "");
-				g_ironrock_service.signup($('#username').val(),
-					password,
-					$('#email').val(),
-					$('#phone').val(),
-					$('#firstName').val(),
-					$('#lastName').val(),
-					'Male',
-					function (err, result) {
-						if (err) {
-							display(err.message, true);
-							return;
-						}
-						display("The user has been created. An email, with the user credentials, has been sent to " + $('#email').val(), false);
-						$('#userModal').modal('hide');
-					});
+			//create new product
+			$("#create-product").click(function(e) {
+				var product_data = {};
+				product_data.id = $('#id').val();
+				product_data.productName = $('#productName').val();
+				product_data.smallImageName = $('#smallImageName').val();
+				product_data.largeImageName = $('#largeImageName').val();
+				product_data.description = $('#description').val();
+				product_data.gender = $('#gender').val();
+				product_data.availability = $('#availability').val();
+				product_data.country = $('#country').val();
+				product_data.price = $('#price').val();
+				setLoadingState(true);
+				g_proudOfMyColorsService.createProduct(product_data, function(err, data) {
+					setLoadingState(false);
+					listProducts();
+					$('#productModal').modal('hide');
+				});
 			});
 
 
-			function listUsers(role, broker, obj) {
-				if (!role) role = null;
-				if (!broker) broker = null;
-				obj = obj ? obj : g_ironrock_service; //
-				obj.listUsers(role, broker, function (err, data) {
+			function listProducts(obj) {
+				obj = obj ? obj : g_proudOfMyColorsService; //
+				obj.listProducts(function(err, items) {
 					if (err) {
 						display(err.message, err);
 						return;
 					}
-					var tcontent = $('#userTable tbody').html('');
-					var items = JSON.parse(data.Payload);
-					$.each(items, function (idx, val) {
-						var role = val.role ? val.role : '';
-						var broker = val.broker ? val.broker : '';
-						tcontent.append('<tr><td>' + val.username +
-							'</td><td>' + val.given_name.toLowerCase().capitalizeFirstLetter() +
-							'</td><td>' + val.family_name.toLowerCase().capitalizeFirstLetter() +
-							'</td><td>' + val.email_verified +
-							'</td><td>' + role +
-							'</td><td>' + broker +
-							'</td><td><button type="button" id="' + val.username +
+					var tcontent = $('#productTable tbody').empty();
+					$.each(items, function(idx, val) {
+						tcontent.append('<tr><td>' + val.id +
+							'</td><td>' + val.productName +
+							'</td><td>' + val.country +
+							'</td><td>' + val.gender +
+							'</td><td>' + val.price +
+							'</td><td><button type="button" id="' + val.id +
 							'" class="btn btn-link select">Select</button></td></tr>');
 					});
 				});
