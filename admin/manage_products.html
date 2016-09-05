@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+	<meta name="description" content="responsive clothing store template">
+	<meta name="author" content="afriq yasin ramadhan">
+	<link href="img/favicon.png" rel="shortcut icon" />
+	<title>ProudOfMyColors</title>
+	<!-- Bootstrap core CSS -->
+	<link href="css/bootstrap.css" rel="stylesheet" />
+	<!-- Custom styles for this template -->
+	<link href="css/style.css" rel="stylesheet" />
+	<link href="css/responsive.css" rel="stylesheet" />
+	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!--[if lt IE 9]>
+      <script src="js/html5shiv.js"></script>
+      <script src="js/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+	<!-- begin:navbar -->
+	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+		<div class="container">
+			<div class="navbar-header">
+				<button class="navbar-toggle" data-target="#clotheshop-navbar" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span></button>
+			</div>
+			<!-- /.navbar-collapse -->
+		</div>
+	</nav>
+	<!-- end:navbar -->
+	<!-- begin:content -->
+
+	<div class="container">
+		<!-- begin:logo -->
+		<div class="row">
+			<div class="col-md-6 col-sm-6 col-xs-6">
+				<div class="logo">
+					<img src="img/logos/Proud-O-My-Colours_TEXTONLY-02-02.png" class="img-responsive" alt="Proud Of My Colors">
+				</div>
+			</div>
+			<div class="col-md-6 col-sm-6 col-xs-6" id="admin">
+			</div>
+			<!--<div class="col-md-6 col-sm-6 col-xs-6">
+				<a href="javascript:;" class="simpleCart_checkout"></a>
+
+				<a href="javascript:;" class="simpleCart_empty"></a>
+
+				<div class="simpleCart_items"></div>
+
+			</div>-->
+			<!-- button to empty the cart -->
+			<!-- show the cart -->
+			<!--End #cartPopover-->
+		</div>
+		<!-- end:logo -->
+		<!-- begin:nav-menus -->
+
+		<div class="row">
+			<div class="col-md-12">
+				<div class="nav-menus">
+					<ul class="nav nav-pills">
+						<li class="active"><a href="index.html">Home</a></li>
+						<li><a href="men.html">Men</a></li>
+						<li><a href="women.html">Women</a></li>
+						<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="men.html">Nationality</a>
+							<ul class="dropdown-menu" id="menu1">
+								<li><a href="#">Canada</a></li>
+								<li><a href="Jamaica.html">Jamaica</a></li>
+								<li><a href="categories.html">Mexico</a></li>
+								<li><a href="#">Trinidad and Tobago</a></li>
+								<li><a href="#">U.S.A</a></li>
+								<li><a href="#">U.K</a></li>
+							</ul>
+						</li>
+						<li><a href="about.html">About</a></li>
+						<li><a href="contact.html">Contact</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="row">
+			<dov class="col-md-12">
+				<h1>Users</h1>
+				<div class="message"></div>
+				<button type="button" id="btnCreateNewUser" class="btn btn-link select">Create User</button>
+				<table class="table table-striped" id="userTable">
+					<thead>
+						<tr>
+							<th>Username</th>
+							<th>First Name</th>
+							<th>Last Name</th>
+							<th>Verified</th>
+							<th>Role</th>
+							<th>Broker</th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody></tbody>
+				</table>
+
+
+				<!-- Modal -->
+				<div id="userModal" class="modal fade" role="dialog">
+					<div class="modal-dialog">
+						<!-- Modal content-->
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal">&times;</button>
+								<h4 class="modal-title">Manage User</h4>
+							</div>
+							<div class="modal-body">
+								<div class="message"></div>
+								<form class="form-horizontal" role="form">
+									<div class="form-group">
+										<label class="control-label col-sm-4" for="username">Username:</label>
+										<div class="col-sm-8">
+											<input type="text" class="form-control" id="username" readonly>
+										</div>
+									</div>
+
+									<div class="form-group">
+										<label class="control-label col-sm-4" for="firstName">FirstName:</label>
+										<div class="col-sm-8">
+											<input type="text" class="form-control" id="firstName" readonly>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="control-label col-sm-4" for="lastName">Last Name:</label>
+										<div class="col-sm-8">
+											<input type="text" class="form-control" id="lastName" readonly>
+										</div>
+									</div>
+
+									<div class="form-group">
+										<label class="control-label col-sm-4" for="email">Email:</label>
+										<div class="col-sm-8">
+											<input type="email" class="form-control" id="email" readonly>
+										</div>
+									</div>
+
+									<div class="form-group">
+										<label class="control-label col-sm-4" for="phone">Phone:</label>
+										<div class="col-sm-8">
+											<input type="text" class="form-control" id="phone" readonly>
+										</div>
+									</div>
+
+									<div class="form-group">
+										<label class="control-label col-sm-4" for="role">Role:</label>
+										<div class="col-sm-8">
+											<select id="role" class="form-control"></select>
+										</div>
+									</div>
+
+									<div class="form-group">
+										<label class="control-label col-sm-4" for="broker">Broker:</label>
+										<div class="col-sm-8">
+											<select id="broker" class="form-control"></select>
+										</div>
+									</div>
+
+								</form>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+								<button type="button" class="btn btn-primary" id="update-user">Update</button>
+								<button type="button" class="btn btn-primary" id="create-user">Create</button>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</dov>
+		</div>
+
+
+		<!-- end:new-arrival -->
+
+		<!-- begin:footer -->
+
+		<!-- end:footer -->
+		<!-- begin:copyright -->
+
+		<div class="row footer">
+			<div class="col-md-12 copyright">
+				<div class="row">
+					<div class="col-md-6 col-sm-6 copyright-left">
+						<p>Copyright &copy; Proud Of My Colors 2016. All right reserved.</p>
+					</div>
+					<div class="col-md-6 col-sm-6 copyright-right">
+						<ul class="list-unstyled list-social">
+							<li><a href="#"><i class="fa fa-twitter"></i></a></li>
+							<li><a href="https://www.facebook.com/proudofmycolors"><i class="fa fa-facebook-square"></i></a></li>
+
+							<li><a href="#"><i class="fa fa-instagram"></i></a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- end:copyright -->
+	</div>
+	<!-- end:content -->
+	<div class="loadingModal">
+			<!-- Place at bottom of page -->
+	</div>
+	<!-- Le javascript
+    ================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
+	<script src="js/jquery.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/masonry.pkgd.min.js"></script>
+	<script src="js/imagesloaded.pkgd.min.js"></script>
+	<script src="js/script.js"></script>
+	<script src="/js/bootbox.js"></script>
+	<!--aws-->
+	<script src="/js/aws/jsbn.js"></script>
+	<script src="/js/aws/jsbn2.js"></script>
+	<script src="/js/aws/sjcl.js"></script>
+	<script src="/js/aws/moment.min.js"></script>
+	<script src="/js/aws/aws-cognito-sdk.min.js"></script>
+	<script src="/js/aws/amazon-cognito-identity.min.js"></script>
+	<script src="/js/aws/aws-sdk-2.3.19.min.js"></script>
+	<!--Iron Rock Custom Library-->
+	<script src="/js/proudofmycolorsservice.js"></script>
+	<script src="/js/index.js"></script>
+
+	<script type="text/javascript">
+		$(document).ready(function() {
+			initPage(function(err, obj) {
+				listUsers(null, null, obj);
+			});
+
+			$('#update-user').click(function () {
+				var username = $('#username').val();
+				var role = $('#role').val();
+				var broker = $('#broker').val();
+				setLoadingState(true);
+				g_ironrock_service.updateUser(username, role, broker, function (err, data) {
+					setLoadingState(false);
+					listUsers();
+					$('#userModal').modal('hide');
+				});
+			});
+
+
+			$('#userTable tbody').on('click', '.select', function (e) {
+				var username = e.target.id;
+				setLoadingState(true);
+				g_ironrock_service.getUser(username, function (err, data) {
+					setLoadingState(false);
+					var item = JSON.parse(data.Payload);
+					$('#username').val(item.username).prop("readonly", true);
+					$('#firstName').val(item.given_name).prop("readonly", true);
+					$('#lastName').val(item.family_name).prop("readonly", true);
+					$('#email').val(item.email).prop("readonly", true);
+					$('#phone').val(item.phone_number).prop("readonly", true);
+					$('#role').val(item.role).parent().parent().show();
+					$('#broker').val(item.broker).parent().parent().show();
+					$('#update-user').show();
+					$('#create-user').hide();
+					$('#userModal .modal-title').text('Update Agent');
+					$('#userModal').modal('show');
+				});
+			});
+
+
+			$('#btnCreateNewUser').click(function () {
+				$('#username').val('').prop("readonly", false);
+				$('#firstName').val('').prop("readonly", false);
+				$('#lastName').val('').prop("readonly", false);
+				$('#email').val('').prop("readonly", false);
+				$('#phone').val('').prop("readonly", false);
+				$('#role').parent().parent().hide();
+				$('#broker').parent().parent().hide();
+				$('#update-user').hide();
+				$('#create-user').show();
+				$('#userModal .modal-title').text('Create Agent');
+				$('#userModal').modal('show');
+			});
+
+
+			//save new user
+			//username, password, email, phone_number, given_name, family_name, gender
+			$("#create-user").click(function (e) {
+				var password = g_ironrock_service.generateRandomCode();
+				password = password.replace(/[^A-Z]/ig, "");
+				g_ironrock_service.signup($('#username').val(),
+					password,
+					$('#email').val(),
+					$('#phone').val(),
+					$('#firstName').val(),
+					$('#lastName').val(),
+					'Male',
+					function (err, result) {
+						if (err) {
+							display(err.message, true);
+							return;
+						}
+						display("The user has been created. An email, with the user credentials, has been sent to " + $('#email').val(), false);
+						$('#userModal').modal('hide');
+					});
+			});
+
+
+			function listUsers(role, broker, obj) {
+				if (!role) role = null;
+				if (!broker) broker = null;
+				obj = obj ? obj : g_ironrock_service; //
+				obj.listUsers(role, broker, function (err, data) {
+					if (err) {
+						display(err.message, err);
+						return;
+					}
+					var tcontent = $('#userTable tbody').html('');
+					var items = JSON.parse(data.Payload);
+					$.each(items, function (idx, val) {
+						var role = val.role ? val.role : '';
+						var broker = val.broker ? val.broker : '';
+						tcontent.append('<tr><td>' + val.username +
+							'</td><td>' + val.given_name.toLowerCase().capitalizeFirstLetter() +
+							'</td><td>' + val.family_name.toLowerCase().capitalizeFirstLetter() +
+							'</td><td>' + val.email_verified +
+							'</td><td>' + role +
+							'</td><td>' + broker +
+							'</td><td><button type="button" id="' + val.username +
+							'" class="btn btn-link select">Select</button></td></tr>');
+					});
+				});
+			}
+
+
+
+
+
+
+
+
+		});
+	</script>
+</body>
+
+</html>
