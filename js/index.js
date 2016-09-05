@@ -1,7 +1,62 @@
 var g_proudOfMyColorsService; // = new proudOfMyColorsService()
+var g_shoppingCartBtn = "shoppingCartBtn";
+var g_shopping_cart_key_name = "_courserv_shopping_cart_key_0001";
 
 
 var _$message;
+
+function getProductTemplate() {
+    var product = {};
+    product.description = "";
+    product.productName = "";
+    product.id = 0;
+    product.image = "";
+    product.quantity = 0;
+    product.size = "";
+    return product;
+}
+
+function getShoppingCart() {
+    var x_shopping_cart_list = sessionStorage.getItem(g_shopping_cart_key_name);
+    if (x_shopping_cart_list) {
+        x_shopping_cart_list = JSON.parse(x_shopping_cart_list);
+    } else {
+        x_shopping_cart_list = [];
+    }
+    return x_shopping_cart_list;
+}
+
+function setShoppingCart(x_shopping_cart_list) {
+    sessionStorage.setItem(g_shopping_cart_key_name, JSON.stringify(x_shopping_cart_list));
+}
+
+function addToCart(product) {
+    var productExits = false;
+    var x_shopping_cart_list = getShoppingCart();
+    for (var i = 0; i < x_shopping_cart_list.length; i++) {
+        if (product.id == x_shopping_cart_list[i].id && product.size == x_shopping_cart_list[i].size) {
+            x_shopping_cart_list[idx].quantity = item.quantity;
+            productExits = true;
+            break;
+        }
+    }
+    if (!productExits) {
+        x_shopping_cart_list.push(product);
+    }
+}
+
+function removeFromCart(product) {
+    var x_shopping_cart_list = getShoppingCart();
+    for (var i = 0; i < x_shopping_cart_list.length; i++) {
+        if (product.id == x_shopping_cart_list[i].id && product.size == x_shopping_cart_list[i].size) {
+            x_shopping_cart_list.splice(i, 1);
+            break;
+        }
+    }
+}
+
+
+
 
 //manage query strings
 function getQueryStringParams(sParam) {
@@ -15,6 +70,36 @@ function getQueryStringParams(sParam) {
     }
 }
 
+//randomized items
+function getRandomizedItems(displaySize, size, exceptItems) {
+    var randomizedItems = [];
+    var k = 1000;
+    while (--k > 0) {
+        var item = getRandomIntInclusive(0, size - 1);
+        var itemValid = true;
+        if (exceptItems) {
+            for (var j = 0; j < exceptItems.length; j++) {
+                if (item == exceptItems[j]) {
+                    itemValid = false;
+                    break;
+                }
+            }
+        }
+        for (var i = 0; i < randomizedItems.length; i++) {
+            if (item == randomizedItems[i]) {
+                itemValid = false;
+                break;
+            }
+        }
+        if (itemValid) {
+            randomizedItems.push(item);
+            if (randomizedItems.length == displaySize) {
+                break;
+            }
+        }
+    }
+    return randomizedItems;
+}
 
 //loader
 function setLoadingState(loadingState) {
@@ -69,9 +154,9 @@ function formatDataPart(dp) {
 
 
 function getRandomIntInclusive(min, max) {
-  min = Math.ceil(min);
-  max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min + 1)) + min;
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
 //display message
@@ -118,16 +203,33 @@ function initPage(callback) {
             location.assign('/index.html');
             return;
         }
+
         //not signed in
         var admin_sub = $('<div/>').addClass('pull-right');
         var valid_page = false;
         if ($this.getUsername()) {
             valid_page = true;
             admin_sub.html('<a href="/admin/changePassword.html">' + $this.getUsername() + '</a>|<a href="#"id="logout">Logout</a>|<a href="/admin/manage_users.html">Users</a>|<a href="/admin/manage_products.html">Products</a>');
-        } else if(!isAdminPage(location.pathname)) {
+        } else if (!isAdminPage(location.pathname)) {
             valid_page = true;
             admin_sub.html('<a href="/admin/account.html">Account</a>');
         }
+        var shoppingCartBtn = $('<button/>').attr("id", g_shoppingCartBtn);
+        var x_shopping_cart_list = getShoppingCart();
+        if (x_shopping_cart_list.length === 0) {
+            shoppingCartBtn.addClass("btn btn-default btn-sm  text-center");
+            shoppingCartBtn.html('<span class="glyphicon glyphicon-shopping-cart"></span><br/>Empty');
+        } else {
+            shoppingCartBtn.addClass("btn btn-primary btn-sm  text-center");
+            shoppingCartBtn.html('<span class="glyphicon glyphicon-shopping-cart"></span><br/>Checkout');
+        }
+
+
+        //	<button type="button" class="btn btn-default" aria-label="Left Align">
+        //		<span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
+        //	</button>
+        var $div = $("<div/>").append("<br/>").append(shoppingCartBtn).appendTo(admin_sub);
+
         admin_sub.appendTo('#admin');
         if (valid_page === true) {
             if (callback && typeof callback == "function") {
@@ -136,6 +238,29 @@ function initPage(callback) {
         } else {
             location.assign('/index.html');
         }
+        var menu_item = $('#menu_items').empty();
+        menu_item.append('<li class="active"><a href="/index.html">Home</a></li>');
+        menu_item.append('<li><a href="/order.html?gender=male">Men</a></li>');
+        menu_item.append('<li><a href="/order.html?gender=female">Women</a></li>');
+        var dropdown_menu_li = $('<li/>').addClass("dropdown").empty();
+        dropdown_menu_li.append('<a class="dropdown-toggle" data-toggle="dropdown" href="/order.html">Nationality</a>');
+        var dropdown_menu_ul = $('<ul/>').addClass("dropdown-menu").attr("id", "menu1").empty();
+        dropdown_menu_ul.append('<li><a href="/order.html?country=ca">Canada</a></li>');
+        dropdown_menu_ul.append('<li><a href="/order.html?country=jm>Jamaica</a></li>');
+        dropdown_menu_ul.append('<li><a href="/order.html?country=mx>Mexico</a></li>');
+        dropdown_menu_ul.append('<li><a href="/order.html?country=tt>Trinidad and Tobago</a></li>');
+        dropdown_menu_ul.append('<li><a href="/order.html?country=us>U.S.A</a></li>');
+        dropdown_menu_ul.append('<li><a href="/order.html?country=uk>U.K</a></li>');
+        dropdown_menu_li.append(dropdown_menu_ul);
+
+        menu_item.append(dropdown_menu_li);
+        menu_item.append('<li><a href="about.html">About</a></li>');
+        menu_item.append('<li><a href="contact.html">Contact</a></li>');
+        //menu
+
+
+
+
     });
 
 

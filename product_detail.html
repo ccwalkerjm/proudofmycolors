@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
@@ -8,7 +9,7 @@
     <meta name="author" content="afriq yasin ramadhan">
     <link rel="shortcut icon" href="img/favicon.png">
 
-  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
 
     <title>Clotheshop</title>
@@ -25,156 +26,126 @@
       <script src="js/html5shiv.js"></script>
       <script src="js/respond.min.js"></script>
     <![endif]-->
-  </head>
+</head>
 
-  <body>
+<body>
 
     <!-- begin:navbar -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#clotheshop-navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-        </div>
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#clotheshop-navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
 
-        <div class="collapse navbar-collapse" id="clotheshop-navbar">
-          <ul class="nav navbar-nav navbar-right">
-            <li><a class="disabled">CURRENCY</a></li>
-            <li class="active"><a href="#">USD</a></li>
-            <li><a href="#">EUR</a></li>
-            <li><a href="#">IDR</a></li>
-            <li class="divider-vertical"></li>
-            <li class="dropdown">
-              <a data-toggle="dropdown" class="dropdown-toggle" href="#">LANGUAGE <b class="caret"></b></a>
-              <ul class="dropdown-menu">
-                <li><a href="#">EN</a></li>
-                <li><a href="#">ID</a></li>
-                <li><a href="#">FR</a></li>
-                <li class="divider"></li>
-                <li><a href="#">IT</a></li>
-              </ul>
-            </li>
-          </ul>
-        </div><!-- /.navbar-collapse -->
-      </div>
+            <div class="collapse navbar-collapse" id="clotheshop-navbar">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a class="disabled">CURRENCY</a></li>
+                    <li class="active"><a href="#">USD</a></li>
+                    <li><a href="#">EUR</a></li>
+                    <li><a href="#">IDR</a></li>
+                    <li class="divider-vertical"></li>
+                    <li class="dropdown">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">LANGUAGE <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">EN</a></li>
+                            <li><a href="#">ID</a></li>
+                            <li><a href="#">FR</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#">IT</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
     </nav>
     <!-- end:navbar -->
 
     <!-- begin:content -->
     <div class="container">
-      <!-- begin:logo -->
-      <div class="row">
-			<div class="col-md-6 col-sm-6 col-xs-6">
-				<div class="logo">
-					
+        <!-- begin:logo -->
+        <div class="row">
+            <div class="col-md-6 col-sm-6 col-xs-6">
+                <div class="logo">
                     <img src="img/logos/Proud-O-My-Colours_TEXTONLY-02-02_small.png" class="img-responsive" alt="Proud Of My Colors">
-
-					
-				</div>
-			</div>
-
-			<div class="col-md-6 col-sm-6 col-xs-6">
-		
-
-			
-			</div>
-		</div>
-      <!-- end:logo -->
-
-      <!-- begin:nav-menus -->
-      <div class="row">
-			<div class="col-md-12">
-				<div class="nav-menus">
-					<ul class="nav nav-pills">
-						<li ><a href="index.html">Home</a></li>
-						<li ><a href="men.html">Men</a></li>
-                        <li><a href="women.html">Women</a></li>
-						<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="men.html">Nationality</a>
-							<ul class="dropdown-menu" id="menu1">
-								<li><a href="#">Canada</a></li>								
-								<li class="active"><a href="Jamaica.html">Jamaica</a></li>
-								<li><a href="categories.html">Mexico</a></li>
-								<li><a href="#">Trinidad and Tobago</a></li>
-								<li><a href="#">U.S.A</a></li>
-                                <li><a href="#">U.K</a></li>
-							</ul>
-						</li>
-						<li><a href="about.html">About</a></li>
-						<li><a href="contact.html">Contact</a></li>
-					</ul>
-				</div>
-			</div>
-		</div>
-      <!-- end:nav-menus -->
-
-      <!-- begin:article -->
-      <div class="row">
-        <!-- begin:sidebar -->
-        <div class="col-md-3 col-sm-4 sidebar">
-          <div class="row">
-            <div class="col-md-12">
-              <div class="widget">
-                <div class="widget-title">
-                  <h3>Cart</h3>
                 </div>
-                <ul class="cart list-unstyled">
-                  <li>
-                    <div class="row">
-                   <script>
-                      simpleCart({
-                        checkout: {
-                          type: "PayPal",
-                          email: "you@yours.com"
-                        }
-                      });
-                       
-                    </script>
-                        
-                        	<a href="javascript:;" class="simpleCart_checkout"></a>
-                            <!-- button to empty the cart -->
-                           
-                        <a href="javascript:;" class="simpleCart_empty"><i class="fa fa-trash-o"></i></a>
-                            <!-- show the cart -->
-                            <div class="simpleCart_items"></div>
-                        
-                    </div>
-                  </li>
-                  <li>
-                    <div class="row">
-              
-                 
-                    </div>
-                  </li>
-                </ul>
-                <ul class="list-unstyled total-price">
-                  <li>
-                    <div class="row">
-                    <span class="simpleCart_quantity"></span> items - <span class="simpleCart_total"></span>
-                    </div>
-                  </li>
-                  <li>
-                    <div class="row">
-             
-                    </div>
-                  </li>
-                  <li>
-                    <div class="row">
-                      <div class="col-sm-6 col-xs-6">
-                        <a class="btn btn-default" href="cart.html">Cart</a>
-                      </div>
-                      <div class="col-sm-6 col-xs-6 text-right">
-                           <a href="javascript:;" class="simpleCart_checkout btn btn-primary">Checkout</a>
-                      </div>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-              <!-- break -->
-             <!-- <div class="widget">
+            </div>
+            <div class="col-md-6 col-sm-6 col-xs-6" id="admin">
+            </div>
+        </div>
+        <!-- end:logo -->
+
+        <!-- begin:nav-menus -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="nav-menus">
+                  <ul class="nav nav-pills" id="menu_items">
+                  </ul>
+                </div>
+            </div>
+        </div>
+        <!-- end:nav-menus -->
+
+        <!-- begin:article -->
+        <div class="row">
+            <!-- begin:sidebar -->
+            <div class="col-md-3 col-sm-4 sidebar">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="widget">
+                            <div class="widget-title">
+                                <h3>Cart</h3>
+                            </div>
+                            <ul class="cart list-unstyled">
+                                <li>
+                                    <div class="row">
+
+                                        <a href="javascript:;" class="simpleCart_checkout"></a>
+                                        <!-- button to empty the cart -->
+
+                                        <a href="javascript:;" class="simpleCart_empty"><i class="fa fa-trash-o"></i></a>
+                                        <!-- show the cart -->
+                                        <div class="simpleCart_items"></div>
+
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="row">
+
+
+                                    </div>
+                                </li>
+                            </ul>
+                            <ul class="list-unstyled total-price">
+                                <li>
+                                    <div class="row">
+                                        <span class="simpleCart_quantity"></span> items - <span class="simpleCart_total"></span>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="row">
+
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="row">
+                                        <div class="col-sm-6 col-xs-6">
+                                            <a class="btn btn-default" href="cart.html">Cart</a>
+                                        </div>
+                                        <div class="col-sm-6 col-xs-6 text-right">
+                                            <a href="javascript:;" class="simpleCart_checkout btn btn-primary">Checkout</a>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- break -->
+                        <!-- <div class="widget">
                 <div class="widget-title">
                   <h3>Category</h3>
                 </div>
@@ -185,172 +156,185 @@
                     <li><a href="#">Edition</a></li>
                 </ul>
               </div>-->
-              <!-- break -->
-              <div class="widget">
-                <div class="widget-title">
-                  <h3>Payment Confirmation</h3>
-                </div>
-                <p>Already make a payment ? please confirm your payment by filling <a href="confirm.html">this form</a></p>
-              </div>
+                        <!-- break -->
+                        <div class="widget">
+                            <div class="widget-title">
+                                <h3>Payment Confirmation</h3>
+                            </div>
+                            <p>Already make a payment ? please confirm your payment by filling <a href="confirm.html">this form</a></p>
+                        </div>
 
-            </div>
-          </div>
-        </div>
-        <!-- end:sidebar -->
-
-        <!-- begin:content -->
-        <div class="col-md-9 col-sm-8 content ">
-            <div class="simpleCart_shelfItem">
-          
-          <div class="row">
-            <div class="col-md-12">
-              <div class="heading-title">
-                <h3><span class="item_name">Trinidad and Tobago Disc Flag Tshirt</span></h3>
-                </div>
-              <div class="row">
-                <!-- begin:product-image-slider -->
-                <div class="col-md-6 col-sm-6">
-                    <img src="img/products/Men/JaredB_ver2_web.png" >
-                </div>
-                <!-- end:product-image-slider -->
-
-                <!-- begin:product-spesification -->
-                <div class="col-md-6 col-sm-6">
-                  <div class="single-desc">
-                    <form>
-                      
-
-                      <table>
-                        <tbody>
-                          
-                          <tr class="hidden-xs">
-                              <td><strong>Availability</strong></td>
-                              <td>:</td>
-                              <td>In Stock</td>
-                          </tr>
-                          <tr>
-                              <td colspan="3"> <span class="price item_price">$21.42</span></td>
-                          </tr>
-                          
-                          <tr>
-                              <td><strong>Size</strong></td>
-                              <td>:</td>
-                              <td>
-                                <select class="form-control item_size">
-                                  
-                                  <option>S</option>
-                                  <option>M</option>
-                                  <option>L</option>
-                                  <option>XL</option><option>XXL</option>
-                                </select>
-                              </td>
-                          </tr>
-                          <tr>
-                              <td><strong>Quantity</strong></td>
-                              <td>:</td>
-                              <td>
-                                <input type="text" class="form-control item_Quantity" value="1">
-                              </td>
-                          </tr>
-                          <tr>
-                              <td colspan="3">
-                                <a  href="javascript:;" class="btn btn-sm btn-primary item_add">Add to Cart</a>
-                              </td>  
-                          </tr>
-                        </tbody>
-                      </table>
-                    </form>
-                  </div>
-                </div>
-                  </div>
-                <!-- end:product-spesification -->
-              </div>
-              <!-- break -->
-              <!-- begin:product-detail -->
-              <div class="row">
-                <div class="col-md-6 content-detail">
-                    <div class="panel panel-default">
-                  <div class="panel-heading">
-                    <h3 class="panel-title">Details</h3>
-                  </div>
-                  <div class="panel-body">
-                    Made from 100% pre-shrunk cotton
-                  </div>
                     </div>
                 </div>
-              </div>
-              <!-- end:product-detail -->
-
-              <!-- begin:related-product -->
-              <div class="row">
-                <div class="col-md-12">
-                  <div class="heading-title">
-                    <h3>Related Products</h3>
-                  </div>
-
-                  <div class="row product-container" style="position: relative; height: 463.75px;">
-                    <div class="col-md-4 col-sm-4 col-xs-6">
-                  <div class="thumbnail product-item">
-                   <div class="simpleCart_shelfItem">
-						<img src="/img/products/Men/AustinW_ver6_web.png" class="item_thumb" />
-						<span class="item_name">Jamaica H-track T-shirt</span>
-                       <span class="item_price">$35.99</span><br>
-                          
-					</div>
-                </div>
-                  </div>
-                    <div class="col-md-4 col-sm-4 col-xs-6">
-                  <div class="thumbnail product-item">
-                   <div class="simpleCart_shelfItem">
-						<img src="/img/products/Men/JaredB_web.png" class="item_thumb" />
-						<span class="item_name">Jamaica H-track T-shirt</span>
-                       <span class="item_price">$35.99</span><br>
-                          
-					</div>
-                </div>
-                  </div>
-                    <div class="col-md-4 col-sm-4 col-xs-6">
-                  <div class="thumbnail product-item">
-                   <div class="simpleCart_shelfItem">
-						<img src="/img/products/Men/AustinW_ver2_web.png" class="item_thumb" />
-						<span class="item_name">Jamaica H-track T-shirt</span>
-                       <span class="item_price">$35.99</span><br>
-                          
-					</div>
-                </div>
-                  </div>
-                    
-                  </div>
-                </div>
-              </div>
-              <!-- end:related-product -->
-
             </div>
-          </div>
+            <!-- end:sidebar -->
+
+            <!-- begin:content -->
+            <div class="col-md-9 col-sm-8 content ">
+                <div class="simpleCart_shelfItem">
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="heading-title">
+                                <input type="hidden" id="productId" value="">
+                                <h3><span class="item_name" id="productName">Trinidad and Tobago Disc Flag Tshirt</span></h3>
+                            </div>
+                            <div class="row">
+                                <!-- begin:product-image-slider -->
+                                <div class="col-md-6 col-sm-6">
+                                    <img id="productImg">
+                                </div>
+                                <!-- end:product-image-slider -->
+
+                                <!-- begin:product-spesification -->
+                                <div class="col-md-6 col-sm-6">
+                                    <div class="single-desc">
+                                        <form>
+                                            <table id="productDetails">
+                                                <tbody>
+
+                                                    <tr class="hidden-xs">
+                                                        <td><strong>Availability</strong></td>
+                                                        <td>:</td>
+                                                        <td id="availability">In Stock</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td colspan="3"> <span class="price item_price"></span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><strong>Size</strong></td>
+                                                        <td>:</td>
+                                                        <td>
+                                                            <select class="form-control item_size">
+                                                            </select>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><strong>Quantity</strong></td>
+                                                        <td>:</td>
+                                                        <td>
+                                                            <input type="number" class="form-control item_Quantity" value="1">
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td colspan="3">
+                                                            <a href="javascript:;" class="btn btn-sm btn-primary item_add">Add to Cart</a>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end:product-spesification -->
+                        </div>
+                        <!-- break -->
+                        <!-- begin:product-detail -->
+                        <div class="row">
+                            <div class="col-md-6 content-detail">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title">Details</h3>
+                                    </div>
+                                    <div class="panel-body" id="productDescription">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end:product-detail -->
+
+                        <!-- begin:related-product -->
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="heading-title">
+                                    <h3>Related Products</h3>
+                                </div>
+
+                                <div class="row product-container" style="position: relative; height: 463.75px;">
+                                    <div class="col-md-4 col-sm-4 col-xs-6">
+                                        <div class="thumbnail product-item" id="firstItem">
+                                            <div class="simpleCart_shelfItem">
+                                                <img class="item_thumb" />
+                                                <span class="item_name"></span>
+                                                <span class="item_price"></span>
+                                                <br>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-4 col-xs-6">
+                                        <div class="thumbnail product-item" id="secondItem">
+                                            <div class="simpleCart_shelfItem">
+                                                <img class="item_thumb" />
+                                                <span class="item_name"></span>
+                                                <span class="item_price"></span>
+                                                <br>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-4 col-xs-6">
+                                        <div class="thumbnail product-item" id="thirdItem">
+                                            <div class="simpleCart_shelfItem">
+                                                <img class="item_thumb" />
+                                                <span class="item_name"></span>
+                                                <span class="item_price"></span>
+                                                <br>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end:related-product -->
+
+                    </div>
+                </div>
+            </div>
+            <!-- end:content -->
         </div>
-        <!-- end:content -->
-      </div>
-      <!-- end:article -->
-      
-      <!-- begin:footer -->
-       <div class="row footer">
-        <div class="col-md-12 copyright">
-          <div class="row">
-            <div class="col-md-6 col-sm-6 copyright-left">
-              <p>Copyright &copy; Proud Of My Colors 2016. All right reserved.</p>
+        <!-- end:article -->
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <!-- begin:footer -->
+        <div class="row footer">
+            <div class="col-md-12 copyright">
+                <div class="row">
+                    <div class="col-md-6 col-sm-6 copyright-left">
+                        <p>Copyright &copy; Proud Of My Colors 2016. All right reserved.</p>
+                    </div>
+                    <div class="col-md-6 col-sm-6 copyright-right">
+                        <ul class="list-unstyled list-social">
+                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                            <li><a href="https://www.facebook.com/proudofmycolors"><i class="fa fa-facebook-square"></i></a></li>
+
+                            <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
             </div>
-            <div class="col-md-6 col-sm-6 copyright-right">
-              <ul class="list-unstyled list-social">
-                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                <li><a href="https://www.facebook.com/proudofmycolors"><i class="fa fa-facebook-square"></i></a></li>
-            
-                <li><a href="#"><i class="fa fa-instagram"></i></a></li>
-              </ul>
-            </div>
-          </div>
         </div>
-      </div>
-      <!-- end:copyright -->
+        <!-- end:copyright -->
 
     </div>
     <!-- end:content -->
@@ -363,10 +347,112 @@
     <script src="js/masonry.pkgd.min.js"></script>
     <script src="js/imagesloaded.pkgd.min.js"></script>
     <script src="js/script.js"></script>
-    <script src="js/simpleCart.js"></script>
-      
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-      
-  </body>
+
+    <script src="/js/accounting.js"></script>
+    <!--aws-->
+    <script src="/js/aws/jsbn.js"></script>
+    <script src="/js/aws/jsbn2.js"></script>
+    <script src="/js/aws/sjcl.js"></script>
+    <script src="/js/aws/moment.min.js"></script>
+    <script src="/js/aws/aws-cognito-sdk.min.js"></script>
+    <script src="/js/aws/amazon-cognito-identity.min.js"></script>
+    <script src="/js/aws/aws-sdk-2.3.19.min.js"></script>
+    <!--Iron Rock Custom Library-->
+    <script src="/js/proudofmycolorsservice.js"></script>
+    <script src="/js/index.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            var productId;
+            initPage(function(err, obj) {
+                productId = getQueryStringParams("id");
+                listProducts(obj);
+            });
+
+            $('.productBtn').click(function() {
+                var productItem = $(this).closest(".product-item");
+                location.assign("/product_detail.html?id=" + productItem.data('product_id'));
+                //alert(productItem.data('product_id'));
+            });
+
+            function listProducts(obj) {
+                obj = obj ? obj : g_proudOfMyColorsService; //
+                obj.listProducts(function(err, items) {
+                    if (err) {
+                        display(err.message, err);
+                        return;
+                    }
+
+                    if (!productId)
+                        productId = items[0].id;
+
+                    var productItem;
+                    for (var i = 0; i < items.length; i++) {
+                        if (productId == items[i].id) {
+                            productItem = items[i];
+                            break;
+                        }
+                    }
+
+                    if (!productItem)
+                        productItem = items[getRandomizedItems(1, items.length)[0]];
+
+
+                    $('#productId').text(productItem.id);
+                    $('#productDescription').html('<p>' + productItem.description + '</p>');
+                    $('#productName').text(productItem.productName);
+                    $('#productImg').attr("src", productItem.largeImageName);
+                    $('#productDetails').find('.item_price').text(accounting.formatMoney(productItem.price));
+
+                    var sizes = $('#productDetails').find('.item_size').empty();
+                    sizes.append('<option value="S">S</option>');
+                    sizes.append('<option value="M">M</option>');
+                    sizes.append('<option value="L">L</option>');
+                    sizes.append('<option value="XL">XL</option>');
+                    if (productItem.gender == "male") {
+                        sizes.append('<option value="XXL">XXL</option>');
+                    }
+
+                    if (productItem.availability == 0) {
+                        $('#availability').text("Out of Stock");
+                    } else {
+                        $('#availability').text("In Stock");
+                    }
+
+
+                    //related by gender and country
+                    var relatedItems = []
+                    for (var i = 0; i < items.length; i++) {
+                        if (productItem.country == items[i].country && productItem.gender == items[i].gender) {
+                            relatedItems.push(items[i]);
+                        }
+                    }
+
+
+                    //display
+                    var exceptItems = [];
+                    exceptItems.push(productItem);
+
+                    var randomizedItems = getRandomizedItems(relatedItems.length >= 3 ? 3 : relatedItems.length, relatedItems.length,exceptItems);
+
+                    if (relatedItems.length >= 1) diplayItem($("#firstItem"), relatedItems[randomizedItems[0]]);
+                    if (relatedItems.length >= 2) diplayItem($("#secondItem"), relatedItems[randomizedItems[1]]);
+                    if (relatedItems.length >= 3) diplayItem($("#thirdItem"), relatedItems[randomizedItems[2]]);
+                });
+            }
+
+
+            function diplayItem(element, item) {
+                element.data("product_id", item.id);
+                element.find(".item_name").text(item.productName);
+                element.find(".item_thumb").attr("src", item.smallImageName);
+                element.find(".item_price").text(accounting.formatMoney(item.price));
+            }
+
+
+        });
+    </script>
+
+</body>
+
 </html>

@@ -360,6 +360,7 @@ var proudOfMyColorsService = (function() {
                     result.smallImageName = getSValue(data.Items[i].smallImageName);
                     result.largeImageName = getSValue(data.Items[i].largeImageName);
                     result.description = getSValue(data.Items[i].description);
+                    result.availability = getNValue(data.Items[i].availability);
 
 
 

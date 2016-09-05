@@ -62,22 +62,7 @@
 		<div class="row">
 			<div class="col-md-12">
 				<div class="nav-menus">
-					<ul class="nav nav-pills">
-						<li class="active"><a href="index.html">Home</a></li>
-						<li><a href="men.html">Men</a></li>
-						<li><a href="women.html">Women</a></li>
-						<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="men.html">Nationality</a>
-							<ul class="dropdown-menu" id="menu1">
-								<li><a href="#">Canada</a></li>
-								<li><a href="Jamaica.html">Jamaica</a></li>
-								<li><a href="categories.html">Mexico</a></li>
-								<li><a href="#">Trinidad and Tobago</a></li>
-								<li><a href="#">U.S.A</a></li>
-								<li><a href="#">U.K</a></li>
-							</ul>
-						</li>
-						<li><a href="about.html">About</a></li>
-						<li><a href="contact.html">Contact</a></li>
+					<ul class="nav nav-pills" id="menu_items">
 					</ul>
 				</div>
 			</div>
@@ -128,79 +113,59 @@
 		</div>
 
 		<div class="row product-container">
-			<div class="col-md-3 col-sm-3 col-xs-6" id="firstItem">
-				<div class="thumbnail product-item">
-					<div class="simpleCart_shelfItem">
-						<img class="item_thumb" />
-						<h4 class="item_name"></h4>
-						<div class="btn-group">
-							<button type="button" class="btn btn-primary">S</button>
-							<button type="button" class="btn btn-primary">M</button>
-							<button type="button" class="btn btn-primary">L</button>
-						</div>
-						<br>
-						<span class="item_price"></span>
-						<button type="button" class="btn btn-default" aria-label="Left Align">
-							<span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
-						</button>
+			<div class="col-md-3 col-sm-3 col-xs-6">
+				<div class="thumbnail product-item" id="firstItem">
+					<img class="item_thumb" />
+					<h4 class="item_name text-center"></h4>
+					<div class="text-center size">
 					</div>
+					<br>
+					<span class="item_price"></span>
+					<button type="button" class="btn btn-default productBtn" aria-label="Left Align">
+						<span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>
+					</button>
 				</div>
 			</div>
 
-			<div class="col-md-3 col-sm-3 col-xs-6" id="secondItem">
-				<div class="thumbnail product-item">
-					<div class="simpleCart_shelfItem">
-						<img class="item_thumb" />
-						<h4 class="item_name"></h4>
-						<div class="btn-group">
-							<button type="button" class="btn btn-primary">S</button>
-							<button type="button" class="btn btn-primary">M</button>
-							<button type="button" class="btn btn-primary">L</button>
-						</div>
-						<br>
-						<span class="item_price"></span>
-						<button type="button" class="btn btn-default" aria-label="Left Align">
-							<span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
-						</button>
+			<div class="col-md-3 col-sm-3 col-xs-6">
+				<div class="thumbnail product-item" id="secondItem">
+					<img class="item_thumb" />
+					<h4 class="item_name"></h4>
+					<div class="text-center size">
 					</div>
+					<br>
+					<span class="item_price"></span>
+					<button type="button" class="btn btn-default productBtn" aria-label="Left Align">
+						<span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>
+					</button>
 				</div>
 			</div>
 
-			<div class="col-md-3 col-sm-3 col-xs-6" id="thirdItem">
-				<div class="thumbnail product-item">
-					<div class="simpleCart_shelfItem">
-						<img class="item_thumb" />
-						<h4 class="item_name"></h4>
-						<div class="btn-group">
-							<button type="button" class="btn btn-primary">S</button>
-							<button type="button" class="btn btn-primary">M</button>
-							<button type="button" class="btn btn-primary">L</button>
-						</div>
-						<br>
-						<span class="item_price"></span>
-						<button type="button" class="btn btn-default" aria-label="Left Align">
-							<span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
-						</button>
+			<div class="col-md-3 col-sm-3 col-xs-6">
+				<div class="thumbnail product-item" id="thirdItem">
+					<img class="item_thumb" />
+					<h4 class="item_name"></h4>
+					<div class="text-center size">
 					</div>
+					<br>
+					<span class="item_price"></span>
+					<button type="button" class="btn btn-default productBtn" aria-label="Left Align">
+						<span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>
+					</button>
 				</div>
 			</div>
 
 			<div class="col-md-3 col-sm-3 col-xs-6">
 				<div class="thumbnail product-item" id="fourthItem">
-					<div class="simpleCart_shelfItem">
-						<img class="item_thumb" />
-						<h4 class="item_name"></h4>
-						<div class="btn-group">
-							<button type="button" class="btn btn-primary">S</button>
-							<button type="button" class="btn btn-primary">M</button>
-							<button type="button" class="btn btn-primary">L</button>
-						</div>
-						<br>
-						<span class="item_price"></span>
-						<button type="button" class="btn btn-default" aria-label="Left Align">
-							<span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
-						</button>
+					<img class="item_thumb" />
+					<h4 class="item_name"></h4>
+					<div class="text-center size">
 					</div>
+					<br>
+					<span class="item_price"></span>
+					<button type="button" class="btn btn-default productBtn" aria-label="Left Align">
+						<span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>
+					</button>
 				</div>
 			</div>
 		</div>
@@ -210,7 +175,22 @@
 
 		<!-- end:footer -->
 		<!-- begin:copyright -->
-
+		<br/>
+		<br/>
+		<br/>
+		<br/>
+		<br/>
+		<br/>
+		<br/>
+		<br/>
+		<br/>
+		<br/>
+		<br/>
+		<br/>
+		<br/>
+		<br/>
+		<br/>
+		<br/>
 		<div class="row footer">
 			<div class="col-md-12 copyright">
 				<div class="row">
@@ -239,7 +219,6 @@
 	<script src="/js/masonry.pkgd.min.js"></script>
 	<script src="/js/imagesloaded.pkgd.min.js"></script>
 	<script src="/js/script.js"></script>
-	<script src="/js/simpleCart.js"></script>
 	<script src="/js/accounting.js"></script>
 	<!--aws-->
 	<script src="/js/aws/jsbn.js"></script>
@@ -257,12 +236,12 @@
 		$(document).ready(function() {
 			initPage(function(err, obj) {
 				listProducts(obj);
-				simpleCart({
-					checkout: {
-						type: "PayPal",
-						email: "ccwalkerjm@gmail.com"
-					},
-				});
+			});
+
+			$('.productBtn').click(function() {
+				var productItem = $(this).closest(".product-item");
+				location.assign("/product_detail.html?id=" + productItem.data('product_id'));
+				//alert(productItem.data('product_id'));
 			});
 
 			function listProducts(obj) {
@@ -273,7 +252,7 @@
 						return;
 					}
 
-					var randomizedItems = getRandomizedItems(4,items.length);
+					var randomizedItems = getRandomizedItems(4, items.length);
 
 					diplayItem($("#firstItem"), items[randomizedItems[0]]);
 					diplayItem($("#secondItem"), items[randomizedItems[1]]);
@@ -282,29 +261,11 @@
 				});
 			}
 
-			function getRandomizedItems(displaySize,size) {
-				var randomizedItems = [];
-				while (true) {
-					var item = getRandomIntInclusive(0, size - 1);
-					var itemExist = false;
-					for(var i=0; i < randomizedItems.length; i++) {
-						if (item == randomizedItems[i]) {
-							itemExist = true;
-							break;
-						}
-					}
-					if (!itemExist) {
-						randomizedItems.push(item);
-						if(randomizedItems.length == displaySize){
-							break;
-						}
-					}
-				}
-				return randomizedItems;
-			}
+
 
 
 			function diplayItem(element, item) {
+				element.data("product_id", item.id);
 				element.find(".item_name").text(item.productName);
 				element.find(".item_thumb").attr("src", item.smallImageName);
 				element.find(".item_price").text(accounting.formatMoney(item.price));
