@@ -84,8 +84,8 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="nav-menus">
-                  <ul class="nav nav-pills" id="menu_items">
-                  </ul>
+                    <ul class="nav nav-pills" id="menu_items">
+                    </ul>
                 </div>
             </div>
         </div>
@@ -173,7 +173,7 @@
             <div class="col-md-9 col-sm-8 content ">
                 <div class="simpleCart_shelfItem">
 
-                    <div class="row">
+                    <div class="row" id="productRowId">
                         <div class="col-md-12">
                             <div class="heading-title">
                                 <input type="hidden" id="productId" value="">
@@ -218,7 +218,7 @@
                                                     </tr>
                                                     <tr>
                                                         <td colspan="3">
-                                                            <a href="javascript:;" class="btn btn-sm btn-primary item_add">Add to Cart</a>
+                                                            <button type="button" class="btn btn-sm btn-primary item_add">Add to Cart</button>
                                                         </td>
                                                     </tr>
                                                 </tbody>
@@ -375,6 +375,17 @@
                 //alert(productItem.data('product_id'));
             });
 
+            $('.item_add').click(function() {
+                var productRow = $(this).closest("#productRowId");
+                var productItem = {};
+                productItem.id = productRow.find("#productId").val();
+                productItem.quantity = productRow.find(".item_Quantity").val();
+                productItem.size = productRow.find(".item_size").val();
+                addToCart(productItem);
+                //alert(productItem.data('product_id'));
+            });
+
+
             function listProducts(obj) {
                 obj = obj ? obj : g_proudOfMyColorsService; //
                 obj.listProducts(function(err, items) {
@@ -398,7 +409,7 @@
                         productItem = items[getRandomizedItems(1, items.length)[0]];
 
 
-                    $('#productId').text(productItem.id);
+                    $('#productId').val(productItem.id);
                     $('#productDescription').html('<p>' + productItem.description + '</p>');
                     $('#productName').text(productItem.productName);
                     $('#productImg').attr("src", productItem.largeImageName);
@@ -433,7 +444,7 @@
                     var exceptItems = [];
                     exceptItems.push(productItem);
 
-                    var randomizedItems = getRandomizedItems(relatedItems.length >= 3 ? 3 : relatedItems.length, relatedItems.length,exceptItems);
+                    var randomizedItems = getRandomizedItems(relatedItems.length >= 3 ? 3 : relatedItems.length, relatedItems.length, exceptItems);
 
                     if (relatedItems.length >= 1) diplayItem($("#firstItem"), relatedItems[randomizedItems[0]]);
                     if (relatedItems.length >= 2) diplayItem($("#secondItem"), relatedItems[randomizedItems[1]]);

@@ -27,7 +27,10 @@ function getShoppingCart() {
 }
 
 function setShoppingCart(x_shopping_cart_list) {
-    sessionStorage.setItem(g_shopping_cart_key_name, JSON.stringify(x_shopping_cart_list));
+    if (x_shopping_cart_list.length > 0)
+        sessionStorage.setItem(g_shopping_cart_key_name, JSON.stringify(x_shopping_cart_list));
+    else
+        sessionStorage.removeItem(g_shopping_cart_key_name);
 }
 
 function addToCart(product) {
@@ -35,14 +38,16 @@ function addToCart(product) {
     var x_shopping_cart_list = getShoppingCart();
     for (var i = 0; i < x_shopping_cart_list.length; i++) {
         if (product.id == x_shopping_cart_list[i].id && product.size == x_shopping_cart_list[i].size) {
-            x_shopping_cart_list[idx].quantity = item.quantity;
+            x_shopping_cart_list[i].quantity = product.quantity;
             productExits = true;
             break;
         }
     }
     if (!productExits) {
         x_shopping_cart_list.push(product);
+        setShoppingCart(x_shopping_cart_list);
     }
+    updateShoppingcartDisplay();
 }
 
 function removeFromCart(product) {
@@ -53,9 +58,22 @@ function removeFromCart(product) {
             break;
         }
     }
+    setShoppingCart(x_shopping_cart_list);
+    updateShoppingcartDisplay();
 }
 
-
+function updateShoppingcartDisplay() {
+    var adminSection = $('#admin');
+    var shoppingCartBtn = adminSection.find('#' + g_shoppingCartBtn).removeClass().empty();
+    var x_shopping_cart_list = getShoppingCart();
+    if (x_shopping_cart_list.length === 0) {
+        shoppingCartBtn.addClass("btn btn-default btn-sm  text-center");
+        shoppingCartBtn.html('<span class="glyphicon glyphicon-shopping-cart"></span><br/>Empty');
+    } else {
+        shoppingCartBtn.addClass("btn btn-primary btn-sm  text-center");
+        shoppingCartBtn.html('<span class="glyphicon glyphicon-shopping-cart"></span><br/>Checkout');
+    }
+}
 
 
 //manage query strings
