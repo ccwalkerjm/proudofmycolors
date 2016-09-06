@@ -73,6 +73,33 @@ function updateShoppingcartDisplay() {
         shoppingCartBtn.addClass("btn btn-primary btn-sm  text-center");
         shoppingCartBtn.html('<span class="glyphicon glyphicon-shopping-cart"></span><br/>Checkout');
     }
+
+    var shoppingCartWidget = $('#shoppingCartWidget').addClass('widget').empty();
+    var widgetTitle = $("<div/>").addClass('widget-title');
+    widgetTitle.append("<h3>Cart</h3>").appendTo(shoppingCartWidget);
+    var productListHolder = $("<ul/>").addClass("cart list-unstyled");
+    for (var i = 0; i < x_shopping_cart_list.length; i++) {
+        var item_li = $("<li/>");
+        var item_row = $("<div/>").addClass("row");
+        //description
+        var item_description = $("<div/>").addClass("col-sm-7 col-xs-7").append(x_shopping_cart_list[i].quantity);
+        item_description.append("&nbsp;");
+        var item_description_a = $("<a/>").attr("href", "#").html(x_shopping_cart_list[i].productName);
+        var item_size = $("<span/>").html("-"+x_shopping_cart_list[i].size).appendTo(item_description_a);
+        item_description_a.appendTo(item_description);
+        //pricing
+        var item_pricing = $("<div/>").addClass("col-sm-5 col-xs-5 text-right");
+        var item_pricing_bold = $("<strong/>").html(accounting.formatMoney(x_shopping_cart_list[i].price)).appendTo(item_pricing);
+        var delete_link = $("<a/>").attr("href", "#");
+        var delete_icon = $("<i/>").addClass("fa fa-trash-o").appendTo(delete_link);
+        delete_link.appendTo(item_pricing);
+        item_row.append(item_description);
+        item_row.append(item_pricing);
+        item_li.append(item_row).appendTo(productListHolder);
+    }
+    shoppingCartWidget.append(productListHolder);
+
+
 }
 
 
@@ -214,6 +241,9 @@ function initPage(callback) {
     });
     setLoadingState(true);
 
+
+
+
     g_proudOfMyColorsService = new proudOfMyColorsService(function(err, $this) {
         setLoadingState(false);
         if (err) {
@@ -276,11 +306,14 @@ function initPage(callback) {
         menu_item.append('<li><a href="contact.html">Contact</a></li>');
         //menu
 
-
+        updateShoppingcartDisplay();
 
 
     });
 
+    $('#admin').on('click','#' + g_shoppingCartBtn,function(){
+      location.assign('/cart.html');
+    });
 
     $('#admin').on('click', '#logout', function() {
         g_proudOfMyColorsService.signoff();

@@ -42,25 +42,6 @@
                 </button>
             </div>
 
-            <div class="collapse navbar-collapse" id="clotheshop-navbar">
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a class="disabled">CURRENCY</a></li>
-                    <li class="active"><a href="#">USD</a></li>
-                    <li><a href="#">EUR</a></li>
-                    <li><a href="#">IDR</a></li>
-                    <li class="divider-vertical"></li>
-                    <li class="dropdown">
-                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">LANGUAGE <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">EN</a></li>
-                            <li><a href="#">ID</a></li>
-                            <li><a href="#">FR</a></li>
-                            <li class="divider"></li>
-                            <li><a href="#">IT</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
             <!-- /.navbar-collapse -->
         </div>
     </nav>
@@ -72,7 +53,7 @@
         <div class="row">
             <div class="col-md-6 col-sm-6 col-xs-6">
                 <div class="logo">
-                    <img src="img/logos/Proud-O-My-Colours_TEXTONLY-02-02_small.png" class="img-responsive" alt="Proud Of My Colors">
+                    <img src="/img/logos/Proud-O-My-Colours_TEXTONLY-02-02_small.png" class="img-responsive" alt="Proud Of My Colors">
                 </div>
             </div>
             <div class="col-md-6 col-sm-6 col-xs-6" id="admin">
@@ -97,65 +78,9 @@
             <div class="col-md-3 col-sm-4 sidebar">
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="widget">
-                            <div class="widget-title">
-                                <h3>Cart</h3>
-                            </div>
-                            <ul class="cart list-unstyled">
-                                <li>
-                                    <div class="row">
-
-                                        <a href="javascript:;" class="simpleCart_checkout"></a>
-                                        <!-- button to empty the cart -->
-
-                                        <a href="javascript:;" class="simpleCart_empty"><i class="fa fa-trash-o"></i></a>
-                                        <!-- show the cart -->
-                                        <div class="simpleCart_items"></div>
-
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="row">
-
-
-                                    </div>
-                                </li>
-                            </ul>
-                            <ul class="list-unstyled total-price">
-                                <li>
-                                    <div class="row">
-                                        <span class="simpleCart_quantity"></span> items - <span class="simpleCart_total"></span>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="row">
-
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="row">
-                                        <div class="col-sm-6 col-xs-6">
-                                            <a class="btn btn-default" href="cart.html">Cart</a>
-                                        </div>
-                                        <div class="col-sm-6 col-xs-6 text-right">
-                                            <a href="javascript:;" class="simpleCart_checkout btn btn-primary">Checkout</a>
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul>
+                        <div class="widget" id="shoppingCartWidget">
                         </div>
                         <!-- break -->
-                        <!-- <div class="widget">
-                <div class="widget-title">
-                  <h3>Category</h3>
-                </div>
-                <ul class="nav nav-pills nav-stacked">
-                    <li class="active"><a href="#">Acessories</a></li>
-                    <li><a href="#">Girl</a></li>
-                    <li><a href="#">Boy</a></li>
-                    <li><a href="#">Edition</a></li>
-                </ul>
-              </div>-->
                         <!-- break -->
                         <div class="widget">
                             <div class="widget-title">
@@ -375,10 +300,10 @@
                 //alert(productItem.data('product_id'));
             });
 
+            //add to Cart
             $('.item_add').click(function() {
                 var productRow = $(this).closest("#productRowId");
-                var productItem = {};
-                productItem.id = productRow.find("#productId").val();
+                var productItem = JSON.parse($("#productId").val());
                 productItem.quantity = productRow.find(".item_Quantity").val();
                 productItem.size = productRow.find(".item_size").val();
                 addToCart(productItem);
@@ -409,7 +334,7 @@
                         productItem = items[getRandomizedItems(1, items.length)[0]];
 
 
-                    $('#productId').val(productItem.id);
+                    $('#productId').val(JSON.stringify(productItem));
                     $('#productDescription').html('<p>' + productItem.description + '</p>');
                     $('#productName').text(productItem.productName);
                     $('#productImg').attr("src", productItem.largeImageName);
