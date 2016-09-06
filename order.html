@@ -98,56 +98,10 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="widget" id="shoppingCartWidget">
-                            <!-- <div class="widget-title">
-                                <h3>Cart</h3>
-                            </div>
-                            <ul class="cart list-unstyled">
-                                <li>
-                                    <div class="row">
-                                        <div class="col-sm-7 col-xs-7">1 <a href="#">Canada Disc Flag T-shirt</a> <span>[ 26 ]</span></div>
-                                        <div class="col-sm-5 col-xs-5 text-right"><strong>$54.00</strong> <a href="#"><i class="fa fa-trash-o"></i></a></div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="row">
-                                        <div class="col-sm-7 col-xs-7">1 <a href="#">Jamaica H-track T-shirt</a> <span>[ M ]</span></div>
-                                        <div class="col-sm-5 col-sm-5 text-right"><strong>$26.00</strong> <a href="#"><i class="fa fa-trash-o"></i></a></div>
-                                    </div>
-                                </li>
-                            </ul>
-                            <ul class="list-unstyled total-price">
-                                <li>
-                                    <div class="row">
-                                        <div class="col-sm-8 col-xs-8">Shipping</div>
-                                        <div class="col-sm-4 col-xs-4 text-right">$1.00</div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="row">
-                                        <div class="col-sm-8 col-xs-8">Total</div>
-                                        <div class="col-sm-4 col-xs-4 text-right">$71.00</div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="row">
-                                        <div class="col-sm-6 col-xs-6">
-                                            <a class="btn btn-default" href="cart.html">Cart</a>
-                                        </div>
-                                        <div class="col-sm-6 col-xs-6 text-right">
-                                            <a class="btn btn-primary" href="login.html">Checkout</a>
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul> -->
                         </div>
                         <!-- break -->
-                        <div class="widget">
-                            <div class="widget-title">
-                                <h3>Payment Confirmation</h3>
-                            </div>
-                            <p>Already make a payment ? please confirm your payment by filling <a href="confirm.html">this form</a></p>
+                        <div class="widget" id="shoppingCartCheckout">
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -155,6 +109,26 @@
 
             <!-- begin:content -->
             <div class="col-md-9 col-sm-8 content">
+                <div class="row">
+                    <div class="col-md-12">
+                        <form class="form-inline">
+                            <div class="form-group">
+                                <label for="gender">Gender</label>
+                                <select class="form-control" id="gender">
+                                    <option value=""></option>
+                                    <option value="male">Male</option>
+                                    <option value="female">Female</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="country">Country</label>
+                                <select class="form-control" id="country">
+                                </select>
+                            </div>
+                            <button type="button" class="btn btn-default" id="search">Search</button>
+                        </form>
+                    </div>
+                </div>
 
                 <div class="row">
                     <div class="col-md-12" id="productList">
@@ -210,12 +184,26 @@
     <script src="/js/index.js"></script>
     <script type="text/javascript">
         $(document).ready(function() {
-            var country;
-            var gender;
             initPage(function(err, obj) {
-                country = getQueryStringParams("country");
-                gender = getQueryStringParams("gender");
+                populateCountries();
+                var country = getQueryStringParams("country");
+                var gender = getQueryStringParams("gender");
+                $('#country').val(country);
+                $('#gender').val(gender);
                 listProducts(obj);
+            });
+
+
+            function populateCountries() {
+                var $select = $('#country').empty();
+                for (var i = 0; i < g_valid_countries.length; i++) {
+                    var $option = $("<option/>").val(g_valid_countries[i].code).text(g_valid_countries[i].name);
+                    $select.append($option);
+                }
+            }
+
+            $('#search').click(function() {
+                listProducts();
             });
 
             function listProducts(obj) {
@@ -226,30 +214,19 @@
                         return;
                     }
 
-                    var productList = $('#productList');
+                    var productList = $('#productList').empty();
                     var header = $('<h3/>');
-                    if (country) {
-                        switch (country.toLowerCase()) {
-                            case "jm":
-                                header.text("Jamaica Selection");
-                                break;
-                            case "us":
-                                header.text("United States Selection");
-                                break;
-                            default:
-                                header.text(country.toUpperCase() + " Selection");
-                                break;
-                        }
-                    }
-                    if (gender) {
-                        switch (gender.toLowerCase()) {
-                            case "male":
-                                header.text("Male Selection");
-                                break;
-                            default:
-                                header.text("Female Selection");
-                                break;
-                        }
+                    var country = $('#country').val();
+                    var gender = $('#gender').val();
+
+                    if (country && gender) {
+                        header.html($("#country option:selected").text() + " and " + $("#gender option:selected").text() + " Selections");
+                    } else if (gender) {
+                        header.html($("#gender option:selected").text() + " Selections");
+                    } else if (country) {
+                        header.html($("#country option:selected").text() + " Selections");
+                    } else {
+                        header.html("");
                     }
 
                     productList.append(header);
@@ -257,9 +234,10 @@
 
                     var filteredItems = [];
                     for (var i = 0; i < items.length; i++) {
-                        if ((gender && items[i].gender == gender && country && items[i].country == country) ||
-                            (gender && items[i].gender == gender && !country) ||
-                            (!gender && country && items[i].country == country)) {
+                        if ((gender && items[i].gender.toLowerCase() == gender.toLowerCase() &&
+                                country && items[i].country.toLowerCase() == country.toLowerCase()) ||
+                            (gender && items[i].gender.toLowerCase() == gender.toLowerCase() && !country) ||
+                            (!gender && country && items[i].country.toLowerCase() == country.toLowerCase())) {
                             filteredItems.push(items[i]);
                         }
                     }

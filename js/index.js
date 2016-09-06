@@ -1,6 +1,13 @@
 var g_proudOfMyColorsService; // = new proudOfMyColorsService()
 var g_shoppingCartBtn = "shoppingCartBtn";
+var g_shoppingCartBtnClass = "shoppingCartBtnClass";
 var g_shopping_cart_key_name = "_courserv_shopping_cart_key_0001";
+var g_valid_countries = [];
+g_valid_countries.push({"code":"","name":""});
+g_valid_countries.push({"code":"US","name":"United States"});
+g_valid_countries.push({"code":"CA","name":"Canada"});
+g_valid_countries.push({"code":"JM","name":"Jamaica"});
+g_valid_countries.push({"code":"MX","name":"Mexico"});
 
 
 var _$message;
@@ -63,41 +70,122 @@ function removeFromCart(product) {
 }
 
 function updateShoppingcartDisplay() {
-    var adminSection = $('#admin');
-    var shoppingCartBtn = adminSection.find('#' + g_shoppingCartBtn).removeClass().empty();
     var x_shopping_cart_list = getShoppingCart();
-    if (x_shopping_cart_list.length === 0) {
-        shoppingCartBtn.addClass("btn btn-default btn-sm  text-center");
-        shoppingCartBtn.html('<span class="glyphicon glyphicon-shopping-cart"></span><br/>Empty');
-    } else {
-        shoppingCartBtn.addClass("btn btn-primary btn-sm  text-center");
-        shoppingCartBtn.html('<span class="glyphicon glyphicon-shopping-cart"></span><br/>Checkout');
+    //update button
+    var adminSection = $('#admin');
+    if (adminSection.length > 0) {
+        var shoppingCartBtn = adminSection.find('#' + g_shoppingCartBtn).removeClass().empty();
+        if (x_shopping_cart_list.length === 0) {
+            shoppingCartBtn.addClass("btn btn-default btn-sm  text-center");
+            shoppingCartBtn.html('<span class="glyphicon glyphicon-shopping-cart"></span>Empty');
+        } else {
+            shoppingCartBtn.addClass("btn btn-primary btn-sm  text-center");
+            shoppingCartBtn.html('<span class="glyphicon glyphicon-shopping-cart"></span>Checkout');
+        }
+        shoppingCartBtn.addClass(g_shoppingCartBtnClass);
+    }
+    //populate widget
+    var shoppingCartWidget = $('#shoppingCartWidget');
+    if (shoppingCartWidget.length > 0) {
+        shoppingCartWidget.removeClass().addClass('widget').empty();
+        var widgetTitle = $("<div/>").addClass('widget-title');
+        widgetTitle.append("<h3>Shopping Cart</h3>").appendTo(shoppingCartWidget);
+        var productListHolder = $("<ul/>").addClass("cart list-unstyled");
+        for (var i = 0; i < x_shopping_cart_list.length; i++) {
+            var item_li = $("<li/>");
+            var item_row = $("<div/>").addClass("row");
+            //description
+            var item_description = $("<div/>").addClass("col-sm-7 col-xs-7").append(x_shopping_cart_list[i].quantity);
+            item_description.append("&nbsp;");
+            var item_description_a = $("<a/>").attr("href", "#").html(x_shopping_cart_list[i].productName);
+            var item_size = $("<span/>").html("-" + x_shopping_cart_list[i].size).appendTo(item_description_a);
+            item_description_a.appendTo(item_description);
+            //pricing
+            var item_pricing = $("<div/>").addClass("col-sm-5 col-xs-5 text-right");
+            var item_total = x_shopping_cart_list[i].quantity * x_shopping_cart_list[i].price;
+            var item_pricing_bold = $("<strong/>").html(accounting.formatMoney(item_total)).appendTo(item_pricing);
+            var delete_link = $("<a/>").attr("href", "#");
+            var delete_icon = $("<i/>").addClass("fa fa-trash-o").appendTo(delete_link);
+            delete_link.appendTo(item_pricing);
+            item_row.append(item_description);
+            item_row.append(item_pricing);
+            item_li.append(item_row).appendTo(productListHolder);
+        }
+        shoppingCartWidget.append(productListHolder);
+    }
+    //Checkout
+    var shoppingCartCheckout = $('#shoppingCartCheckout');
+    if (shoppingCartCheckout.length > 0) {
+        shoppingCartCheckout.removeClass().addClass('widget').empty();
+        var shoppingCartCheckoutTitle = $("<div/>").addClass('widget-title');
+        shoppingCartCheckoutTitle.append("<h3>Confirm Cart</h3>").appendTo(shoppingCartCheckout);
+
+        var shoppingCartCheckoutBtn = $("<button/>");
+        if (x_shopping_cart_list.length === 0)
+            shoppingCartCheckoutBtn.addClass("btn btn-default");
+        else
+            shoppingCartCheckoutBtn.addClass("btn btn-primary");
+        shoppingCartCheckoutBtn.addClass(g_shoppingCartBtnClass);
+        shoppingCartCheckoutBtn.html('<span class="glyphicon glyphicon-shopping-cart"></span>Checkout');
+        shoppingCartCheckoutBtn.appendTo(shoppingCartCheckout);
     }
 
-    var shoppingCartWidget = $('#shoppingCartWidget').addClass('widget').empty();
-    var widgetTitle = $("<div/>").addClass('widget-title');
-    widgetTitle.append("<h3>Cart</h3>").appendTo(shoppingCartWidget);
-    var productListHolder = $("<ul/>").addClass("cart list-unstyled");
-    for (var i = 0; i < x_shopping_cart_list.length; i++) {
-        var item_li = $("<li/>");
-        var item_row = $("<div/>").addClass("row");
-        //description
-        var item_description = $("<div/>").addClass("col-sm-7 col-xs-7").append(x_shopping_cart_list[i].quantity);
-        item_description.append("&nbsp;");
-        var item_description_a = $("<a/>").attr("href", "#").html(x_shopping_cart_list[i].productName);
-        var item_size = $("<span/>").html("-"+x_shopping_cart_list[i].size).appendTo(item_description_a);
-        item_description_a.appendTo(item_description);
-        //pricing
-        var item_pricing = $("<div/>").addClass("col-sm-5 col-xs-5 text-right");
-        var item_pricing_bold = $("<strong/>").html(accounting.formatMoney(x_shopping_cart_list[i].price)).appendTo(item_pricing);
-        var delete_link = $("<a/>").attr("href", "#");
-        var delete_icon = $("<i/>").addClass("fa fa-trash-o").appendTo(delete_link);
-        delete_link.appendTo(item_pricing);
-        item_row.append(item_description);
-        item_row.append(item_pricing);
-        item_li.append(item_row).appendTo(productListHolder);
+    //populate shopping cart
+    var shoppingCartTable = $('#shoppingCartTable tbody').empty();
+    if(shoppingCartTable.length > 0){
+      var total = 0;
+      for (var k = 0; k < x_shopping_cart_list.length; k++) {
+        var $tr = $('<tr/>');
+        //img cell
+        var imgCell = $('<td/>');
+        var img = $('<img/>').addClass('img-cart').attr('src',x_shopping_cart_list[k].smallImageName);
+        img.appendTo(imgCell);
+        imgCell.appendTo($tr);
+
+        //type cell
+        var typeCell = $('<td/>');
+        var productName = $('<strong/>').text(x_shopping_cart_list[k].productName);
+        productName.appendTo(typeCell);
+        var size_p = $('<p/>').html('Size : '+x_shopping_cart_list[k].size);
+        size_p.appendTo(typeCell);
+        typeCell.appendTo($tr);
+
+        //quantity cell
+        var quantityCell = $('<td/>');
+        var quantitySection = $('<div/>').addClass('form-inline');
+        var quantityInput = $('<input/>').addClass('form-control').attr('type','number');
+        quantityInput.val(x_shopping_cart_list[k].quantity).appendTo(quantitySection);
+        var _productId = $('<input/>').addClass('productId').attr('type','hidden');
+        _productId.val(x_shopping_cart_list[k].id).appendTo(quantitySection);
+        var updateBtn = $('<button/>').addClass('btn btn-default update').attr('rel','tooltip');
+        updateBtn.attr('title','Update');
+        var update_i = $('<i/>').addClass('fa fa-pencil').appendTo(updateBtn);
+        updateBtn.appendTo(quantitySection);
+        var deleteBtn =  $('<a/>').addClass('btn btn-primary delete').attr('rel','tooltip');
+        deleteBtn.attr("href","#").attr('title','Delete');
+        var delete_i = $('<i/>').addClass('fa fa-trash-o').appendTo(deleteBtn);
+        deleteBtn.appendTo(quantitySection);
+        quantitySection.appendTo(quantityCell);
+        quantityCell.appendTo($tr);
+        //price cell
+        var priceFormat = accounting.formatMoney(x_shopping_cart_list[k].price);
+        var priceCell = $('<td/>').html(priceFormat).appendTo($tr);
+        var item_total = x_shopping_cart_list[k].quantity * x_shopping_cart_list[k].price;
+        var itemTotalCell = $('<td/>').html(accounting.formatMoney(item_total)).appendTo($tr);
+        //create row
+        shoppingCartTable.append($tr);
+        total += item_total;
+      }
+      shoppingCartTable.append('<tr><td colspan="6">&nbsp;</td></tr>');
+      //summary
+      var $total_tr = $('<tr/>');
+      //img cell
+      var total_description_cell = $('<td/>').attr('colspan','4').addClass('text-right');
+      total_description_cell.html('Total Product').appendTo($total_tr);
+      var total_amount_cell = $('<td/>').html(accounting.formatMoney(total)).appendTo($total_tr);
+      shoppingCartTable.append($total_tr);
     }
-    shoppingCartWidget.append(productListHolder);
+
 
 
 }
@@ -263,19 +351,6 @@ function initPage(callback) {
             admin_sub.html('<a href="/admin/account.html">Account</a>');
         }
         var shoppingCartBtn = $('<button/>').attr("id", g_shoppingCartBtn);
-        var x_shopping_cart_list = getShoppingCart();
-        if (x_shopping_cart_list.length === 0) {
-            shoppingCartBtn.addClass("btn btn-default btn-sm  text-center");
-            shoppingCartBtn.html('<span class="glyphicon glyphicon-shopping-cart"></span><br/>Empty');
-        } else {
-            shoppingCartBtn.addClass("btn btn-primary btn-sm  text-center");
-            shoppingCartBtn.html('<span class="glyphicon glyphicon-shopping-cart"></span><br/>Checkout');
-        }
-
-
-        //	<button type="button" class="btn btn-default" aria-label="Left Align">
-        //		<span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
-        //	</button>
         var $div = $("<div/>").append("<br/>").append(shoppingCartBtn).appendTo(admin_sub);
 
         admin_sub.appendTo('#admin');
@@ -290,20 +365,20 @@ function initPage(callback) {
         menu_item.append('<li class="active"><a href="/index.html">Home</a></li>');
         menu_item.append('<li><a href="/order.html?gender=male">Men</a></li>');
         menu_item.append('<li><a href="/order.html?gender=female">Women</a></li>');
-        var dropdown_menu_li = $('<li/>').addClass("dropdown").empty();
-        dropdown_menu_li.append('<a class="dropdown-toggle" data-toggle="dropdown" href="/order.html">Nationality</a>');
-        var dropdown_menu_ul = $('<ul/>').addClass("dropdown-menu").attr("id", "menu1").empty();
-        dropdown_menu_ul.append('<li><a href="/order.html?country=ca">Canada</a></li>');
-        dropdown_menu_ul.append('<li><a href="/order.html?country=jm>Jamaica</a></li>');
-        dropdown_menu_ul.append('<li><a href="/order.html?country=mx>Mexico</a></li>');
-        dropdown_menu_ul.append('<li><a href="/order.html?country=tt>Trinidad and Tobago</a></li>');
-        dropdown_menu_ul.append('<li><a href="/order.html?country=us>U.S.A</a></li>');
-        dropdown_menu_ul.append('<li><a href="/order.html?country=uk>U.K</a></li>');
-        dropdown_menu_li.append(dropdown_menu_ul);
-
-        menu_item.append(dropdown_menu_li);
-        menu_item.append('<li><a href="about.html">About</a></li>');
-        menu_item.append('<li><a href="contact.html">Contact</a></li>');
+        // var dropdown_menu_li = $('<li/>').addClass("dropdown").empty();
+        // dropdown_menu_li.append('<a class="dropdown-toggle" data-toggle="dropdown" href="/order.html">Nationality</a>');
+        // var dropdown_menu_ul = $('<ul/>').addClass("dropdown-menu").attr("id", "menu1").empty();
+        // dropdown_menu_ul.append('<li><a href="/order.html?country=ca">Canada</a></li>');
+        // dropdown_menu_ul.append('<li><a href="/order.html?country=jm>Jamaica</a></li>');
+        // dropdown_menu_ul.append('<li><a href="/order.html?country=mx>Mexico</a></li>');
+        // dropdown_menu_ul.append('<li><a href="/order.html?country=tt>Trinidad and Tobago</a></li>');
+        // dropdown_menu_ul.append('<li><a href="/order.html?country=us>U.S.A</a></li>');
+        // dropdown_menu_ul.append('<li><a href="/order.html?country=uk>U.K</a></li>');
+        // dropdown_menu_li.append(dropdown_menu_ul);
+        // menu_item.append(dropdown_menu_li);
+        menu_item.append('<li><a href="/order.html">Categories</a></li>');
+        menu_item.append('<li><a href="/about.html">About</a></li>');
+        menu_item.append('<li><a href="/contact.html">Contact</a></li>');
         //menu
 
         updateShoppingcartDisplay();
@@ -311,13 +386,20 @@ function initPage(callback) {
 
     });
 
-    $('#admin').on('click','#' + g_shoppingCartBtn,function(){
-      location.assign('/cart.html');
-    });
 
     $('#admin').on('click', '#logout', function() {
         g_proudOfMyColorsService.signoff();
         location.assign('/index.html');
     });
+
+    //shopping cart events
+    $('#admin').on('click', '#' + g_shoppingCartBtn, function() {
+        location.assign('/cart.html');
+    });
+
+    $('#shoppingCartCheckout').on('click', '.' + g_shoppingCartBtnClass, function() {
+        location.assign('/cart.html');
+    });
+
 
 }

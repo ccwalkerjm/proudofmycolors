@@ -244,8 +244,17 @@
 	<script type="text/javascript">
 		$(document).ready(function() {
 			initPage(function(err, obj) {
+				populateCountries();
 				listProducts(obj);
 			});
+
+			function populateCountries() {
+					var $select = $('#country').empty();
+					for (var i = 0; i < g_valid_countries.length; i++) {
+							var $option = $("<option/>").val(g_valid_countries[i].code).text(g_valid_countries[i].name);
+							$select.append($option);
+					}
+			}
 
 			$('#update-product').click(function() {
 				var product_data = {};
