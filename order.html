@@ -105,7 +105,7 @@
             <div class="col-md-9 col-sm-8 content">
                 <div class="row">
                     <div class="col-md-12">
-                        <form class="form-inline">
+                        <form class="form-inline pull-right">
                             <div class="form-group">
                                 <label for="gender">Gender</label>
                                 <select class="form-control" id="gender">
@@ -125,7 +125,7 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-md-12" id="productList">
+                    <div class="col-md-12 product-container" id="productList">
                     </div>
                 </div>
             </div>
@@ -228,12 +228,20 @@
 
                     var filteredItems = [];
                     for (var i = 0; i < items.length; i++) {
-                        if ((gender && items[i].gender.toLowerCase() == gender.toLowerCase() &&
-                                country && items[i].country.toLowerCase() == country.toLowerCase()) ||
+                        if ((gender && items[i].gender.toLowerCase() == gender.toLowerCase() && country && items[i].country.toLowerCase() == country.toLowerCase()) ||
                             (gender && items[i].gender.toLowerCase() == gender.toLowerCase() && !country) ||
-                            (!gender && country && items[i].country.toLowerCase() == country.toLowerCase())) {
+                            (!gender && country && items[i].country.toLowerCase() == country.toLowerCase())
+                          ) {
                             filteredItems.push(items[i]);
                         }
+                    }
+
+                    if(!country && !gender){
+                      header.html("Random Selections");
+                      var rans = getRandomizedItems(6, items.length);
+                      for(var j=0;j<rans.length;j++){
+                        filteredItems.push(items[rans[j]]);
+                      }
                     }
 
                     for (var i = 0; i < filteredItems.length; i = i + 3) {
@@ -266,19 +274,11 @@
                 productPrice.appendTo(productItem);
                 var productBtn = $('<button/>').addClass("btn btn-default productBtn").attr("aria-label", "Left Align");
                 productBtn.append('<span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>');
+                productItem.append('<br/>');
                 productBtn.appendTo(productItem);
                 productItem.appendTo(cellDiv);
                 placementElement.append(cellDiv);
             }
-
-
-            $('#productList').on('click', '.productBtn', function() {
-                var productItem = $(this).closest(".product-item");
-                location.assign("/product_detail.html?id=" + productItem.data('product_id'));
-                //alert(productItem.data('product_id'));
-            });
-
-
 
 
         });

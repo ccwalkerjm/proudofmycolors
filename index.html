@@ -19,8 +19,8 @@
       <script src="js/html5shiv.js"></script>
       <script src="js/respond.min.js"></script>
     <![endif]-->
-		<!--Favicon  -->
-		<link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png">
+	<!--Favicon  -->
+	<link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png">
 	<link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png">
 	<link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png">
 	<link rel="apple-touch-icon" sizes="76x76" href="/apple-icon-76x76.png">
@@ -29,7 +29,7 @@
 	<link rel="apple-touch-icon" sizes="144x144" href="/apple-icon-144x144.png">
 	<link rel="apple-touch-icon" sizes="152x152" href="/apple-icon-152x152.png">
 	<link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180x180.png">
-	<link rel="icon" type="image/png" sizes="192x192"  href="/android-icon-192x192.png">
+	<link rel="icon" type="image/png" sizes="192x192" href="/android-icon-192x192.png">
 	<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 	<link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
 	<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -138,8 +138,8 @@
 					<h4 class="item_name text-center"></h4>
 					<div class="text-center size">
 					</div>
-					<br>
 					<span class="item_price"></span>
+					<br>
 					<button type="button" class="btn btn-default productBtn" aria-label="Left Align">
 						<span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>
 					</button>
@@ -152,8 +152,8 @@
 					<h4 class="item_name"></h4>
 					<div class="text-center size">
 					</div>
-					<br>
 					<span class="item_price"></span>
+					<br>
 					<button type="button" class="btn btn-default productBtn" aria-label="Left Align">
 						<span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>
 					</button>
@@ -166,8 +166,8 @@
 					<h4 class="item_name"></h4>
 					<div class="text-center size">
 					</div>
-					<br>
 					<span class="item_price"></span>
+					<br>
 					<button type="button" class="btn btn-default productBtn" aria-label="Left Align">
 						<span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>
 					</button>
@@ -180,8 +180,8 @@
 					<h4 class="item_name"></h4>
 					<div class="text-center size">
 					</div>
-					<br>
 					<span class="item_price"></span>
+					<br>
 					<button type="button" class="btn btn-default productBtn" aria-label="Left Align">
 						<span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>
 					</button>
@@ -257,11 +257,6 @@
 				listProducts(obj);
 			});
 
-			$('.productBtn').click(function() {
-				var productItem = $(this).closest(".product-item");
-				location.assign("/product_detail.html?id=" + productItem.data('product_id'));
-				//alert(productItem.data('product_id'));
-			});
 
 			function listProducts(obj) {
 				obj = obj ? obj : g_proudOfMyColorsService; //

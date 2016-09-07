@@ -276,6 +276,25 @@ var proudOfMyColorsService = (function() {
         return JSON.parse(data.Payload);
     };
 
+
+    //admin only
+  	proudOfMyColorsService.prototype.listUsers = function (callback) {
+  		var jsonRequest = {};
+  		jsonRequest.request = {
+  			'cmd': 'listUsers'
+  		};
+  		jsonRequest.auth = _getAuth();
+  		var requestSerialized = JSON.stringify(jsonRequest);
+  		var params = {
+  			FunctionName: 'proudofmycolorsAdminFunc',
+  			Payload: requestSerialized
+  		};
+  		var _lambda = new AWS.Lambda();
+  		_lambda.invoke(params, function (err, results) {
+  			callback(err, results);
+  		});
+  	};
+
     //admin functions
     //get user
     proudOfMyColorsService.prototype.createProduct = function(data, callback) {
