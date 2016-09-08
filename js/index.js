@@ -2,6 +2,10 @@ var g_proudOfMyColorsService; // = new proudOfMyColorsService()
 var g_shoppingCartBtn = "shoppingCartBtn";
 var g_shoppingCartBtnClass = "shoppingCartBtnClass";
 var g_shopping_cart_key_name = "_courserv_shopping_cart_key_0001";
+//widget//
+//paypal Now Accepting PayPal
+var paypal_widget ='<!-- PayPal Logo --><table border="0" cellpadding="10" cellspacing="0" align="center"><tr><td align="center"></td></tr><tr><td align="center"><a href="https://www.paypal.com/webapps/mpp/paypal-popup" title="How PayPal Works" onclick="javascript:window.open("https://www.paypal.com/webapps/mpp/paypal-popup", "WIPaypal", "toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=yes, width=1060, height=700"); return false;"><img src="https://www.paypalobjects.com/webstatic/mktg/logo/bdg_now_accepting_pp_2line_w.png" border="0" alt="Now Accepting PayPal"></a><div style="text-align:center"><a href="https://www.paypal.com/webapps/mpp/how-paypal-works"><font size="2" face="Arial" color="#0079CD">How PayPal Works</font></a></div></td></tr></table><!-- PayPal Logo -->';
+
 var g_valid_countries = [];
 g_valid_countries.push({
     "code": "",
@@ -120,9 +124,11 @@ function updateShoppingcartDisplay() {
     var shoppingCartWidget = $('#shoppingCartWidget');
     if (shoppingCartWidget.length > 0) {
         shoppingCartWidget.removeClass().addClass('widget').empty();
+        shoppingCartWidget.append(paypal_widget).append("<br/>");
         var widgetTitle = $("<div/>").addClass('widget-title');
         widgetTitle.append("<h3>Shopping Cart</h3>").appendTo(shoppingCartWidget);
         var productListHolder = $("<ul/>").addClass("cart list-unstyled");
+        var total = 0;
         for (var i = 0; i < x_shopping_cart_list.length; i++) {
             var item_li = $("<li/>");
             var item_row = $("<div/>").addClass("row");
@@ -131,7 +137,7 @@ function updateShoppingcartDisplay() {
             item_description.append("&nbsp;");
             var _productId = $('<input/>').addClass('productId').attr('type', 'hidden');
             _productId.val(x_shopping_cart_list[i].id).appendTo(item_description);
-            var item_description_a = $("<a/>").attr("href", "#").html(x_shopping_cart_list[i].productName+'-');
+            var item_description_a = $("<a/>").attr("href", "#").html(x_shopping_cart_list[i].productName + '-');
             var item_size = $("<span/>").addClass('size').html(x_shopping_cart_list[i].size).appendTo(item_description_a);
             item_description_a.appendTo(item_description);
             //pricing
@@ -144,7 +150,18 @@ function updateShoppingcartDisplay() {
             item_row.append(item_description);
             item_row.append(item_pricing);
             item_li.append(item_row).appendTo(productListHolder);
+            total += item_total;
         }
+        var total_li = $("<li/>").append("<br/><hr/>");
+        var total_row = $("<div/>").addClass("row");
+        var total_description = $("<div/>").addClass("col-sm-7 col-xs-7");
+        var total_description_a = $("<a/>").attr("href", "#").html('Total:').appendTo(total_description);
+        var total_pricing = $("<div/>").addClass("col-sm-5 col-xs-5 text-right");
+        var total_pricing_bold = $("<strong/>").html(accounting.formatMoney(total)).appendTo(total_pricing);
+        total_row.append(total_description);
+        total_row.append(total_pricing);
+        total_li.append(total_row).appendTo(productListHolder);
+
         shoppingCartWidget.append(productListHolder);
         //delete
         shoppingCartWidget.on("click", ".delete", function() {
@@ -155,12 +172,13 @@ function updateShoppingcartDisplay() {
             removeFromCart(product);
         });
     }
+
     //Checkout
     var shoppingCartCheckout = $('#shoppingCartCheckout');
     if (shoppingCartCheckout.length > 0) {
         shoppingCartCheckout.removeClass().addClass('widget').empty();
-        var shoppingCartCheckoutTitle = $("<div/>").addClass('widget-title');
-        shoppingCartCheckoutTitle.append("<h3>Confirm Cart</h3>").appendTo(shoppingCartCheckout);
+        //var shoppingCartCheckoutTitle = $("<div/>").addClass('widget-title');
+        //shoppingCartCheckoutTitle.append("<h3>Confirm Cart</h3>").appendTo(shoppingCartCheckout);
 
         var shoppingCartCheckoutBtn = $("<button/>");
         if (x_shopping_cart_list.length === 0)
@@ -175,7 +193,7 @@ function updateShoppingcartDisplay() {
     //populate shopping cart
     var shoppingCartTable = $('#shoppingCartTable tbody').empty();
     if (shoppingCartTable.length > 0) {
-        var total = 0;
+        var total2 = 0;
         for (var k = 0; k < x_shopping_cart_list.length; k++) {
             var $tr = $('<tr/>');
             //img cell
@@ -197,8 +215,8 @@ function updateShoppingcartDisplay() {
             var quantitySection = $('<div/>').addClass('form-inline');
             var quantityInput = $('<input/>').addClass('form-control quantity').attr('type', 'number');
             quantityInput.val(x_shopping_cart_list[k].quantity).appendTo(quantitySection);
-            var _productId = $('<input/>').addClass('productId').attr('type', 'hidden');
-            _productId.val(x_shopping_cart_list[k].id).appendTo(quantitySection);
+            var _productId2 = $('<input/>').addClass('productId').attr('type', 'hidden');
+            _productId2.val(x_shopping_cart_list[k].id).appendTo(quantitySection);
             var updateBtn = $('<button/>').addClass('btn btn-default update').attr('rel', 'tooltip');
             updateBtn.attr('title', 'Update');
             var update_i = $('<i/>').addClass('fa fa-pencil').appendTo(updateBtn);
@@ -216,7 +234,7 @@ function updateShoppingcartDisplay() {
             var itemTotalCell = $('<td/>').html(accounting.formatMoney(item_total2)).appendTo($tr);
             //create row
             shoppingCartTable.append($tr);
-            total += item_total2;
+            total2 += item_total2;
         }
         shoppingCartTable.append('<tr><td colspan="6">&nbsp;</td></tr>');
         //summary
@@ -224,7 +242,7 @@ function updateShoppingcartDisplay() {
         //img cell
         var total_description_cell = $('<td/>').attr('colspan', '4').addClass('text-right');
         total_description_cell.html('Total Product').appendTo($total_tr);
-        var total_amount_cell = $('<td/>').html(accounting.formatMoney(total)).appendTo($total_tr);
+        var total_amount_cell = $('<td/>').html(accounting.formatMoney(total2)).appendTo($total_tr);
         shoppingCartTable.append($total_tr);
         //set events
         //update
@@ -394,9 +412,6 @@ function initPage(callback) {
     });
     setLoadingState(true);
 
-
-
-
     g_proudOfMyColorsService = new proudOfMyColorsService(function(err, $this) {
         setLoadingState(false);
         if (err) {
@@ -434,6 +449,7 @@ function initPage(callback) {
         menu_item.append('<li><a href="/about.html">About</a></li>');
         menu_item.append('<li><a href="/contact.html">Contact</a></li>');
         //menu
+
         //update shopping cart
         updateShoppingcartDisplay();
 

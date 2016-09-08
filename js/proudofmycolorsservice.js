@@ -278,22 +278,22 @@ var proudOfMyColorsService = (function() {
 
 
     //admin only
-  	proudOfMyColorsService.prototype.listUsers = function (callback) {
-  		var jsonRequest = {};
-  		jsonRequest.request = {
-  			'cmd': 'listUsers'
-  		};
-  		jsonRequest.auth = _getAuth();
-  		var requestSerialized = JSON.stringify(jsonRequest);
-  		var params = {
-  			FunctionName: 'proudofmycolorsAdminFunc',
-  			Payload: requestSerialized
-  		};
-  		var _lambda = new AWS.Lambda();
-  		_lambda.invoke(params, function (err, results) {
-  			callback(err, results);
-  		});
-  	};
+    proudOfMyColorsService.prototype.listUsers = function(callback) {
+        var jsonRequest = {};
+        jsonRequest.request = {
+            'cmd': 'listUsers'
+        };
+        jsonRequest.auth = _getAuth();
+        var requestSerialized = JSON.stringify(jsonRequest);
+        var params = {
+            FunctionName: 'proudofmycolorsAdminFunc',
+            Payload: requestSerialized
+        };
+        var _lambda = new AWS.Lambda();
+        _lambda.invoke(params, function(err, results) {
+            callback(err, results);
+        });
+    };
 
     //admin functions
     //get user
@@ -333,6 +333,7 @@ var proudOfMyColorsService = (function() {
         });
     };
 
+    //
     proudOfMyColorsService.prototype.deleteProduct = function(id, callback) {
         var jsonRequest = {};
         jsonRequest.request = {
@@ -427,6 +428,21 @@ var proudOfMyColorsService = (function() {
                 callback(null, result);
 
             }
+        });
+    };
+
+    //set checkout ---return token
+    proudOfMyColorsService.prototype.setCheckout = function(shoppingList, callback) {
+        var request = {};
+        request.shoppingList = shoppingList;
+        var requestSerialized = JSON.stringify(request);
+        var params = {
+            FunctionName: 'pomyc_set_checkout',
+            Payload: requestSerialized
+        };
+        var _lambda = new AWS.Lambda();
+        _lambda.invoke(params, function(err, results) {
+            callback(err, results);
         });
     };
 
