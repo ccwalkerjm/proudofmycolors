@@ -59,6 +59,11 @@ function setShoppingCart(x_shopping_cart_list) {
         sessionStorage.removeItem(g_shopping_cart_key_name);
 }
 
+function emptyShoppingCart() {
+    sessionStorage.removeItem(g_shopping_cart_key_name);
+    updateShoppingcartDisplay();
+}
+
 function getProduct(productId, productSize) {
     var productIndex = -1;
     var x_shopping_cart_list = getShoppingCart();
@@ -180,16 +185,13 @@ function updateShoppingcartDisplay() {
 
     //Checkout
     var shoppingCartCheckout = $('#shoppingCartCheckout');
-    if (shoppingCartCheckout.length > 0) {
+    if (shoppingCartCheckout.length > 0 && x_shopping_cart_list.length > 0) {
         shoppingCartCheckout.removeClass().addClass('widget').empty();
         //var shoppingCartCheckoutTitle = $("<div/>").addClass('widget-title');
         //shoppingCartCheckoutTitle.append("<h3>Confirm Cart</h3>").appendTo(shoppingCartCheckout);
 
         var shoppingCartCheckoutBtn = $("<button/>");
-        if (x_shopping_cart_list.length === 0)
-            shoppingCartCheckoutBtn.addClass("btn btn-default");
-        else
-            shoppingCartCheckoutBtn.addClass("btn btn-primary");
+        shoppingCartCheckoutBtn.addClass("btn btn-primary");
         shoppingCartCheckoutBtn.addClass(g_shoppingCartBtnClass);
         shoppingCartCheckoutBtn.html('<span class="glyphicon glyphicon-shopping-cart"></span>Checkout');
         shoppingCartCheckoutBtn.appendTo(shoppingCartCheckout);
@@ -456,7 +458,8 @@ function initPage(callback) {
             location.assign('/index.html');
         }
         var menu_item = $('#menu_items').empty();
-        menu_item.append('<li class="active"><a href="/index.html">Home</a></li>');
+        //<li class="active">
+        menu_item.append('<li><a href="/index.html">Home</a></li>');
         menu_item.append('<li><a href="/order.html?gender=male">Men</a></li>');
         menu_item.append('<li><a href="/order.html?gender=female">Women</a></li>');
         menu_item.append('<li><a href="/order.html">Categories</a></li>');

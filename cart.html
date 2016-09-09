@@ -46,16 +46,25 @@
 
 <body>
 
-    <!-- begin:navbar -->
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-        <div class="container">
-            <div class="navbar-header">
-                <button class="navbar-toggle" data-target="#clotheshop-navbar" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span></button>
-            </div>
-            <!-- /.navbar-collapse -->
-        </div>
-    </nav>
-    <!-- end:navbar -->
+  <!-- begin:navbar -->
+  <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#clotheshop-navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+      </div>
+
+      <div class="collapse navbar-collapse" id="clotheshop-navbar">
+        <ul class="nav navbar-nav navbar-right" id="menu_items">
+        </ul>
+      </div><!-- /.navbar-collapse -->
+    </div>
+  </nav>
+  <!-- end:navbar -->
 
     <!-- begin:content -->
     <div class="container">
@@ -83,13 +92,10 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="nav-menus">
-                    <ul class="nav nav-pills" id="menu_items">
-                    </ul>
                 </div>
             </div>
         </div>
         <!-- end:nav-menus -->
-
         <!-- begin:article -->
         <div class="row">
             <!-- begin:sidebar -->
@@ -101,28 +107,16 @@
                         <!-- break -->
                         <div class="widget" id="shoppingCartCheckout">
                         </div>
-
                     </div>
                 </div>
             </div>
             <!-- end:sidebar -->
 
             <!-- begin:content -->
-            <div class="col-md-9 col-sm-8 content">
+            <div class="col-md-9 col-sm-8 content vertical-line">
                 <div class="row">
                     <div class="col-md-12">
-                        <ol class="breadcrumb">
-                            <li><a href="#">Home</a></li>
-                            <li class="active">Cart</li>
-                        </ol>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <!-- <div class="pull-right">
-                            <img src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/cc-badges-ppppcmcvdam.png" alt="Pay with PayPal, PayPal Credit or any major credit card" />
-                        </div> -->
-                        <h3>Your Cart</h3>
+                        <h3>Shopping Cart</h3>
                         <hr />
                         <table class="table table-bordered table-striped" id="shoppingCartTable">
                             <thead>
@@ -138,7 +132,6 @@
                             </tbody>
                         </table>
                         <a href="/order.html" class="btn btn-default">Continue Shopping</a>
-
                         <button type="button" class="btn btn-primary pull-right" id="set-checkout">Next</button>
                     </div>
                 </div>
@@ -169,6 +162,9 @@
         <!-- end:copyright -->
 
     </div>
+    <div class="loadingModal">
+  		<!-- Place at bottom of page -->
+  	</div>
     <!-- end:content -->
 
     <!-- Le javascript

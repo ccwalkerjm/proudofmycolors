@@ -28,36 +28,46 @@
     <![endif]-->
     <!--Favicon  -->
     <link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png">
-  <link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png">
-  <link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png">
-  <link rel="apple-touch-icon" sizes="76x76" href="/apple-icon-76x76.png">
-  <link rel="apple-touch-icon" sizes="114x114" href="/apple-icon-114x114.png">
-  <link rel="apple-touch-icon" sizes="120x120" href="/apple-icon-120x120.png">
-  <link rel="apple-touch-icon" sizes="144x144" href="/apple-icon-144x144.png">
-  <link rel="apple-touch-icon" sizes="152x152" href="/apple-icon-152x152.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180x180.png">
-  <link rel="icon" type="image/png" sizes="192x192"  href="/android-icon-192x192.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-  <link rel="manifest" href="/manifest.json">
-  <meta name="msapplication-TileColor" content="#ffffff">
-  <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
-  <meta name="theme-color" content="#ffffff">
-  <!--Favicon  -->
+    <link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+    <!--Favicon  -->
 </head>
 
 <body>
 
     <!-- begin:navbar -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-  		<div class="container">
-  			<div class="navbar-header">
-  				<button class="navbar-toggle" data-target="#clotheshop-navbar" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span></button>
-  			</div>
-  			<!-- /.navbar-collapse -->
-  		</div>
-  	</nav>
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#clotheshop-navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+
+            <div class="collapse navbar-collapse" id="clotheshop-navbar">
+                <ul class="nav navbar-nav navbar-right" id="menu_items">
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+    </nav>
     <!-- end:navbar -->
 
     <!-- begin:content -->
@@ -70,14 +80,14 @@
                 </div>
             </div>
             <div class="col-md-6 col-sm-6 col-xs-6">
-              <div class="account">
-                <ul>
-                  <li id="your-account">
-                  </li>
-                  <li id="cart-status">
-                  </li>
-                </ul>
-              </div>
+                <div class="account">
+                    <ul>
+                        <li id="your-account">
+                        </li>
+                        <li id="cart-status">
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
         <!-- end:logo -->
@@ -86,8 +96,6 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="nav-menus">
-                    <ul class="nav nav-pills" id="menu_items">
-                    </ul>
                 </div>
             </div>
         </div>
@@ -110,13 +118,14 @@
             <!-- end:sidebar -->
 
             <!-- begin:content -->
-            <div class="col-md-9 col-sm-8 content">
+            <div class="col-md-9 col-sm-8 content vertical-line">
                 <div class="row">
                     <div class="col-md-12">
+                        <h3 id="content-header"></h3>
                         <form class="form-inline pull-right">
                             <div class="form-group">
                                 <label for="gender">Gender</label>
-                                <select class="form-control" id="gender">
+                                <select class="form-control input-sm" id="gender">
                                     <option value=""></option>
                                     <option value="male">Male</option>
                                     <option value="female">Female</option>
@@ -124,14 +133,13 @@
                             </div>
                             <div class="form-group">
                                 <label for="country">Country</label>
-                                <select class="form-control" id="country">
+                                <select class="form-control input-sm" id="country">
                                 </select>
                             </div>
                             <button type="button" class="btn btn-default" id="search">Search</button>
                         </form>
                     </div>
                 </div>
-
                 <div class="row">
                     <div class="col-md-12 product-container" id="productList">
                     </div>
@@ -216,8 +224,8 @@
                         return;
                     }
 
-                    var productList = $('#productList').empty();
-                    var header = $('<h3/>');
+
+                    var header = $('#content-header');
                     var country = $('#country').val();
                     var gender = $('#gender').val();
 
@@ -231,25 +239,24 @@
                         header.html("");
                     }
 
-                    productList.append(header);
-                    productList.append('<hr/>');
+                    var productList = $('#productList').html('<hr/>');
 
                     var filteredItems = [];
                     for (var i = 0; i < items.length; i++) {
                         if ((gender && items[i].gender.toLowerCase() == gender.toLowerCase() && country && items[i].country.toLowerCase() == country.toLowerCase()) ||
                             (gender && items[i].gender.toLowerCase() == gender.toLowerCase() && !country) ||
                             (!gender && country && items[i].country.toLowerCase() == country.toLowerCase())
-                          ) {
+                        ) {
                             filteredItems.push(items[i]);
                         }
                     }
 
-                    if(!country && !gender){
-                      header.html("Random Selections");
-                      var rans = getRandomizedItems(6, items.length);
-                      for(var j=0;j<rans.length;j++){
-                        filteredItems.push(items[rans[j]]);
-                      }
+                    if (!country && !gender) {
+                        header.html("Random Selections");
+                        var rans = getRandomizedItems(6, items.length);
+                        for (var j = 0; j < rans.length; j++) {
+                            filteredItems.push(items[rans[j]]);
+                        }
                     }
 
                     for (var i = 0; i < filteredItems.length; i = i + 3) {

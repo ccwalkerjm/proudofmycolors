@@ -431,21 +431,7 @@ var proudOfMyColorsService = (function() {
         });
     };
 
-    //set checkout ---return token
-    proudOfMyColorsService.prototype.setCheckout = function(shoppingList, callback) {
-        var request = {};
-        request.shoppingList = shoppingList;
-        var requestSerialized = JSON.stringify(request);
-        var params = {
-            FunctionName: 'pomyc_set_checkout',
-            Payload: requestSerialized
-        };
-        var _lambda = new AWS.Lambda();
-        _lambda.invoke(params, function(err, results) {
-            callback(err, results);
-        });
-    };
-
+    //checkout ---return token
     proudOfMyColorsService.prototype.paypalCheckout = function(method,data, callback) {
         var request = {};
         request.data = data;
@@ -461,8 +447,7 @@ var proudOfMyColorsService = (function() {
         });
     };
 
-
-
+    
     //
     return proudOfMyColorsService;
 }());
