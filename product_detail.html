@@ -75,7 +75,15 @@
                     <img src="/img/logos/Proud-O-My-Colours_TEXTONLY-02-02_small.png" class="img-responsive" alt="Proud Of My Colors">
                 </div>
             </div>
-            <div class="col-md-6 col-sm-6 col-xs-6" id="admin">
+            <div class="col-md-6 col-sm-6 col-xs-6">
+              <div class="account">
+                <ul>
+                  <li id="your-account">
+                  </li>
+                  <li id="cart-status">
+                  </li>
+                </ul>
+              </div>
             </div>
         </div>
         <!-- end:logo -->
@@ -307,7 +315,7 @@
                 productId = getQueryStringParams("id");
                 listProducts(obj);
             });
-            
+
             //add to Cart
             $('.item_add').click(function() {
                 var productRow = $(this).closest("#productRowId");

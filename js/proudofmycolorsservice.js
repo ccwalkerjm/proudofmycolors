@@ -446,6 +446,21 @@ var proudOfMyColorsService = (function() {
         });
     };
 
+    proudOfMyColorsService.prototype.paypalCheckout = function(method,data, callback) {
+        var request = {};
+        request.data = data;
+        request.method = method;
+        var requestSerialized = JSON.stringify(request);
+        var params = {
+            FunctionName: 'pomyc_set_checkout',
+            Payload: requestSerialized
+        };
+        var _lambda = new AWS.Lambda();
+        _lambda.invoke(params, function(err, results) {
+            callback(err, results);
+        });
+    };
+
 
 
     //

@@ -1,5 +1,5 @@
 var g_proudOfMyColorsService; // = new proudOfMyColorsService()
-var g_shoppingCartBtn = "shoppingCartBtn";
+
 var g_shoppingCartBtnClass = "shoppingCartBtnClass";
 var g_shopping_cart_key_name = "_courserv_shopping_cart_key_0001";
 //widget//
@@ -77,7 +77,7 @@ function addToCart(product) {
     var x_shopping_cart_list = getShoppingCart();
     for (var i = 0; i < x_shopping_cart_list.length; i++) {
         if (product.id == x_shopping_cart_list[i].id && product.size == x_shopping_cart_list[i].size) {
-            if (product.quantity === 0) {
+            if (product.quantity <= 0) {
                 x_shopping_cart_list.splice(i, 1);
             } else {
                 x_shopping_cart_list[i].quantity = product.quantity;
@@ -86,7 +86,8 @@ function addToCart(product) {
             break;
         }
     }
-    if (!productExits) {
+
+    if (!productExits && product.quantity > 0) {
         x_shopping_cart_list.push(product);
     }
     setShoppingCart(x_shopping_cart_list);
@@ -108,23 +109,27 @@ function removeFromCart(product) {
 function updateShoppingcartDisplay() {
     var x_shopping_cart_list = getShoppingCart();
     //update button
-    var adminSection = $('#admin');
-    if (adminSection.length > 0) {
-        var shoppingCartBtn = adminSection.find('#' + g_shoppingCartBtn).removeClass().empty();
-        if (x_shopping_cart_list.length === 0) {
-            shoppingCartBtn.addClass("btn btn-default btn-sm  text-center");
-            shoppingCartBtn.html('<span class="glyphicon glyphicon-shopping-cart"></span>Empty');
-        } else {
-            shoppingCartBtn.addClass("btn btn-primary btn-sm  text-center");
-            shoppingCartBtn.html('<span class="glyphicon glyphicon-shopping-cart"></span>Checkout');
-        }
-        shoppingCartBtn.addClass(g_shoppingCartBtnClass);
+    var cartStatus = $('#cart-status').empty();
+    if (cartStatus.length > 0) {   //x_shopping_cart_list.length
+        var cart_status_hidden = $('<div/>').addClass("hidden-xs");
+        cart_status_hidden.append('<h4><a href="/cart.html">Cart</a></h4>');
+        cart_status_hidden.append('<p><strong>' +x_shopping_cart_list.length +' Product' + (x_shopping_cart_list.length > 1?'s':'')+'</strong></p>');
+        cart_status_hidden.appendTo(cartStatus);
+        var cart_status_visible = $('<div/>').addClass("visible-xs");
+
+        var cart_status_visible_link = $('<a/>').attr('href',"/cart.html").addClass('btn btn-primary');
+        var cart_status_visible_span = $('<span/>').addClass("cart-item").html(x_shopping_cart_list.length);
+        cart_status_visible_link.append(cart_status_visible_span);
+        cart_status_visible_link.append('<i class="fa fa-shopping-cart"></i>');
+        cart_status_visible_link.appendTo(cart_status_visible);
+        cart_status_visible.appendTo(cartStatus);
     }
+
     //populate widget
     var shoppingCartWidget = $('#shoppingCartWidget');
     if (shoppingCartWidget.length > 0) {
         shoppingCartWidget.removeClass().addClass('widget').empty();
-        shoppingCartWidget.append(paypal_widget).append("<br/>");
+        //shoppingCartWidget.append(paypal_widget).append("<br/>");
         var widgetTitle = $("<div/>").addClass('widget-title');
         widgetTitle.append("<h3>Shopping Cart</h3>").appendTo(shoppingCartWidget);
         var productListHolder = $("<ul/>").addClass("cart list-unstyled");
@@ -421,19 +426,28 @@ function initPage(callback) {
         }
 
         //not signed in
-        var admin_sub = $('<div/>').addClass('pull-right');
+        var accountSection = $('#your-account').empty();
+        var accountStatus = $('<div/>').addClass('hidden-xs');
+        var accountHeader = $('<h4/>');
+        var visible_xs = $('<div/>').addClass("visible-xs");
         var valid_page = false;
-        if ($this.getUsername()) {
+        var username = $this.getUsername();
+        if (username) {
             valid_page = true;
-            admin_sub.html('<a href="/admin/changePassword.html">' + $this.getUsername() + '</a>|<a href="#"id="logout">Logout</a>|<a href="/admin/manage_products.html">Products</a>');
+            accountHeader.html('<a href="/admin/changePassword.html">' + username + '</a>');
+            accountHeader.appendTo(accountStatus);
+            accountStatus.append('<p><a href="#" id="logout">Logout</a>|<a href="/admin/manage_products.html">Products</a><p>');
+            visible_xs.html('<a href="/admin/manage_products.html" class="btn btn-primary"><i class="fa fa-briefcase"></i></a>');
         } else if (!isAdminPage(location.pathname)) {
             valid_page = true;
-            admin_sub.html('<a href="/admin/account.html">Account</a>');
+            accountHeader.html('<a href="/admin/account.html">Account</a>');
+            accountHeader.appendTo(accountStatus);
+            accountStatus.append('<p>Welcome</p>');
+            visible_xs.html('<a href="/admin/account.html" class="btn btn-primary"><i class="fa fa-user"></i></a>');
         }
-        var shoppingCartBtn = $('<button/>').attr("id", g_shoppingCartBtn);
-        var $div = $("<div/>").append("<br/>").append(shoppingCartBtn).appendTo(admin_sub);
+        accountStatus.appendTo(accountSection);
+        accountSection.append(visible_xs);
 
-        admin_sub.appendTo('#admin');
         if (valid_page === true) {
             if (callback && typeof callback == "function") {
                 callback(null, $this);
@@ -462,16 +476,12 @@ function initPage(callback) {
         //alert(productItem.data('product_id'));
     });
 
-    $('#admin').on('click', '#logout', function() {
+    $('#your-account').on('click', '#logout', function() {
         g_proudOfMyColorsService.signoff();
         location.assign('/index.html');
     });
 
     //shopping cart events
-    $('#admin').on('click', '#' + g_shoppingCartBtn, function() {
-        location.assign('/cart.html');
-    });
-
     $('#shoppingCartCheckout').on('click', '.' + g_shoppingCartBtnClass, function() {
         location.assign('/cart.html');
     });
