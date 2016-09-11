@@ -215,17 +215,15 @@
                 dl.append('<dt>Last Name</dt><dd>' + _customerDetails.LASTNAME + '</dd>');
                 dl.append('<dt>EMAIL</dt><dd>' + _customerDetails.EMAIL + '</dd>');
                 dl.append('<dt></dt><dd><b>Shipping Details</b></dd>');
-                dl.append('<dt>Insurance</dt><dd>' + _customerDetails.INSURANCEOPTIONOFFERED + '</dd>');
-
+                // dl.append('<dt>Insurance</dt><dd>' + _customerDetails.INSURANCEOPTIONOFFERED + '</dd>');
                 dl.append('<dt>Address Status</dt><dd>' + _customerDetails.ADDRESSSTATUS + '</dd>');
-
                 dl.append('<dt>Ship To City</dt><dd>' + _customerDetails.SHIPTOCITY + '</dd>');
                 dl.append('<dt>Country</dt><dd>' + _customerDetails.SHIPTOCOUNTRYNAME + '</dd>');
                 dl.append('<dt>Ship To</dt><dd>' + _customerDetails.SHIPTONAME + '</dd>');
                 dl.append('<dt>State</dt><dd>' + _customerDetails.SHIPTOSTATE + '</dd>');
                 dl.append('<dt>Street</dt><dd>' + _customerDetails.SHIPTOSTREET + '</dd>');
                 dl.append('<dt>ZIP Code</dt><dd>' + _customerDetails.SHIPTOZIP + '</dd>');
-                dl.append('<dt></dt><dd><b>Cost</b></dd>');
+                dl.append('<dt></dt><dd><b>Costing</b></dd>');
                 dl.append('<dt>Currency</dt><dd>' + _customerDetails.CURRENCYCODE + '</dd>');
                 dl.append('<dt>Items Cost</dt><dd>' + accounting.formatMoney(_customerDetails.ITEMAMT) + '</dd>');
                 dl.append('<dt>Shipping Amt</dt><dd>' + accounting.formatMoney(_customerDetails.SHIPPINGAMT) + '</dd>');
