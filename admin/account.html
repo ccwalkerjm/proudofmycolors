@@ -33,7 +33,7 @@
     <link rel="apple-touch-icon" sizes="144x144" href="/apple-icon-144x144.png">
     <link rel="apple-touch-icon" sizes="152x152" href="/apple-icon-152x152.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180x180.png">
-    <link rel="icon" type="image/png" sizes="192x192"  href="/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/android-icon-192x192.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -47,54 +47,55 @@
 
 <body>
 
-  <!-- begin:navbar -->
-  <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-    <div class="container">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#clotheshop-navbar">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-      </div>
+    <!-- begin:navbar -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#clotheshop-navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
 
-      <div class="collapse navbar-collapse" id="clotheshop-navbar">
-        <ul class="nav navbar-nav navbar-right" id="menu_items">
-        </ul>
-      </div><!-- /.navbar-collapse -->
-    </div>
-  </nav>
-  <!-- end:navbar -->
+            <div class="collapse navbar-collapse" id="clotheshop-navbar">
+                <ul class="nav navbar-nav navbar-right" id="menu_items">
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+    </nav>
+    <!-- end:navbar -->
 
     <!-- begin:content -->
     <div class="container">
         <!-- begin:logo -->
         <div class="row">
-    			<div class="col-md-6 col-sm-6 col-xs-6">
-    				<div class="logo">
-    					<img src="/img/logos/Proud-O-My-Colours_TEXTONLY-02-02.png" class="img-responsive" alt="Proud Of My Colors">
-    				</div>
-    			</div>
-          <div class="col-md-6 col-sm-6 col-xs-6">
-            <div class="account">
-              <ul>
-                <li id="your-account">
-                </li>
-                <li id="cart-status">
-                </li>
-              </ul>
+            <div class="col-md-6 col-sm-6 col-xs-6">
+                <div class="logo">
+                    <img src="/img/logos/Proud-O-My-Colours_TEXTONLY-02-02.png" class="img-responsive" alt="Proud Of My Colors">
+                </div>
             </div>
-          </div>
-    		</div>
+            <div class="col-md-6 col-sm-6 col-xs-6">
+                <div class="account">
+                    <ul>
+                        <li id="your-account">
+                        </li>
+                        <li id="cart-status">
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
         <!-- end:logo -->
 
         <!-- begin:nav-menus -->
         <div class="row">
-          <div class="col-md-12">
-            <div class="nav-menus">
+            <div class="col-md-12">
+                <div class="nav-menus">
+                </div>
             </div>
-          </div>
         </div>
         <!-- end:nav-menus -->
 
@@ -102,72 +103,70 @@
         <div class="row">
             <!-- begin:sidebar -->
             <div class="col-md-3 col-sm-4 sidebar">
-
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="widget" id="shoppingCartWidget">
+                        </div>
+                        <!-- break -->
+                        <div class="widget" id="shoppingCartCheckout">
+                        </div>
+                    </div>
+                </div>
             </div>
             <!-- end:sidebar -->
 
             <!-- begin:content -->
             <div class="col-md-9 col-sm-8 content">
                 <div class="row">
-                    <div class="col-md-12">
-                        <ol class="breadcrumb">
-                            <li><a href="#">Home</a></li>
-                            <li class="active">Account</li>
-                        </ol>
+                    <div class="col-md-6 col-sm-6">
+                        <h3>Create An Account</h3>
+                        <div class="message"></div>
+                        <hr />
+                        <form role="form">
+                            <div class="form-group">
+                                <label for="username">Username</label>
+                                <input type="text" value="" class="form-control" placeholder="Username" id="username">
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email Address</label>
+                                <input type="email" class="form-control" placeholder="Email" id="email">
+                            </div>
+                            <div class="form-group">
+                                <label for="phone_number">Phone Number</label>
+                                <input type="text" value="" class="form-control" placeholder="phone_number" id="phone_number">
+                            </div>
+                            <div class="form-group">
+                                <label for="given_name">First Name</label>
+                                <input type="text" value="" class="form-control" placeholder="First Name" id="given_name">
+                            </div>
+                            <div class="form-group">
+                                <label for="family_name">Last Name</label>
+                                <input type="text" value="" class="form-control" placeholder="lastName" id="family_name">
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Create your password</label>
+                                <input type="password" value="" class="form-control" placeholder="Password" id="password">
+                            </div>
+                            <button type="button" class="btn btn-default" id="register">Register</button>
+                        </form>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="row">
-                        <div class="col-md-6 col-sm-6">
-                            <div id="message"></div>
-                            <h3>Create An Account</h3>
-                            <hr />
-                            <form role="form">
-                                <div class="form-group">
-                                    <label for="username">Username</label>
-                                    <input type="text" value="" class="form-control" placeholder="Username" id="username">
-                                </div>
-                                <div class="form-group">
-                                    <label for="email">Email Address</label>
-                                    <input type="email" class="form-control" placeholder="Email" id="email">
-                                </div>
-                                <div class="form-group">
-                                    <label for="phone_number">Phone Number</label>
-                                    <input type="text" value="" class="form-control" placeholder="phone_number" id="phone_number">
-                                </div>
-                                <div class="form-group">
-                                    <label for="given_name">First Name</label>
-                                    <input type="text" value="" class="form-control" placeholder="First Name" id="given_name">
-                                </div>
-                                <div class="form-group">
-                                    <label for="family_name">Last Name</label>
-                                    <input type="text" value="" class="form-control" placeholder="lastName" id="family_name">
-                                </div>
-                                <div class="form-group">
-                                    <label for="password">Create your password</label>
-                                    <input type="password" value="" class="form-control" placeholder="Password" id="password">
-                                </div>
-                                <button type="button" class="btn btn-default" id="register">Register</button>
-                            </form>
-                        </div>
-                        <div class="col-md-6 col-sm-6">
-                            <h3>Already Registered ?</h3>
-                            <hr />
-                            <form role="form">
-                                <div class="form-group">
-                                    <label for="username">Username</label>
-                                    <input type="text" class="form-control" placeholder="Username" id="login_username">
-                                </div>
-                                <div class="form-group">
-                                    <label for="password">Password Address</label>
-                                    <input type="password" class="form-control" placeholder="Password" id="login_password">
-                                </div>
-                                <a href="#">Forgot your password ?</a>
-                                <br>
-                                <br>
-                                <button type="button" class="btn btn-primary" id="login">Log in</button>
-                            </form>
-                        </div>
+                    <div class="col-md-6 col-sm-6">
+                        <h3>Already Registered ?</h3>
+                        <hr />
+                        <form role="form">
+                            <div class="form-group">
+                                <label for="username">Username</label>
+                                <input type="text" class="form-control" placeholder="Username" id="login_username">
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Password Address</label>
+                                <input type="password" class="form-control" placeholder="Password" id="login_password">
+                            </div>
+                            <a href="#">Forgot your password ?</a>
+                            <br>
+                            <br>
+                            <button type="button" class="btn btn-primary" id="login">Log in</button>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -176,22 +175,22 @@
 
         <!-- begin:footer -->
         <div class="row footer">
-    			<div class="col-md-12 copyright">
-    				<div class="row">
-    					<div class="col-md-6 col-sm-6 copyright-left">
-    						<p>Copyright &copy; Proud Of My Colors 2016. All right reserved.</p>
-    					</div>
-    					<div class="col-md-6 col-sm-6 copyright-right">
-    						<ul class="list-unstyled list-social">
-    							<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-    							<li><a href="https://www.facebook.com/proudofmycolors"><i class="fa fa-facebook-square"></i></a></li>
+            <div class="col-md-12 copyright">
+                <div class="row">
+                    <div class="col-md-6 col-sm-6 copyright-left">
+                        <p>Copyright &copy; Proud Of My Colors 2016. All right reserved.</p>
+                    </div>
+                    <div class="col-md-6 col-sm-6 copyright-right">
+                        <ul class="list-unstyled list-social">
+                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                            <li><a href="https://www.facebook.com/proudofmycolors"><i class="fa fa-facebook-square"></i></a></li>
 
-    							<li><a href="#"><i class="fa fa-instagram"></i></a></li>
-    						</ul>
-    					</div>
-    				</div>
-    			</div>
-    		</div>
+                            <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
         <!-- end:copyright -->
 
     </div>
@@ -209,6 +208,7 @@
     <script src="/js/imagesloaded.pkgd.min.js"></script>
     <script src="/js/script.js"></script>
     <script src="/js/bootbox.js"></script>
+    <script src="/js/accounting.js"></script>
     <!--aws-->
     <script src="/js/aws/jsbn.js"></script>
     <script src="/js/aws/jsbn2.js"></script>
@@ -224,7 +224,7 @@
     <script type="text/javascript">
         $(document).ready(function() {
             initPage(function(err, obj) {
-              setLoadingState(false);
+
             });
 
             ///login
@@ -238,8 +238,9 @@
                 userData.family_name = $("#family_name").val();
                 userData.username = $("#username").val();
                 userData.password = $("#password").val();
-
+                setLoadingState(true);
                 g_proudOfMyColorsService.signup(userData, function(err, result) {
+                    setLoadingState(false);
                     if (err) {
                         display(err.message, true);
                         return;
@@ -249,12 +250,12 @@
                             bootbox.alert("Enter the correct code!");
                             return false;
                         } else {
-                            g_proudOfMyColorsService.confirmSignup(userData.username, verificationCode, function(err,r){
-                              if (err) {
-                                  display(err.message, true);
-                                  return;
-                              }
-                              location.assign("/index.html");
+                            g_proudOfMyColorsService.confirmSignup(userData.username, verificationCode, function(err, r) {
+                                if (err) {
+                                    display(err.message, true);
+                                    return;
+                                }
+                                location.assign("/index.html");
                             });
                         }
                     });
@@ -270,6 +271,7 @@
                 var password = $("#login_password").val();
                 g_proudOfMyColorsService.signoff();
                 g_proudOfMyColorsService.signin(username, password, function(err, obj) {
+                    setLoadingState(false);
                     if (err) {
                         setLoadingState(false);
                         display(err.message, true);

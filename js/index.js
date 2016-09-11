@@ -1,10 +1,15 @@
+//product details
+var g_product_details = '<div class=modal-dialog><div class=modal-content><div class=modal-header><button class=close type=button data-dismiss=modal>×</button><h4 class=modal-title></h4></div><div class=modal-body><div class=row id=productRowId><div class=col-md-12><div class=heading-title><input type=hidden id=productId><h3><span class=item_name id=productName>Trinidad and Tobago Disc Flag Tshirt</span></h3></div><div class=row><div class="col-md-6 col-sm-6"><img id=productImg></div><div class="col-md-6 col-sm-6"><div class=single-desc><form><table id=productDetails><tr class=hidden-xs><td><strong>Availability</strong><td>:<td id=availability>In Stock<tr><td colspan=3><span class="item_price price"></span><tr><td><strong>Size</strong><td>:<td><select class="form-control item_size"></select><tr><td><strong>Quantity</strong><td>:<td><input type=number class="form-control item_Quantity"value=1><tr><td colspan=3><button class="btn btn-primary btn-sm item_add"type=button>Add to Cart</button></table></form></div></div></div></div><div class=row><div class="col-md-6 content-detail"><div class="panel panel-default"><div class=panel-heading><h3 class=panel-title>Details</h3></div><div class=panel-body id=productDescription></div></div></div></div></div></div><div class=modal-footer><button class="btn btn-default"type=button data-dismiss=modal>Close</button></div></div></div>';
+var _productModal = $('#productModal');
+
+//backend service
 var g_proudOfMyColorsService; // = new proudOfMyColorsService()
 
 var g_shoppingCartBtnClass = "shoppingCartBtnClass";
 var g_shopping_cart_key_name = "_courserv_shopping_cart_key_0001";
 //widget//
 //paypal Now Accepting PayPal
-var paypal_widget ='<!-- PayPal Logo --><table border="0" cellpadding="10" cellspacing="0" align="center"><tr><td align="center"></td></tr><tr><td align="center"><a href="https://www.paypal.com/webapps/mpp/paypal-popup" title="How PayPal Works" onclick="javascript:window.open("https://www.paypal.com/webapps/mpp/paypal-popup", "WIPaypal", "toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=yes, width=1060, height=700"); return false;"><img src="https://www.paypalobjects.com/webstatic/mktg/logo/bdg_now_accepting_pp_2line_w.png" border="0" alt="Now Accepting PayPal"></a><div style="text-align:center"><a href="https://www.paypal.com/webapps/mpp/how-paypal-works"><font size="2" face="Arial" color="#0079CD">How PayPal Works</font></a></div></td></tr></table><!-- PayPal Logo -->';
+var paypal_widget = '<!-- PayPal Logo --><table border="0" cellpadding="10" cellspacing="0" align="center"><tr><td align="center"></td></tr><tr><td align="center"><a href="https://www.paypal.com/webapps/mpp/paypal-popup" title="How PayPal Works" onclick="javascript:window.open("https://www.paypal.com/webapps/mpp/paypal-popup", "WIPaypal", "toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=yes, width=1060, height=700"); return false;"><img src="https://www.paypalobjects.com/webstatic/mktg/logo/bdg_now_accepting_pp_2line_w.png" border="0" alt="Now Accepting PayPal"></a><div style="text-align:center"><a href="https://www.paypal.com/webapps/mpp/how-paypal-works"><font size="2" face="Arial" color="#0079CD">How PayPal Works</font></a></div></td></tr></table><!-- PayPal Logo -->';
 
 var g_valid_countries = [];
 g_valid_countries.push({
@@ -115,14 +120,14 @@ function updateShoppingcartDisplay() {
     var x_shopping_cart_list = getShoppingCart();
     //update button
     var cartStatus = $('#cart-status').empty();
-    if (cartStatus.length > 0) {   //x_shopping_cart_list.length
+    if (cartStatus.length > 0) { //x_shopping_cart_list.length
         var cart_status_hidden = $('<div/>').addClass("hidden-xs");
         cart_status_hidden.append('<h4><a href="/cart.html">Cart</a></h4>');
-        cart_status_hidden.append('<p><strong>' +x_shopping_cart_list.length +' Product' + (x_shopping_cart_list.length > 1?'s':'')+'</strong></p>');
+        cart_status_hidden.append('<p><strong>' + x_shopping_cart_list.length + ' Product' + (x_shopping_cart_list.length > 1 ? 's' : '') + '</strong></p>');
         cart_status_hidden.appendTo(cartStatus);
         var cart_status_visible = $('<div/>').addClass("visible-xs");
 
-        var cart_status_visible_link = $('<a/>').attr('href',"/cart.html").addClass('btn btn-primary');
+        var cart_status_visible_link = $('<a/>').attr('href', "/cart.html").addClass('btn btn-primary');
         var cart_status_visible_span = $('<span/>').addClass("cart-item").html(x_shopping_cart_list.length);
         cart_status_visible_link.append(cart_status_visible_span);
         cart_status_visible_link.append('<i class="fa fa-shopping-cart"></i>');
@@ -404,6 +409,44 @@ function isAdminPage(pagePath) {
 }
 
 
+function DisplayProductDetail(productId) {
+    setLoadingState(true);
+    g_proudOfMyColorsService.getProduct(productId, function(err, productItem) {
+        setLoadingState(false);
+        if (err) {
+            display(err.message, true);
+            return;
+        }
+
+        _productModal.html(g_product_details);
+        _productModal.find('#productId').val(JSON.stringify(productItem));
+        _productModal.find('#productDescription').html('<p>' + productItem.description + '</p>');
+        _productModal.find('#productName').text(productItem.productName);
+        _productModal.find('#productImg').attr("src", productItem.largeImageName);
+        _productModal.find('.item_price').text(accounting.formatMoney(productItem.price));
+
+        var sizes = _productModal.find('.item_size').empty();
+        sizes.append('<option value="S">S</option>');
+        sizes.append('<option value="M">M</option>');
+        sizes.append('<option value="L">L</option>');
+        sizes.append('<option value="XL">XL</option>');
+        if (productItem.gender == "male") {
+            sizes.append('<option value="XXL">XXL</option>');
+        }
+
+        if (productItem.availability === 0) {
+            _productModal.find('#availability').text("Out of Stock");
+        } else {
+            _productModal.find('#availability').text("In Stock");
+        }
+        _productModal.modal("show");
+
+        //
+    });
+
+}
+
+
 function initPage(callback) {
     //set message
     _$message = $(document).find('.message');
@@ -473,10 +516,26 @@ function initPage(callback) {
 
     });
 
+    $('.product-container').on("click", ".product-item", function() {
+        //g_product_details
+        var productItem = $(this);
+        var productId = productItem.data('product_id');
+        if (_productModal.length > 0) {
+            DisplayProductDetail(productId);
+        } else {
+            location.assign("/product_detail.html?id=" + productId);
+        }
+    });
+
     $('.product-container').on("click", ".productBtn", function() {
+        //g_product_details
         var productItem = $(this).closest(".product-item");
-        location.assign("/product_detail.html?id=" + productItem.data('product_id'));
-        //alert(productItem.data('product_id'));
+        var productId = productItem.data('product_id');
+        if (_productModal.length > 0) {
+            DisplayProductDetail(productId);
+        } else {
+            location.assign("/product_detail.html?id=" + productId);
+        }
     });
 
     $('#your-account').on('click', '#logout', function() {
@@ -487,6 +546,18 @@ function initPage(callback) {
     //shopping cart events
     $('#shoppingCartCheckout').on('click', '.' + g_shoppingCartBtnClass, function() {
         location.assign('/cart.html');
+    });
+
+    //add to Cart
+    _productModal.on('click','.item_add', function() {
+        var productRow = $(this).closest("#productRowId");
+        var productItem = _productModal.find("#productId").val();
+        productItem = JSON.parse(productItem);
+        productItem.quantity = productRow.find(".item_Quantity").val();
+        productItem.size = productRow.find(".item_size").val();
+        addToCart(productItem);
+        _productModal.modal("hide");
+        //alert(productItem.data('product_id'));
     });
 
 

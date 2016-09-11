@@ -49,25 +49,26 @@
 
 <body>
 
-  <!-- begin:navbar -->
-  <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-    <div class="container">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#clotheshop-navbar">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-      </div>
+    <!-- begin:navbar -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#clotheshop-navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
 
-      <div class="collapse navbar-collapse" id="clotheshop-navbar">
-        <ul class="nav navbar-nav navbar-right" id="menu_items">
-        </ul>
-      </div><!-- /.navbar-collapse -->
-    </div>
-  </nav>
-  <!-- end:navbar -->
+            <div class="collapse navbar-collapse" id="clotheshop-navbar">
+                <ul class="nav navbar-nav navbar-right" id="menu_items">
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+    </nav>
+    <!-- end:navbar -->
 
     <!-- begin:content -->
     <div class="container">
@@ -79,14 +80,14 @@
                 </div>
             </div>
             <div class="col-md-6 col-sm-6 col-xs-6">
-              <div class="account">
-                <ul>
-                  <li id="your-account">
-                  </li>
-                  <li id="cart-status">
-                  </li>
-                </ul>
-              </div>
+                <div class="account">
+                    <ul>
+                        <li id="your-account">
+                        </li>
+                        <li id="cart-status">
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
         <!-- end:logo -->
@@ -119,125 +120,125 @@
             <!-- begin:content -->
             <div class="col-md-9 col-sm-8 content vertical-line">
                 <div class="row" id="productRowId">
+                    <div class="col-md-12">
+                        <div class="heading-title">
+                            <input type="hidden" id="productId" value="">
+                            <h3><span class="item_name" id="productName">Trinidad and Tobago Disc Flag Tshirt</span></h3>
+                        </div>
+                        <div class="row">
+                            <!-- begin:product-image-slider -->
+                            <div class="col-md-6 col-sm-6">
+                                <img id="productImg">
+                            </div>
+                            <!-- end:product-image-slider -->
+
+                            <!-- begin:product-spesification -->
+                            <div class="col-md-6 col-sm-6">
+                                <div class="single-desc">
+                                    <form>
+                                        <table id="productDetails">
+                                            <tbody>
+
+                                                <tr class="hidden-xs">
+                                                    <td><strong>Availability</strong></td>
+                                                    <td>:</td>
+                                                    <td id="availability">In Stock</td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="3"> <span class="price item_price"></span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Size</strong></td>
+                                                    <td>:</td>
+                                                    <td>
+                                                        <select class="form-control item_size">
+                                                        </select>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Quantity</strong></td>
+                                                    <td>:</td>
+                                                    <td>
+                                                        <input type="number" class="form-control item_Quantity" value="1">
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="3">
+                                                        <a href="/order.html" class="btn btn-default">Continue Shopping</a>
+                                                        <button type="button" class="btn btn-sm btn-primary item_add pull-right">Add to Cart</button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end:product-spesification -->
+                    </div>
+                    <!-- break -->
+                    <!-- begin:product-detail -->
+                    <div class="row">
+                        <div class="col-md-6 content-detail">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Details</h3>
+                                </div>
+                                <div class="panel-body" id="productDescription">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end:product-detail -->
+
+                    <!-- begin:related-product -->
+                    <div class="row">
                         <div class="col-md-12">
                             <div class="heading-title">
-                                <input type="hidden" id="productId" value="">
-                                <h3><span class="item_name" id="productName">Trinidad and Tobago Disc Flag Tshirt</span></h3>
+                                <h3>Related Products</h3>
                             </div>
-                            <div class="row">
-                                <!-- begin:product-image-slider -->
-                                <div class="col-md-6 col-sm-6">
-                                    <img id="productImg">
-                                </div>
-                                <!-- end:product-image-slider -->
 
-                                <!-- begin:product-spesification -->
-                                <div class="col-md-6 col-sm-6">
-                                    <div class="single-desc">
-                                        <form>
-                                            <table id="productDetails">
-                                                <tbody>
+                            <div class="row product-container" style="position: relative; height: 463.75px;">
+                                <div class="col-md-4 col-sm-4 col-xs-6">
+                                    <div class="thumbnail product-item" id="firstItem">
+                                        <img class="item_thumb" />
+                                        <span class="item_name"></span>
+                                        <span class="item_price"></span>
+                                        <br>
+                                        <button type="button" class="btn btn-default productBtn" aria-label="Left Align">
+                                            <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-4 col-xs-6">
+                                    <div class="thumbnail product-item" id="secondItem">
+                                        <img class="item_thumb" />
+                                        <span class="item_name"></span>
+                                        <span class="item_price"></span>
+                                        <br>
+                                        <button type="button" class="btn btn-default productBtn" aria-label="Left Align">
+                                            <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-4 col-xs-6">
+                                    <div class="thumbnail product-item" id="thirdItem">
+                                        <img class="item_thumb" />
+                                        <span class="item_name"></span>
+                                        <span class="item_price"></span>
+                                        <br>
+                                        <button type="button" class="btn btn-default productBtn" aria-label="Left Align">
+                                            <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>
+                                        </button>
+                                    </div>
+                                </div>
 
-                                                    <tr class="hidden-xs">
-                                                        <td><strong>Availability</strong></td>
-                                                        <td>:</td>
-                                                        <td id="availability">In Stock</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td colspan="3"> <span class="price item_price"></span></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><strong>Size</strong></td>
-                                                        <td>:</td>
-                                                        <td>
-                                                            <select class="form-control item_size">
-                                                            </select>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><strong>Quantity</strong></td>
-                                                        <td>:</td>
-                                                        <td>
-                                                            <input type="number" class="form-control item_Quantity" value="1">
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td colspan="3">
-                                                            <a href="/order.html" class="btn btn-default">Continue Shopping</a>
-                                                            <button type="button" class="btn btn-sm btn-primary item_add pull-right">Add to Cart</button>
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- end:product-spesification -->
-                        </div>
-                        <!-- break -->
-                        <!-- begin:product-detail -->
-                        <div class="row">
-                            <div class="col-md-6 content-detail">
-                                <div class="panel panel-default">
-                                    <div class="panel-heading">
-                                        <h3 class="panel-title">Details</h3>
-                                    </div>
-                                    <div class="panel-body" id="productDescription">
-                                    </div>
-                                </div>
                             </div>
                         </div>
-                        <!-- end:product-detail -->
-
-                        <!-- begin:related-product -->
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="heading-title">
-                                    <h3>Related Products</h3>
-                                </div>
-
-                                <div class="row product-container" style="position: relative; height: 463.75px;">
-                                    <div class="col-md-4 col-sm-4 col-xs-6">
-                                        <div class="thumbnail product-item" id="firstItem">
-                                            <img class="item_thumb" />
-                                            <span class="item_name"></span>
-                                            <span class="item_price"></span>
-                                            <br>
-                                            <button type="button" class="btn btn-default productBtn" aria-label="Left Align">
-                                                <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4 col-sm-4 col-xs-6">
-                                        <div class="thumbnail product-item" id="secondItem">
-                                            <img class="item_thumb" />
-                                            <span class="item_name"></span>
-                                            <span class="item_price"></span>
-                                            <br>
-                                            <button type="button" class="btn btn-default productBtn" aria-label="Left Align">
-                                                <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4 col-sm-4 col-xs-6">
-                                        <div class="thumbnail product-item" id="thirdItem">
-                                            <img class="item_thumb" />
-                                            <span class="item_name"></span>
-                                            <span class="item_price"></span>
-                                            <br>
-                                            <button type="button" class="btn btn-default productBtn" aria-label="Left Align">
-                                                <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>
-                                            </button>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                        <!-- end:related-product -->
-
                     </div>
+                    <!-- end:related-product -->
+
+                </div>
             </div>
             <!-- end:content -->
         </div>

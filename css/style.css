@@ -472,6 +472,9 @@ a:hover.no-underline {
 
 .product-item {
     position: relative;
+    cursor: pointer;
+    display:block;
+    height:420px;
 }
 .product-item .caption h5 {
     font-weight: 600;

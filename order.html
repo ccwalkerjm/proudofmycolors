@@ -171,6 +171,9 @@
 
     </div>
     <!-- end:content -->
+    <!-- Modals -->
+  	<div id="productModal" class="modal fade" role="dialog"></div>
+  	<div class="loadingModal"></div>
 
     <!-- Le javascript
     ================================================== -->
@@ -287,10 +290,10 @@
                 productName.appendTo(productItem);
                 var productPrice = $('<span/>').addClass("item_price").text(accounting.formatMoney(item.price));
                 productPrice.appendTo(productItem);
-                var productBtn = $('<button/>').addClass("btn btn-default productBtn").attr("aria-label", "Left Align");
-                productBtn.append('<span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>');
-                productItem.append('<br/>');
-                productBtn.appendTo(productItem);
+                //var productBtn = $('<button/>').addClass("btn btn-default productBtn").attr("aria-label", "Left Align");
+                //productBtn.append('<span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>');
+                //productItem.append('<br/>');
+                //productBtn.appendTo(productItem);
                 productItem.appendTo(cellDiv);
                 placementElement.append(cellDiv);
             }

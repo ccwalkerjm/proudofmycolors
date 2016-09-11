@@ -56,7 +56,8 @@
 			<div class="collapse navbar-collapse" id="clotheshop-navbar">
 				<ul class="nav navbar-nav navbar-right" id="menu_items">
 				</ul>
-			</div><!-- /.navbar-collapse -->
+			</div>
+			<!-- /.navbar-collapse -->
 		</div>
 	</nav>
 	<!-- end:navbar -->
@@ -106,7 +107,7 @@
 			<div class="carousel-inner">
 				<div class="item active"><img alt="clotheshop" src="img/firstslide.png" />
 					<div class="carousel-caption hidden-xs">
-						<h3  >WHETHER IT’S THE LAND OF YOUR BIRTH…</h3>
+						<h3>WHETHER IT’S THE LAND OF YOUR BIRTH…</h3>
 
 
 
@@ -149,12 +150,8 @@
 					<img class="item_thumb" />
 					<h4 class="item_name text-center"></h4>
 					<div class="text-center size">
-					</div>
+					</div><br/>
 					<span class="item_price"></span>
-					<br>
-					<button type="button" class="btn btn-default productBtn" aria-label="Left Align">
-						<span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>
-					</button>
 				</div>
 			</div>
 
@@ -165,10 +162,6 @@
 					<div class="text-center size">
 					</div>
 					<span class="item_price"></span>
-					<br>
-					<button type="button" class="btn btn-default productBtn" aria-label="Left Align">
-						<span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>
-					</button>
 				</div>
 			</div>
 
@@ -179,10 +172,6 @@
 					<div class="text-center size">
 					</div>
 					<span class="item_price"></span>
-					<br>
-					<button type="button" class="btn btn-default productBtn" aria-label="Left Align">
-						<span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>
-					</button>
 				</div>
 			</div>
 
@@ -193,10 +182,6 @@
 					<div class="text-center size">
 					</div>
 					<span class="item_price"></span>
-					<br>
-					<button type="button" class="btn btn-default productBtn" aria-label="Left Align">
-						<span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>
-					</button>
 				</div>
 			</div>
 		</div>
@@ -241,6 +226,9 @@
 		</div>
 		<!-- end:copyright -->
 	</div>
+	<!-- Modals -->
+	<div id="productModal" class="modal fade" role="dialog"></div>
+	<div class="loadingModal"></div>
 	<!-- end:content -->
 	<!-- Le javascript
     ================================================== -->
@@ -271,8 +259,10 @@
 
 
 			function listProducts(obj) {
+				setLoadingState(true);
 				obj = obj ? obj : g_proudOfMyColorsService; //
 				obj.listProducts(function(err, items) {
+					setLoadingState(false);
 					if (err) {
 						display(err.message, err);
 						return;
