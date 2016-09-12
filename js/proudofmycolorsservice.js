@@ -121,7 +121,10 @@ var proudOfMyColorsService = (function() {
         }
     };
 
-
+    var getBaseUrl = function (){
+      var getUrl = window.location;
+      return getUrl .protocol + "//" + getUrl.host + "/";// + getUrl.pathname.split('/')[1];
+    };
 
 
     //public methods
@@ -436,6 +439,7 @@ var proudOfMyColorsService = (function() {
         var request = {};
         request.data = data;
         request.method = method;
+        request.baseUrl = getBaseUrl();
         var requestSerialized = JSON.stringify(request);
         var params = {
             FunctionName: 'pomyc_set_checkout',
@@ -447,7 +451,7 @@ var proudOfMyColorsService = (function() {
         });
     };
 
-    
+
     //
     return proudOfMyColorsService;
 }());
