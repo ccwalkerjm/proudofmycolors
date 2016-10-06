@@ -173,7 +173,7 @@
     <script src="/js/aws/amazon-cognito-identity.min.js"></script>
     <script src="/js/aws/aws-sdk-2.3.19.min.js"></script>
     <!--Iron Rock Custom Library-->
-    <script src="/js/proudofmycolorsservice.js"></script>
+    <script src="/js/courserv_web_services.js"></script>
     <script src="/js/index.js"></script>
 
     <script type="text/javascript">
@@ -182,13 +182,13 @@
             initPage(function(err, obj) {
                 //?token=EC-1CB61872B5335341B&PayerID=PKETGAYSH5TCS
                 var token = getQueryStringParams('token');
-                var customerId = getQueryStringParams('PKETGAYSH5TCS');
+                var customerId = getQueryStringParams('PayerID');
                 setPayPalDetails(token, customerId, obj);
             });
 
             //set checkout---get secure token
             function setPayPalDetails(token, customerId, obj) {
-                obj = obj || g_proudOfMyColorsService;
+                obj = obj || g_courserv_web_service;
                 setLoadingState(true);
                 var data = {};
                 data.token = token;
@@ -246,7 +246,7 @@
 
             $('#details').on('click', '#confirmOrder', function() {
                 setLoadingState(true);
-                g_proudOfMyColorsService.paypalCheckout("DoExpressCheckoutPayment", _customerDetails, function(err, resp) {
+                g_courserv_web_service.paypalCheckout("DoExpressCheckoutPayment", _customerDetails, function(err, resp) {
                     setLoadingState(false);
                     var confirmInfo = JSON.parse(resp.Payload);
                     console.log(confirmInfo);

@@ -172,8 +172,8 @@
     </div>
     <!-- end:content -->
     <!-- Modals -->
-  	<div id="productModal" class="modal fade" role="dialog"></div>
-  	<div class="loadingModal"></div>
+    <div id="productModal" class="modal fade" role="dialog"></div>
+    <div class="loadingModal"></div>
 
     <!-- Le javascript
     ================================================== -->
@@ -193,7 +193,7 @@
     <script src="/js/aws/amazon-cognito-identity.min.js"></script>
     <script src="/js/aws/aws-sdk-2.3.19.min.js"></script>
     <!--Iron Rock Custom Library-->
-    <script src="/js/proudofmycolorsservice.js"></script>
+    <script src="/js/courserv_web_services.js"></script>
     <script src="/js/index.js"></script>
     <script type="text/javascript">
         $(document).ready(function() {
@@ -220,8 +220,8 @@
             });
 
             function listProducts(obj) {
-                obj = obj ? obj : g_proudOfMyColorsService; //
-                obj.listProducts(function(err, items) {
+                obj = obj ? obj : g_courserv_web_service; //
+                obj.listProducts(g_domainKey, function(err, items) {
                     if (err) {
                         display(err.message, err);
                         return;

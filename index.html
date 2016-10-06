@@ -20,19 +20,19 @@
       <script src="js/respond.min.js"></script>
     <![endif]-->
 	<!--Favicon  -->
-	<link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png">
-	<link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png">
-	<link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png">
-	<link rel="apple-touch-icon" sizes="76x76" href="/apple-icon-76x76.png">
-	<link rel="apple-touch-icon" sizes="114x114" href="/apple-icon-114x114.png">
-	<link rel="apple-touch-icon" sizes="120x120" href="/apple-icon-120x120.png">
-	<link rel="apple-touch-icon" sizes="144x144" href="/apple-icon-144x144.png">
-	<link rel="apple-touch-icon" sizes="152x152" href="/apple-icon-152x152.png">
-	<link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180x180.png">
-	<link rel="icon" type="image/png" sizes="192x192" href="/android-icon-192x192.png">
-	<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-	<link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
-	<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+	<link rel="apple-touch-icon" sizes="57x57" href="/img/favicons/apple-icon-57x57.png">
+	<link rel="apple-touch-icon" sizes="60x60" href="/img/favicons/apple-icon-60x60.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="/img/favicons/apple-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="76x76" href="/img/favicons/apple-icon-76x76.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="/img/favicons/apple-icon-114x114.png">
+	<link rel="apple-touch-icon" sizes="120x120" href="/img/favicons/apple-icon-120x120.png">
+	<link rel="apple-touch-icon" sizes="144x144" href="/img/favicons/apple-icon-144x144.png">
+	<link rel="apple-touch-icon" sizes="152x152" href="/img/favicons/apple-icon-152x152.png">
+	<link rel="apple-touch-icon" sizes="180x180" href="/img/favicons/apple-icon-180x180.png">
+	<link rel="icon" type="image/png" sizes="192x192" href="/img/favicons/android-icon-192x192.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/img/favicons/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="96x96" href="/img/favicons/favicon-96x96.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/img/favicons/favicon-16x16.png">
 	<link rel="manifest" href="/manifest.json">
 	<meta name="msapplication-TileColor" content="#ffffff">
 	<meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
@@ -168,7 +168,7 @@
 			<div class="col-md-3 col-sm-3 col-xs-6">
 				<div class="thumbnail product-item" id="thirdItem">
 					<img class="item_thumb" />
-					<p class="item_name"><p>
+					<p class="item_name"></p>
 					<div class="text-center size">
 					</div>
 					<span class="item_price"></span>
@@ -248,7 +248,7 @@
 	<script src="/js/aws/amazon-cognito-identity.min.js"></script>
 	<script src="/js/aws/aws-sdk-2.3.19.min.js"></script>
 	<!--Iron Rock Custom Library-->
-	<script src="/js/proudofmycolorsservice.js"></script>
+	<script src="/js/courserv_web_services.js"></script>
 	<script src="/js/index.js"></script>
 
 	<script type="text/javascript">
@@ -260,14 +260,15 @@
 
 			function listProducts(obj) {
 				setLoadingState(true);
-				obj = obj ? obj : g_proudOfMyColorsService; //
-				obj.listProducts(function(err, items) {
+				obj = obj ? obj : g_courserv_web_service; //
+				obj.listProducts(g_domainKey, function(err, items) {
 					setLoadingState(false);
 					if (err) {
 						display(err.message, err);
 						return;
 					}
 
+					if (items.length === 0) return;
 					var randomizedItems = getRandomizedItems(4, items.length);
 
 					diplayItem($("#firstItem"), items[randomizedItems[0]]);

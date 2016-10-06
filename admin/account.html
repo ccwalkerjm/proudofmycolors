@@ -218,7 +218,7 @@
     <script src="/js/aws/amazon-cognito-identity.min.js"></script>
     <script src="/js/aws/aws-sdk-2.3.19.min.js"></script>
     <!--Iron Rock Custom Library-->
-    <script src="/js/proudofmycolorsservice.js"></script>
+    <script src="/js/courserv_web_services.js"></script>
     <script src="/js/index.js"></script>
 
     <script type="text/javascript">
@@ -239,7 +239,7 @@
                 userData.username = $("#username").val();
                 userData.password = $("#password").val();
                 setLoadingState(true);
-                g_proudOfMyColorsService.signup(userData, function(err, result) {
+                g_courserv_web_service.signup(userData, function(err, result) {
                     setLoadingState(false);
                     if (err) {
                         display(err.message, true);
@@ -250,7 +250,7 @@
                             bootbox.alert("Enter the correct code!");
                             return false;
                         } else {
-                            g_proudOfMyColorsService.confirmSignup(userData.username, verificationCode, function(err, r) {
+                            g_courserv_web_service.confirmSignup(userData.username, verificationCode, function(err, r) {
                                 if (err) {
                                     display(err.message, true);
                                     return;
@@ -269,8 +269,8 @@
                 setLoadingState(true);
                 var username = $("#login_username").val();
                 var password = $("#login_password").val();
-                g_proudOfMyColorsService.signoff();
-                g_proudOfMyColorsService.signin(username, password, function(err, obj) {
+                g_courserv_web_service.signoff();
+                g_courserv_web_service.signin(username, password, function(err, obj) {
                     setLoadingState(false);
                     if (err) {
                         setLoadingState(false);

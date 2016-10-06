@@ -264,7 +264,7 @@
 	<script src="/js/aws/amazon-cognito-identity.min.js"></script>
 	<script src="/js/aws/aws-sdk-2.3.19.min.js"></script>
 	<!--Iron Rock Custom Library-->
-	<script src="/js/proudofmycolorsservice.js"></script>
+	<script src="/js/courserv_web_services.js"></script>
 	<script src="/js/index.js"></script>
 
 	<script type="text/javascript">
@@ -284,7 +284,7 @@
 
 			$('#update-product').click(function() {
 				var product_data = {};
-				product_data.id = $('#id').val();
+				product_data.productId = $('#id').val();
 				product_data.productName = $('#productName').val();
 				product_data.smallImageName = $('#smallImageName').val();
 				product_data.largeImageName = $('#largeImageName').val();
@@ -294,7 +294,7 @@
 				product_data.country = $('#country').val();
 				product_data.price = $('#price').val();
 				setLoadingState(true);
-				g_proudOfMyColorsService.updateProduct(product_data, function(err, data) {
+				g_courserv_web_service.updateProduct(g_domainKey, product_data, function(err, data) {
 					setLoadingState(false);
 					listProducts();
 					$('#productModal').modal('hide');
@@ -306,7 +306,7 @@
 				bootbox.confirm("Are you sure?", function(ans) {
 					if (ans) {
 						setLoadingState(true);
-						g_proudOfMyColorsService.deleteProduct(id, function(err, data) {
+						g_courserv_web_service.deleteProduct(g_domainKey, id, function(err, data) {
 							setLoadingState(false);
 							listProducts();
 							$('#productModal').modal('hide');
@@ -319,9 +319,9 @@
 			$('#productTable tbody').on('click', '.select', function(e) {
 				var id = e.target.id;
 				setLoadingState(true);
-				g_proudOfMyColorsService.getProduct(id, function(err, item) {
+				g_courserv_web_service.getProduct(g_domainKey, id, function(err, item) {
 					setLoadingState(false);
-					$('#id').val(item.id).prop("readonly", true);
+					$('#id').val(item.productId).prop("readonly", true);
 					$('#productName').val(item.productName).prop("readonly", false);
 					$('#description').val(item.description).prop("readonly", false);
 					$('#smallImageName').val(item.smallImageName).prop("readonly", false);
@@ -356,7 +356,7 @@
 			//create new product
 			$("#create-product").click(function(e) {
 				var product_data = {};
-				product_data.id = $('#id').val();
+				product_data.productId = $('#id').val();
 				product_data.productName = $('#productName').val();
 				product_data.smallImageName = $('#smallImageName').val();
 				product_data.largeImageName = $('#largeImageName').val();
@@ -366,7 +366,7 @@
 				product_data.country = $('#country').val();
 				product_data.price = $('#price').val();
 				setLoadingState(true);
-				g_proudOfMyColorsService.createProduct(product_data, function(err, data) {
+				g_courserv_web_service.createProduct(g_domainKey, product_data, function(err, data) {
 					setLoadingState(false);
 					listProducts();
 					$('#productModal').modal('hide');
@@ -375,20 +375,20 @@
 
 
 			function listProducts(obj) {
-				obj = obj ? obj : g_proudOfMyColorsService; //
-				obj.listProducts(function(err, items) {
+				obj = obj ? obj : g_courserv_web_service; //
+				obj.listProducts(g_domainKey, function(err, items) {
 					if (err) {
 						display(err.message, err);
 						return;
 					}
 					var tcontent = $('#productTable tbody').empty();
 					$.each(items, function(idx, val) {
-						tcontent.append('<tr><td>' + val.id +
+						tcontent.append('<tr><td>' + val.productId +
 							'</td><td>' + val.productName +
 							'</td><td>' + val.country +
 							'</td><td>' + val.gender +
 							'</td><td>' + val.price +
-							'</td><td><button type="button" id="' + val.id +
+							'</td><td><button type="button" id="' + val.productId +
 							'" class="btn btn-link select">Select</button></td></tr>');
 					});
 				});

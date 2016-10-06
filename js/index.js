@@ -1,9 +1,10 @@
 //product details
 var g_product_details = '<div class=modal-dialog><div class=modal-content><div class=modal-header><button class=close type=button data-dismiss=modal>×</button><h4 class=modal-title></h4></div><div class=modal-body><div class=row id=productRowId><div class=col-md-12><div class=heading-title><input type=hidden id=productId><h3><span class=item_name id=productName>Trinidad and Tobago Disc Flag Tshirt</span></h3></div><div class=row><div class="col-md-6 col-sm-6"><img id=productImg></div><div class="col-md-6 col-sm-6"><div class=single-desc><form><table id=productDetails><tr class=hidden-xs><td><strong>Availability</strong><td>:<td id=availability>In Stock<tr><td colspan=3><span class="item_price price"></span><tr><td><strong>Size</strong><td>:<td><select class="form-control item_size"></select><tr><td><strong>Quantity</strong><td>:<td><input type=number class="form-control item_Quantity"value=1><tr><td colspan=3><button class="btn btn-primary btn-sm item_add"type=button>Add to Cart</button></table></form></div></div></div></div><div class=row><div class="col-md-6 content-detail"><div class="panel panel-default"><div class=panel-heading><h3 class=panel-title>Details</h3></div><div class=panel-body id=productDescription></div></div></div></div></div></div><div class=modal-footer><button class="btn btn-default"type=button data-dismiss=modal>Close</button></div></div></div>';
 var _productModal = $('#productModal');
+var g_domainKey = "f2464c5a-ad53-40ab-bb29-b368ba2d7eb1";
 
 //backend service
-var g_proudOfMyColorsService; // = new proudOfMyColorsService()
+var g_courserv_web_service; // = new courserv_web_service()
 
 var g_shoppingCartBtnClass = "shoppingCartBtnClass";
 var g_shopping_cart_key_name = "_courserv_shopping_cart_key_0001";
@@ -40,7 +41,7 @@ function getProductTemplate() {
     var product = {};
     product.description = "";
     product.productName = "";
-    product.id = 0;
+    product.productId = 0;
     product.image = "";
     product.quantity = 0;
     product.size = "";
@@ -340,7 +341,7 @@ function setLoadingState(loadingState) {
 //convert to json without error
 function ConvertToJson(r) {
     try {
-        while (true) {
+        while (r) {
             r = JSON.parse(r);
         }
     } catch (e) {
@@ -411,7 +412,7 @@ function isAdminPage(pagePath) {
 
 function DisplayProductDetail(productId) {
     setLoadingState(true);
-    g_proudOfMyColorsService.getProduct(productId, function(err, productItem) {
+    g_courserv_web_service.getProduct(g_domainKey, productId, function(err, productItem) {
         setLoadingState(false);
         if (err) {
             display(err.message, true);
@@ -462,10 +463,10 @@ function initPage(callback) {
     });
     setLoadingState(true);
 
-    g_proudOfMyColorsService = new proudOfMyColorsService(function(err, $this) {
+    g_courserv_web_service = new courserv_web_service(function(err, $this) {
         setLoadingState(false);
         if (err) {
-            g_proudOfMyColorsService.signoff();
+            g_courserv_web_service.signoff();
             location.assign('/index.html');
             return;
         }
@@ -539,7 +540,7 @@ function initPage(callback) {
     });
 
     $('#your-account').on('click', '#logout', function() {
-        g_proudOfMyColorsService.signoff();
+        g_courserv_web_service.signoff();
         location.assign('/index.html');
     });
 

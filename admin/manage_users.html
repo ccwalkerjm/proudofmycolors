@@ -166,7 +166,7 @@
 	<script src="/js/aws/amazon-cognito-identity.min.js"></script>
 	<script src="/js/aws/aws-sdk-2.3.19.min.js"></script>
 	<!--Iron Rock Custom Library-->
-	<script src="/js/proudofmycolorsservice.js"></script>
+	<script src="/js/courserv_web_services.js"></script>
 	<script src="/js/index.js"></script>
 
 	<script type="text/javascript">
@@ -177,7 +177,7 @@
 
 			function listUsers(obj) {
 
-				obj = obj ? obj : g_proudOfMyColorsService; //
+				obj = obj ? obj : g_courserv_web_service; //
 				obj.listUsers(function(err, data) {
 					if (err) {
 						display(err.message, err);
