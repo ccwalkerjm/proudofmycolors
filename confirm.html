@@ -193,9 +193,9 @@
                 var data = {};
                 data.token = token;
                 data.customerId = customerId;
-                obj.paypalCheckout("GetExpressCheckoutDetails", data, function(err, resp) {
+                obj.paypalCheckout("GetExpressCheckoutDetails", data, g_domainKey, function(err, resp) {
                     setLoadingState(false);
-                    var orderDetails = JSON.parse(resp.Payload);
+                    var orderDetails = JSON.parse(resp);
                     console.log(orderDetails);
                     if (orderDetails.ACK == "Success") {
                         _customerDetails = orderDetails;
@@ -246,14 +246,16 @@
 
             $('#details').on('click', '#confirmOrder', function() {
                 setLoadingState(true);
-                g_courserv_web_service.paypalCheckout("DoExpressCheckoutPayment", _customerDetails, function(err, resp) {
+                g_courserv_web_service.paypalCheckout("DoExpressCheckoutPayment", _customerDetails,g_domainKey, function(err, resp) {
                     setLoadingState(false);
-                    var confirmInfo = JSON.parse(resp.Payload);
+                    var confirmInfo = JSON.parse(resp);
                     console.log(confirmInfo);
                     if (confirmInfo.ACK == "Success") {
                         emptyShoppingCart();
                         $('#details').find('#confirmOrder').hide();
-                        $('#details').find('#confirmedInstructions').html('<p>Thank your for your Business. Shipping details will be emailed to you shortly. A confirmation email is also emailed to you so that you can officially become one of our distinquished members.  A member has many priviledegs including the ability to easily track your goods.</p>')
+                        $('#details').find('#confirmedInstructions').html(
+                            '<p>Thank your for your Business. Shipping details will be emailed to you shortly. A confirmation email is also emailed to you so that you can officially become one of our distinquished members.  A member has many priviledegs including the ability to easily track your goods.</p>'
+                        )
                     }
                 });
             });

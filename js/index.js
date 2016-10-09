@@ -74,7 +74,7 @@ function getProduct(productId, productSize) {
     var productIndex = -1;
     var x_shopping_cart_list = getShoppingCart();
     for (var i = 0; i < x_shopping_cart_list.length; i++) {
-        if (productId == x_shopping_cart_list[i].id && productSize == x_shopping_cart_list[i].size) {
+        if (productId == x_shopping_cart_list[i].productId && productSize == x_shopping_cart_list[i].size) {
             productIndex = i;
             break;
         }
@@ -87,7 +87,7 @@ function addToCart(product) {
     var productExits = false;
     var x_shopping_cart_list = getShoppingCart();
     for (var i = 0; i < x_shopping_cart_list.length; i++) {
-        if (product.id == x_shopping_cart_list[i].id && product.size == x_shopping_cart_list[i].size) {
+        if (product.productId == x_shopping_cart_list[i].productId && product.size == x_shopping_cart_list[i].size) {
             if (product.quantity <= 0) {
                 x_shopping_cart_list.splice(i, 1);
             } else {
@@ -108,7 +108,7 @@ function addToCart(product) {
 function removeFromCart(product) {
     var x_shopping_cart_list = getShoppingCart();
     for (var i = 0; i < x_shopping_cart_list.length; i++) {
-        if (product.id == x_shopping_cart_list[i].id && product.size == x_shopping_cart_list[i].size) {
+        if (product.productId == x_shopping_cart_list[i].productId && product.size == x_shopping_cart_list[i].size) {
             x_shopping_cart_list.splice(i, 1);
             break;
         }
@@ -152,7 +152,7 @@ function updateShoppingcartDisplay() {
             var item_description = $("<div/>").addClass("col-sm-7 col-xs-7").append(x_shopping_cart_list[i].quantity);
             item_description.append("&nbsp;");
             var _productId = $('<input/>').addClass('productId').attr('type', 'hidden');
-            _productId.val(x_shopping_cart_list[i].id).appendTo(item_description);
+            _productId.val(x_shopping_cart_list[i].productId).appendTo(item_description);
             var item_description_a = $("<a/>").attr("href", "#").html(x_shopping_cart_list[i].productName + '-');
             var item_size = $("<span/>").addClass('size').html(x_shopping_cart_list[i].size).appendTo(item_description_a);
             item_description_a.appendTo(item_description);
@@ -229,7 +229,7 @@ function updateShoppingcartDisplay() {
             var quantityInput = $('<input/>').addClass('form-control quantity').attr('type', 'number');
             quantityInput.val(x_shopping_cart_list[k].quantity).appendTo(quantitySection);
             var _productId2 = $('<input/>').addClass('productId').attr('type', 'hidden');
-            _productId2.val(x_shopping_cart_list[k].id).appendTo(quantitySection);
+            _productId2.val(x_shopping_cart_list[k].productId).appendTo(quantitySection);
             var updateBtn = $('<button/>').addClass('btn btn-default update').attr('rel', 'tooltip');
             updateBtn.attr('title', 'Update');
             var update_i = $('<i/>').addClass('fa fa-pencil').appendTo(updateBtn);

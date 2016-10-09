@@ -203,12 +203,18 @@
                 setLoadingState(true);
                 g_courserv_web_service.paypalCheckout("SetExpressCheckout", getShoppingCart(), g_domainKey, function(err, data) {
                     setLoadingState(false);
-                    var tokenData = JSON.parse(data.Payload);
+                    if (err) {
+                        return display(err.message, true);
+                    }
+                    var tokenData = JSON.parse(data);
+                    if (tokenData.errorMessage) {
+                        return display(tokenData.errorMessage, true);
+                    }
                     console.log(tokenData);
                     if (tokenData.TOKEN)
                         location.assign('https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_express-checkout&token=' + tokenData.TOKEN);
                     else {
-                        alert(data.Payload);
+                        alert(data);
                     }
                 });
             });

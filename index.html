@@ -282,7 +282,7 @@
 
 
 			function diplayItem(element, item) {
-				element.data("product_id", item.id);
+				element.data("product_id", item.productId);
 				element.find(".item_name").text(item.productName);
 				element.find(".item_thumb").attr("src", item.smallImageName);
 				element.find(".item_price").text(accounting.formatMoney(item.price));

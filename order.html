@@ -274,7 +274,7 @@
             }
 
             function diplayItem(element, item) {
-                element.data("product_id", item.id);
+                element.data("product_id", item.productId);
                 element.find(".item_name").text(item.productName);
                 element.find(".item_thumb").attr("src", item.smallImageName);
                 element.find(".item_price").text(accounting.formatMoney(item.price));
@@ -283,7 +283,7 @@
 
             function InsertCell(placementElement, item) {
                 var cellDiv = $('<div/>').addClass("col-md-4 col-sm-4 col-xs-6");
-                var productItem = $('<div/>').addClass("thumbnail product-item").data("product_id", item.id);
+                var productItem = $('<div/>').addClass("thumbnail product-item").data("product_id", item.productId);
                 var img = $("<img/>").addClass("item_thumb").attr("src", item.smallImageName);
                 img.appendTo(productItem);
                 var productName = $('<span/>').addClass("item_name").text(item.productName);
