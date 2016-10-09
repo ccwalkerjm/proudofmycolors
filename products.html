@@ -9,6 +9,9 @@
     <meta name="author" content="courserv">
     <link rel="shortcut icon" href="img/favicon.png">
 
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+
     <title>ProudOfMyColors</title>
 
     <!-- Bootstrap core CSS -->
@@ -20,8 +23,8 @@
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
-      <script src="js/html5shiv.js"></script>
-      <script src="js/respond.min.js"></script>
+      <script src="/js/html5shiv.js"></script>
+      <script src="/js/respond.min.js"></script>
     <![endif]-->
     <!--Favicon  -->
     <link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png">
@@ -42,7 +45,6 @@
     <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
     <meta name="theme-color" content="#ffffff">
     <!--Favicon  -->
-
 </head>
 
 <body>
@@ -74,7 +76,7 @@
         <div class="row">
             <div class="col-md-6 col-sm-6 col-xs-6">
                 <div class="logo">
-                    <img src="/img/logos/Proud-O-My-Colours_TEXTONLY-02-02.png" class="img-responsive" alt="Proud Of My Colors">
+                    <img src="img/logos/Proud-O-My-Colours_TEXTONLY-02-02_small.png" class="img-responsive" alt="Proud Of My Colors">
                 </div>
             </div>
             <div class="col-md-6 col-sm-6 col-xs-6">
@@ -116,60 +118,34 @@
             <!-- end:sidebar -->
 
             <!-- begin:content -->
-            <div class="col-md-9 col-sm-8 content">
+            <div class="col-md-9 col-sm-8 content vertical-line">
                 <div class="row">
-                    <div class="col-md-6 col-sm-6">
-                        <h3>Create An Account</h3>
-                        <div class="message"></div>
-                        <hr />
-                        <form role="form">
+                    <div class="col-md-12">
+                        <h3 id="content-header"></h3>
+                        <form class="form-inline pull-right">
                             <div class="form-group">
-                                <label for="username">Username</label>
-                                <input type="text" value="" class="form-control" placeholder="Username" id="username">
+                                <label for="gender">Gender</label>
+                                <select class="form-control input-sm" id="gender">
+                                    <option value=""></option>
+                                    <option value="male">Male</option>
+                                    <option value="female">Female</option>
+                                </select>
                             </div>
                             <div class="form-group">
-                                <label for="email">Email Address</label>
-                                <input type="email" class="form-control" placeholder="Email" id="email">
+                                <label for="country">Country</label>
+                                <select class="form-control input-sm" id="country">
+                                </select>
                             </div>
-                            <div class="form-group">
-                                <label for="phone_number">Phone Number</label>
-                                <input type="text" value="" class="form-control" placeholder="phone_number" id="phone_number">
-                            </div>
-                            <div class="form-group">
-                                <label for="given_name">First Name</label>
-                                <input type="text" value="" class="form-control" placeholder="First Name" id="given_name">
-                            </div>
-                            <div class="form-group">
-                                <label for="family_name">Last Name</label>
-                                <input type="text" value="" class="form-control" placeholder="lastName" id="family_name">
-                            </div>
-                            <div class="form-group">
-                                <label for="password">Create your password</label>
-                                <input type="password" value="" class="form-control" placeholder="Password" id="password">
-                            </div>
-                            <button type="button" class="btn btn-default" id="register">Register</button>
-                        </form>
-                    </div>
-                    <div class="col-md-6 col-sm-6">
-                        <h3>Already Registered ?</h3>
-                        <hr />
-                        <form role="form">
-                            <div class="form-group">
-                                <label for="username">Username</label>
-                                <input type="text" class="form-control" placeholder="Username" id="login_username">
-                            </div>
-                            <div class="form-group">
-                                <label for="password">Password Address</label>
-                                <input type="password" class="form-control" placeholder="Password" id="login_password">
-                            </div>
-                            <a href="#">Forgot your password ?</a>
-                            <br>
-                            <br>
-                            <button type="button" class="btn btn-primary" id="login">Log in</button>
+                            <button type="button" class="btn btn-default" id="search">Search</button>
                         </form>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-md-12 product-container" id="productList">
+                    </div>
+                </div>
             </div>
+            <!-- end:content -->
         </div>
         <!-- end:article -->
 
@@ -195,9 +171,9 @@
 
     </div>
     <!-- end:content -->
-    <div class="loadingModal">
-        <!-- Place at bottom of page -->
-    </div>
+    <!-- Modals -->
+    <div id="productModal" class="modal fade" role="dialog"></div>
+    <div class="loadingModal"></div>
 
     <!-- Le javascript
     ================================================== -->
@@ -207,7 +183,6 @@
     <script src="/js/masonry.pkgd.min.js"></script>
     <script src="/js/imagesloaded.pkgd.min.js"></script>
     <script src="/js/script.js"></script>
-    <script src="/js/bootbox.js"></script>
     <script src="/js/accounting.js"></script>
     <!--aws-->
     <script src="/js/aws/jsbn.js"></script>
@@ -220,74 +195,113 @@
     <!--Iron Rock Custom Library-->
     <script src="http://127.0.0.1:8891/assets/js/courserv_web_services.js"></script>
     <script src="/js/index.js"></script>
-
     <script type="text/javascript">
         $(document).ready(function() {
             initPage(function(err, obj) {
-
+                populateCountries();
+                var country = getQueryStringParams("country");
+                var gender = getQueryStringParams("gender");
+                $('#country').val(country);
+                $('#gender').val(gender);
+                listProducts(obj);
             });
 
-            ///login
 
+            function populateCountries() {
+                var $select = $('#country').empty();
+                for (var i = 0; i < g_valid_countries.length; i++) {
+                    var $option = $("<option/>").val(g_valid_countries[i].code).text(g_valid_countries[i].name);
+                    $select.append($option);
+                }
+            }
 
-            $("#register").click(function(e) {
-                var userData = {};
-                userData.email = $("#email").val();
-                userData.phone_number = $("#phone_number").val();
-                userData.given_name = $("#given_name").val();
-                userData.family_name = $("#family_name").val();
-                userData.username = $("#username").val();
-                userData.password = $("#password").val();
-                setLoadingState(true);
-                g_courserv_web_service.signup(userData, function(err, result) {
-                    setLoadingState(false);
+            $('#search').click(function() {
+                listProducts();
+            });
+
+            function listProducts(obj) {
+                obj = obj ? obj : g_courserv_web_service; //
+                obj.listProducts(g_domainKey, function(err, items) {
                     if (err) {
-                        display(err.message, true);
+                        display(err.message, err);
                         return;
                     }
-                    bootbox.prompt("The user has been created. Enter the code sent to the email address", function(verificationCode) {
-                        if (verificationCode === null) {
-                            bootbox.alert("Enter the correct code!");
-                            return false;
-                        } else {
-                            g_courserv_web_service.confirmSignup(userData.username, verificationCode, function(err, r) {
-                                if (err) {
-                                    display(err.message, true);
-                                    return;
-                                }
-                                location.assign("/index.html");
-                            });
-                        }
-                    });
-
-                });
-            });
 
 
+                    var header = $('#content-header');
+                    var country = $('#country').val();
+                    var gender = $('#gender').val();
 
-            $("#login").click(function(e) {
-                setLoadingState(true);
-                var username = $("#login_username").val();
-                var password = $("#login_password").val();
-                g_courserv_web_service.signoff();
-                g_courserv_web_service.signin(username, password, function(err, obj) {
-                    setLoadingState(false);
-                    if (err) {
-                        setLoadingState(false);
-                        display(err.message, true);
+                    if (country && gender) {
+                        header.html($("#country option:selected").text() + " and " + $("#gender option:selected").text() + " Selections");
+                    } else if (gender) {
+                        header.html($("#gender option:selected").text() + " Selections");
+                    } else if (country) {
+                        header.html($("#country option:selected").text() + " Selections");
                     } else {
-                        location.href = "/index.html";
+                        header.html("");
                     }
+
+                    var productList = $('#productList').html('<hr/>');
+
+                    var filteredItems = [];
+                    for (var i = 0; i < items.length; i++) {
+                        if ((gender && items[i].category1.toLowerCase() == gender.toLowerCase() && country && items[i].category0.toLowerCase() == country.toLowerCase()) ||
+                            (gender && items[i].category1.toLowerCase() == gender.toLowerCase() && !country) ||
+                            (!gender && country && items[i].category0.toLowerCase() == country.toLowerCase())
+                        ) {
+                            filteredItems.push(items[i]);
+                        }
+                    }
+
+                    if (!country && !gender) {
+                        header.html("Random Selections");
+                        var rans = getRandomizedItems(6, items.length);
+                        for (var j = 0; j < rans.length; j++) {
+                            filteredItems.push(items[rans[j]]);
+                        }
+                    }
+
+                    for (var i = 0; i < filteredItems.length; i = i + 3) {
+                        var rowContainer = $('<div/>').addClass("row product-container");
+                        InsertCell(rowContainer, filteredItems[i]);
+                        if (i + 1 < filteredItems.length) InsertCell(rowContainer, filteredItems[i + 1]);
+                        if (i + 2 < filteredItems.length) InsertCell(rowContainer, filteredItems[i + 2]);
+                        productList.append(rowContainer);
+                    }
+
                 });
-            });
+            }
+
+            function diplayItem(element, item) {
+                element.data("product_id", item.productId);
+                element.find(".item_name").text(item.productName);
+                element.find(".item_thumb").attr("src", item.smallImageName);
+                element.find(".item_price").text(accounting.formatMoney(item.price));
+            }
 
 
-
-
+            function InsertCell(placementElement, item) {
+                var cellDiv = $('<div/>').addClass("col-md-4 col-sm-4 col-xs-6");
+                var productItem = $('<div/>').addClass("thumbnail product-item").data("product_id", item.productId);
+                var img = $("<img/>").addClass("item_thumb").attr("src", item.smallImageName);
+                img.appendTo(productItem);
+                var productName = $('<span/>').addClass("item_name").text(item.productName);
+                productName.appendTo(productItem);
+                var productPrice = $('<span/>').addClass("item_price").text(accounting.formatMoney(item.price));
+                productPrice.appendTo(productItem);
+                //var productBtn = $('<button/>').addClass("btn btn-default productBtn").attr("aria-label", "Left Align");
+                //productBtn.append('<span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>');
+                //productItem.append('<br/>');
+                //productBtn.appendTo(productItem);
+                productItem.appendTo(cellDiv);
+                placementElement.append(cellDiv);
+            }
 
 
         });
     </script>
+
 </body>
 
 </html>

@@ -401,7 +401,7 @@ function display(message, err) {
     _$message.html(message).fadeIn().delay(10000).fadeOut();
 }
 
-function isAdminPage(pagePath) {
+function isAccountPage(pagePath) {
     if (pagePath == '/admin/manage_users.html' ||
         pagePath == '/admin/manage_products.html') {
         return true;
@@ -431,7 +431,7 @@ function DisplayProductDetail(productId) {
         sizes.append('<option value="M">M</option>');
         sizes.append('<option value="L">L</option>');
         sizes.append('<option value="XL">XL</option>');
-        if (productItem.gender == "male") {
+        if (productItem.category1 == "male") {
             sizes.append('<option value="XXL">XXL</option>');
         }
 
@@ -471,21 +471,48 @@ function initPage(callback) {
             return;
         }
 
+        if ($this.getUsername()) {
+            $this.getRole(g_domainKey, function(err, role) {
+                loadMenuItems($this.getUsername(), role);
+                if (callback && typeof callback == "function") {
+                    callback(null, $this);
+                }
+            });
+        } else if (!isAccountPage(location.pathname)) {
+            loadMenuItems();
+            if (callback && typeof callback == "function") {
+                callback(null, $this);
+            }
+        } else {
+            location.assign('/index.html');
+        }
+    });
+
+
+    function loadMenuItems(username, role) {
         //not signed in
+        var menu_item = $('#menu_items').empty();
+        //<li class="active">
+        menu_item.append('<li><a href="/index.html">Home</a></li>');
+        menu_item.append('<li><a href="/products.html?gender=male">Men</a></li>');
+        menu_item.append('<li><a href="/products.html?gender=female">Women</a></li>');
+        menu_item.append('<li><a href="/products.html">Categories</a></li>');
+        ////
         var accountSection = $('#your-account').empty();
         var accountStatus = $('<div/>').addClass('hidden-xs');
         var accountHeader = $('<h4/>');
         var visible_xs = $('<div/>').addClass("visible-xs");
-        var valid_page = false;
-        var username = $this.getUsername();
         if (username) {
-            valid_page = true;
             accountHeader.html('<a href="/admin/changePassword.html">' + username + '</a>');
             accountHeader.appendTo(accountStatus);
-            accountStatus.append('<p><a href="#" id="logout">Logout</a>|<a href="/admin/manage_products.html">Products</a><p>');
-            visible_xs.html('<a href="/admin/manage_products.html" class="btn btn-primary"><i class="fa fa-briefcase"></i></a>');
-        } else if (!isAdminPage(location.pathname)) {
-            valid_page = true;
+            accountStatus.append('<p><a href="#" id="logout">Logout</a><p>');
+            visible_xs.html('<a href="#" id="logout" class="btn btn-primary"><i class="fa fa-sign-out"></i></a>');
+            menu_item.append('<li><a href="/orders.html">Orders</a></li>');
+            if(role){
+              menu_item.append('<li><a href="/admin/manage_products.html">Manage Products</a></li>');
+              menu_item.append('<li><a href="/admin/manage_orders.html">Manage Orders</a></li>');
+            }
+        } else {
             accountHeader.html('<a href="/admin/account.html">Account</a>');
             accountHeader.appendTo(accountStatus);
             accountStatus.append('<p>Welcome</p>');
@@ -493,29 +520,13 @@ function initPage(callback) {
         }
         accountStatus.appendTo(accountSection);
         accountSection.append(visible_xs);
-
-        if (valid_page === true) {
-            if (callback && typeof callback == "function") {
-                callback(null, $this);
-            }
-        } else {
-            location.assign('/index.html');
-        }
-        var menu_item = $('#menu_items').empty();
-        //<li class="active">
-        menu_item.append('<li><a href="/index.html">Home</a></li>');
-        menu_item.append('<li><a href="/order.html?gender=male">Men</a></li>');
-        menu_item.append('<li><a href="/order.html?gender=female">Women</a></li>');
-        menu_item.append('<li><a href="/order.html">Categories</a></li>');
         menu_item.append('<li><a href="/about.html">About</a></li>');
         menu_item.append('<li><a href="/contact.html">Contact</a></li>');
         //menu
 
         //update shopping cart
         updateShoppingcartDisplay();
-
-
-    });
+    }
 
     $('.product-container').on("click", ".product-item", function() {
         //g_product_details
@@ -550,7 +561,7 @@ function initPage(callback) {
     });
 
     //add to Cart
-    _productModal.on('click','.item_add', function() {
+    _productModal.on('click', '.item_add', function() {
         var productRow = $(this).closest("#productRowId");
         var productItem = _productModal.find("#productId").val();
         productItem = JSON.parse(productItem);

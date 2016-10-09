@@ -121,27 +121,12 @@
             <div class="col-md-9 col-sm-8 content vertical-line">
                 <div class="row">
                     <div class="col-md-12">
-                        <h3 id="content-header"></h3>
-                        <form class="form-inline pull-right">
-                            <div class="form-group">
-                                <label for="gender">Gender</label>
-                                <select class="form-control input-sm" id="gender">
-                                    <option value=""></option>
-                                    <option value="male">Male</option>
-                                    <option value="female">Female</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="country">Country</label>
-                                <select class="form-control input-sm" id="country">
-                                </select>
-                            </div>
-                            <button type="button" class="btn btn-default" id="search">Search</button>
-                        </form>
+                        <h3 id="content-header">Orders</h3>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-12 product-container" id="productList">
+                    <div class="col-md-12 product-container">
+                        <table class="table"></table>
                     </div>
                 </div>
             </div>
@@ -193,111 +178,24 @@
     <script src="/js/aws/amazon-cognito-identity.min.js"></script>
     <script src="/js/aws/aws-sdk-2.3.19.min.js"></script>
     <!--Iron Rock Custom Library-->
-    <script src="/js/courserv_web_services.js"></script>
+    <script src="http://127.0.0.1:8891/assets/js/courserv_web_services.js"></script>
     <script src="/js/index.js"></script>
     <script type="text/javascript">
         $(document).ready(function() {
             initPage(function(err, obj) {
-                populateCountries();
-                var country = getQueryStringParams("country");
-                var gender = getQueryStringParams("gender");
-                $('#country').val(country);
-                $('#gender').val(gender);
-                listProducts(obj);
+                listOrders(obj);
             });
 
-
-            function populateCountries() {
-                var $select = $('#country').empty();
-                for (var i = 0; i < g_valid_countries.length; i++) {
-                    var $option = $("<option/>").val(g_valid_countries[i].code).text(g_valid_countries[i].name);
-                    $select.append($option);
-                }
-            }
-
-            $('#search').click(function() {
-                listProducts();
-            });
-
-            function listProducts(obj) {
+            function listOrders(obj) {
                 obj = obj ? obj : g_courserv_web_service; //
-                obj.listProducts(g_domainKey, function(err, items) {
+                obj.listOrders(g_domainKey, function(err, items) {
                     if (err) {
                         display(err.message, err);
                         return;
                     }
 
-
-                    var header = $('#content-header');
-                    var country = $('#country').val();
-                    var gender = $('#gender').val();
-
-                    if (country && gender) {
-                        header.html($("#country option:selected").text() + " and " + $("#gender option:selected").text() + " Selections");
-                    } else if (gender) {
-                        header.html($("#gender option:selected").text() + " Selections");
-                    } else if (country) {
-                        header.html($("#country option:selected").text() + " Selections");
-                    } else {
-                        header.html("");
-                    }
-
-                    var productList = $('#productList').html('<hr/>');
-
-                    var filteredItems = [];
-                    for (var i = 0; i < items.length; i++) {
-                        if ((gender && items[i].gender.toLowerCase() == gender.toLowerCase() && country && items[i].country.toLowerCase() == country.toLowerCase()) ||
-                            (gender && items[i].gender.toLowerCase() == gender.toLowerCase() && !country) ||
-                            (!gender && country && items[i].country.toLowerCase() == country.toLowerCase())
-                        ) {
-                            filteredItems.push(items[i]);
-                        }
-                    }
-
-                    if (!country && !gender) {
-                        header.html("Random Selections");
-                        var rans = getRandomizedItems(6, items.length);
-                        for (var j = 0; j < rans.length; j++) {
-                            filteredItems.push(items[rans[j]]);
-                        }
-                    }
-
-                    for (var i = 0; i < filteredItems.length; i = i + 3) {
-                        var rowContainer = $('<div/>').addClass("row product-container");
-                        InsertCell(rowContainer, filteredItems[i]);
-                        if (i + 1 < filteredItems.length) InsertCell(rowContainer, filteredItems[i + 1]);
-                        if (i + 2 < filteredItems.length) InsertCell(rowContainer, filteredItems[i + 2]);
-                        productList.append(rowContainer);
-                    }
-
                 });
             }
-
-            function diplayItem(element, item) {
-                element.data("product_id", item.productId);
-                element.find(".item_name").text(item.productName);
-                element.find(".item_thumb").attr("src", item.smallImageName);
-                element.find(".item_price").text(accounting.formatMoney(item.price));
-            }
-
-
-            function InsertCell(placementElement, item) {
-                var cellDiv = $('<div/>').addClass("col-md-4 col-sm-4 col-xs-6");
-                var productItem = $('<div/>').addClass("thumbnail product-item").data("product_id", item.productId);
-                var img = $("<img/>").addClass("item_thumb").attr("src", item.smallImageName);
-                img.appendTo(productItem);
-                var productName = $('<span/>').addClass("item_name").text(item.productName);
-                productName.appendTo(productItem);
-                var productPrice = $('<span/>').addClass("item_price").text(accounting.formatMoney(item.price));
-                productPrice.appendTo(productItem);
-                //var productBtn = $('<button/>').addClass("btn btn-default productBtn").attr("aria-label", "Left Align");
-                //productBtn.append('<span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>');
-                //productItem.append('<br/>');
-                //productBtn.appendTo(productItem);
-                productItem.appendTo(cellDiv);
-                placementElement.append(cellDiv);
-            }
-
 
         });
     </script>

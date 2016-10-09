@@ -264,7 +264,7 @@
 	<script src="/js/aws/amazon-cognito-identity.min.js"></script>
 	<script src="/js/aws/aws-sdk-2.3.19.min.js"></script>
 	<!--Iron Rock Custom Library-->
-	<script src="/js/courserv_web_services.js"></script>
+	<script src="http://127.0.0.1:8891/assets/js/courserv_web_services.js"></script>
 	<script src="/js/index.js"></script>
 
 	<script type="text/javascript">
@@ -289,9 +289,9 @@
 				product_data.smallImageName = $('#smallImageName').val();
 				product_data.largeImageName = $('#largeImageName').val();
 				product_data.description = $('#description').val();
-				product_data.gender = $('#gender').val();
+				product_data.category1 = $('#gender').val();
 				product_data.availability = $('#availability').val();
-				product_data.country = $('#country').val();
+				product_data.category0 = $('#country').val();
 				product_data.price = $('#price').val();
 				setLoadingState(true);
 				g_courserv_web_service.updateProduct(g_domainKey, product_data, function(err, data) {
@@ -326,8 +326,8 @@
 					$('#description').val(item.description).prop("readonly", false);
 					$('#smallImageName').val(item.smallImageName).prop("readonly", false);
 					$('#largeImageName').val(item.largeImageName).prop("readonly", false);
-					$('#country').val(item.country).prop("readonly", false);
-					$('#gender').val(item.gender).prop("readonly", false);
+					$('#country').val(item.category0).prop("readonly", false);
+					$('#gender').val(item.category1).prop("readonly", false);
 					$('#price').val(item.price).prop("readonly", false);
 					$('#update-product').show();
 					$('#delete-product').show();
@@ -361,9 +361,9 @@
 				product_data.smallImageName = $('#smallImageName').val();
 				product_data.largeImageName = $('#largeImageName').val();
 				product_data.description = $('#description').val();
-				product_data.gender = $('#gender').val();
+				product_data.category1 = $('#gender').val();
 				product_data.availability = $('#availability').val();
-				product_data.country = $('#country').val();
+				product_data.category0 = $('#country').val();
 				product_data.price = $('#price').val();
 				setLoadingState(true);
 				g_courserv_web_service.createProduct(g_domainKey, product_data, function(err, data) {
@@ -385,8 +385,8 @@
 					$.each(items, function(idx, val) {
 						tcontent.append('<tr><td>' + val.productId +
 							'</td><td>' + val.productName +
-							'</td><td>' + val.country +
-							'</td><td>' + val.gender +
+							'</td><td>' + val.category0 +
+							'</td><td>' + val.category1 +
 							'</td><td>' + val.price +
 							'</td><td><button type="button" id="' + val.productId +
 							'" class="btn btn-link select">Select</button></td></tr>');

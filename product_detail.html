@@ -305,7 +305,7 @@
     <script src="/js/aws/amazon-cognito-identity.min.js"></script>
     <script src="/js/aws/aws-sdk-2.3.19.min.js"></script>
     <!--Iron Rock Custom Library-->
-    <script src="/js/proudofmycolorsservice.js"></script>
+    <script src="http://127.0.0.1:8891/assets/js/courserv_web_services.js"></script>
     <script src="/js/index.js"></script>
 
     <script type="text/javascript">
@@ -328,7 +328,7 @@
 
 
             function listProducts(obj) {
-                obj = obj ? obj : g_proudOfMyColorsService; //
+                obj = obj ? obj : g_courserv_web_service; //
                 obj.listProducts(function(err, items) {
                     if (err) {
                         display(err.message, err);
@@ -375,7 +375,7 @@
                     //related by gender and country
                     var relatedItems = []
                     for (var i = 0; i < items.length; i++) {
-                        if (productItem.country == items[i].country && productItem.gender == items[i].gender) {
+                        if (productItem.country == items[i].category0 && productItem.gender == items[i].category1) {
                             relatedItems.push(items[i]);
                         }
                     }
