@@ -126,7 +126,7 @@
                 </div>
                 <div class="row">
                     <div class="col-md-12 product-container">
-                        <table class="table"></table>
+                        <table class="table" id="orders"></table>
                     </div>
                 </div>
             </div>
@@ -169,6 +169,7 @@
     <script src="/js/imagesloaded.pkgd.min.js"></script>
     <script src="/js/script.js"></script>
     <script src="/js/accounting.js"></script>
+    <script src="/js/bootbox.js"></script>
     <!--aws-->
     <script src="/js/aws/jsbn.js"></script>
     <script src="/js/aws/jsbn2.js"></script>
@@ -182,20 +183,76 @@
     <script src="/js/index.js"></script>
     <script type="text/javascript">
         $(document).ready(function() {
+            var details_on = ">>>>>>>";
+            var details_off = "Goods ET-AL";
+
             initPage(function(err, obj) {
                 listOrders(obj);
             });
 
             function listOrders(obj) {
                 obj = obj ? obj : g_courserv_web_service; //
+                setLoadingState(true);
                 obj.listOrders(g_domainKey, function(err, items) {
+                    setLoadingState(false);
                     if (err) {
                         display(err.message, err);
                         return;
                     }
+                    items.sort(function(a, b) {
+                        return parseFloat(b.created) - parseFloat(a.created);
+                    });
+                    var $table = $('#orders').empty();
+                    var $thead = $('<thead/>').append('<tr><th  class="col-md-2">Date/Time</th><th class="col-md-6">Goods</th><th  class="col-md-2">Status</th><th  class="col-md-2" style="text-align: right">Cost</th></tr>');
+                    $table.append($thead);
+                    var $tbody = $('<tbody/>');
+                    $.each(items, function(idx, item) {
+                        var $tr = $('<tr/>');
+                        //created
+                        var dt = new Date(item.created);
+                        $tr.append('<td>' + moment(dt).format('YYYY-MM-DD HH:mm') + '</td>');
+                        $tr.append('<td><a class="details" href="#" data-source="' + encodeURIComponent(item.items) + '" id="' + item.orderNo + '">' + details_off + '</a><div></div></td>');
+                        $tr.append('<td>' + item.status + '</td>');
+                        $tr.append('<td style="text-align: right">' + accounting.formatMoney(item.amt) + '</td>');
+
+
+                        $tbody.append($tr);
+                    });
+                    $table.append($tbody);
 
                 });
             }
+
+            $('#orders').on('click', '.details', function(e) {
+                e.preventDefault();
+                var $this = $(this);
+                var rawList = $this.data('source');
+                var orderList = decodeURIComponent(rawList);
+                orderList = JSON.parse(orderList);
+                var $td = $(this).parent();
+                var $div = $td.find('div');
+                if ($div.html()) {
+                    $this.text(details_off);
+                    $div.html('');
+                } else {
+                    $this.text(details_on);
+                    var $table = $('<table/>').addClass('table');
+                    $('<thead/>').append('<tr><th>No</th><th>Name</th><th style="text-align: right">Price</th><th>Qty</th><th style="text-align: right">Total</th></tr>').appendTo($table);
+                    var $tbody = $('<tbody/>');
+                    $.each(orderList, function(idx, item) {
+                        $tbody.append('<tr><td>' + (idx + 1) +
+                            '</td><td>' + item.M.name.S +
+                            '</td><td style="text-align: right">' + accounting.formatMoney(item.M.amt.N) +
+                            '</td><td>' + item.M.qty.N +
+                            '</td><td style="text-align: right">' + accounting.formatMoney(item.M.amt.N * item.M.qty.N) + '</td></tr>');
+                        $tbody.appendTo($table);
+                    });
+                    $div.append($table);
+                }
+
+            })
+
+
 
         });
     </script>

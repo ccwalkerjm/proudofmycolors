@@ -508,9 +508,16 @@ function initPage(callback) {
             accountStatus.append('<p><a href="#" id="logout">Logout</a><p>');
             visible_xs.html('<a href="#" id="logout" class="btn btn-primary"><i class="fa fa-sign-out"></i></a>');
             menu_item.append('<li><a href="/orders.html">Orders</a></li>');
-            if(role){
-              menu_item.append('<li><a href="/admin/manage_products.html">Manage Products</a></li>');
-              menu_item.append('<li><a href="/admin/manage_orders.html">Manage Orders</a></li>');
+            if (role) {
+
+                var dropdown = $('<li/>');
+                dropdown.append('<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Admin <span class="caret"></span></a>');
+                var $ul = $('<ul/>').addClass('dropdown-menu');
+                $ul.append('<li><a href="/admin/manage_products.html">Manage Products</a></li>');
+                $ul.append('<li><a href="/admin/manage_orders.html">Manage Orders</a></li>');
+                dropdown.append($ul);
+                menu_item.append(dropdown);
+
             }
         } else {
             accountHeader.html('<a href="/admin/account.html">Account</a>');
