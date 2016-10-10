@@ -403,7 +403,8 @@ function display(message, err) {
 
 function isAccountPage(pagePath) {
     if (pagePath == '/admin/manage_users.html' ||
-        pagePath == '/admin/manage_products.html') {
+        pagePath == '/admin/manage_products.html' ||
+        pagePath == '/admin/manage_orders.html' ) {
         return true;
     }
     return false;

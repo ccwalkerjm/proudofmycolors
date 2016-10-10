@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="description" content="range of shopping including tee shirts and other items">
+    <meta name="author" content="courserv">
+    <link rel="shortcut icon" href="img/favicon.png">
+
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+
+    <title>ProudOfMyColors</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="/css/responsive.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="/js/html5shiv.js"></script>
+      <script src="/js/respond.min.js"></script>
+    <![endif]-->
+    <!--Favicon  -->
+    <link rel="apple-touch-icon" sizes="57x57" href="/img/favicons/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/img/favicons/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/img/favicons/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/img/favicons/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/img/favicons/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/img/favicons/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/img/favicons/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/img/favicons/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/favicons/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/img/favicons/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/img/favicons/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/img/favicons/favicon-16x16.png">
+    <link rel="manifest" href="/img/favicons/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+    <!--Favicon  -->
+</head>
+
+<body>
+
+    <!-- begin:navbar -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#clotheshop-navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+
+            <div class="collapse navbar-collapse" id="clotheshop-navbar">
+                <ul class="nav navbar-nav navbar-right" id="menu_items">
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+    </nav>
+    <!-- end:navbar -->
+
+    <!-- begin:content -->
+    <div class="container">
+        <!-- begin:logo -->
+        <div class="row">
+            <div class="col-md-6 col-sm-6 col-xs-6">
+                <div class="logo">
+                    <img src="/img/logos/Proud-O-My-Colours_TEXTONLY-02-02_small.png" class="img-responsive" alt="Proud Of My Colors">
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-6 col-xs-6">
+                <div class="account">
+                    <ul>
+                        <li id="your-account">
+                        </li>
+                        <li id="cart-status">
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- end:logo -->
+
+        <!-- begin:nav-menus -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="nav-menus">
+                </div>
+            </div>
+        </div>
+        <!-- end:nav-menus -->
+
+        <!-- begin:article -->
+        <div class="row">
+            <!-- begin:sidebar -->
+            <div class="col-md-3 col-sm-4 sidebar">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="widget" id="shoppingCartWidget">
+                        </div>
+                        <!-- break -->
+                        <div class="widget" id="shoppingCartCheckout">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end:sidebar -->
+
+            <!-- begin:content -->
+            <div class="col-md-9 col-sm-8 content vertical-line">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h3 id="content-header">Manage Orders</h3>
+                        <form class="form-inline pull-right">
+                            <div class="form-group">
+                                <label for="status">Status</label>
+                                <select class="form-control input-sm" id="status">
+                                    <option value="">ALL</option>
+                                    <option value="PENDING">PENDING PAYMENT</option>
+                                    <option value="PAID_NOT_DELIVERED">PAID PENDING DELIVERY</option>
+                                    <option value="PAID_BEING_DELIVERED">PAID BEING DELIVERED</option>
+                                    <option value="PAID_AND_RECEIVED">PAID AND RECEIVED</option>
+                                    <option value="CANCELLED">CANCELLED</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="dateFrom">Date From</label>
+                                <input type="date" class="form-control input-sm" id="dateFrom" />
+                            </div>
+                            <div class="form-group">
+                                <label for="dateTo">Date To</label>
+                                <input type="date" class="form-control input-sm" id="dateTo" />
+                            </div>
+                            <button type="button" class="btn btn-default" id="search">Search</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 product-container">
+                        <table class="table" id="orders"></table>
+                    </div>
+                </div>
+            </div>
+            <!-- end:content -->
+        </div>
+        <!-- end:article -->
+
+        <!-- begin:footer -->
+        <div class="row footer">
+            <div class="col-md-12 copyright">
+                <div class="row">
+                    <div class="col-md-6 col-sm-6 copyright-left">
+                        <p>Copyright &copy; Proud Of My Colors 2016. All right reserved.</p>
+                    </div>
+                    <div class="col-md-6 col-sm-6 copyright-right">
+                        <ul class="list-unstyled list-social">
+                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                            <li><a href="https://www.facebook.com/proudofmycolors"><i class="fa fa-facebook-square"></i></a></li>
+
+                            <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end:copyright -->
+
+    </div>
+    <!-- end:content -->
+    <!-- Modals -->
+    <div id="productModal" class="modal fade" role="dialog"></div>
+    <div class="loadingModal"></div>
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="/js/jquery.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/masonry.pkgd.min.js"></script>
+    <script src="/js/imagesloaded.pkgd.min.js"></script>
+    <script src="/js/script.js"></script>
+    <script src="/js/accounting.js"></script>
+    <script src="/js/bootbox.js"></script>
+    <!--aws-->
+    <script src="/js/aws/jsbn.js"></script>
+    <script src="/js/aws/jsbn2.js"></script>
+    <script src="/js/aws/sjcl.js"></script>
+    <script src="/js/aws/moment.min.js"></script>
+    <script src="/js/aws/aws-cognito-sdk.min.js"></script>
+    <script src="/js/aws/amazon-cognito-identity.min.js"></script>
+    <script src="/js/aws/aws-sdk-2.3.19.min.js"></script>
+    <!--Iron Rock Custom Library-->
+    <script src="http://127.0.0.1:8891/assets/js/courserv_web_services.js"></script>
+    <script src="/js/index.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            var details_on = ">>>>>>>";
+            var details_off = "Goods ET-AL";
+            var fromDate = new Date(); //.toISOString().slice(0,10);
+            var toDate = new Date(); //.toISOString().slice(0,10);
+            fromDate.setMonth(fromDate.getMonth() - 1);
+            toDate.setDate(toDate.getDate() + 2);
+            $('#dateFrom').val(fromDate.toISOString().slice(0, 10));
+            $('#dateTo').val(toDate.toISOString().slice(0, 10));
+
+            initPage(function(err, obj) {
+                manageOrders(obj);
+            });
+
+            function manageOrders(obj) {
+                obj = obj ? obj : g_courserv_web_service; //
+                setLoadingState(true);
+                obj.manageOrders(g_domainKey, $('#dateFrom').val(), $('#dateTo').val(), function(err, items) {
+                    setLoadingState(false);
+                    if (err) {
+                        display(err.message, err);
+                        return;
+                    }
+
+                    var searchStatus = $('#status').val();
+                    if (searchStatus) {
+                        items = items.filter(function(x) {
+                            if (x.status == searchStatus) {
+                                return true;
+                            } else {
+                                return false;
+                            }
+                        });
+                    }
+
+
+                    items.sort(function(a, b) {
+                        return parseFloat(b.created) - parseFloat(a.created);
+                    });
+                    var $table = $('#orders').empty();
+                    var $thead = $('<thead/>').append('<tr><th  class="col-md-2">Date/Time</th><th class="col-md-6">Goods</th><th  class="col-md-2">Status</th><th  class="col-md-2" style="text-align: right">Cost</th></tr>');
+                    $table.append($thead);
+                    var $tbody = $('<tbody/>');
+                    $.each(items, function(idx, item) {
+                        var $tr = $('<tr/>');
+                        //created
+                        var dt = new Date(item.created);
+                        $tr.append('<td>' + moment(dt).format('YYYY-MM-DD HH:mm') + '</td>');
+                        $tr.append('<td><a class="details" href="#" data-source="' + encodeURIComponent(item.items) + '" id="' + item.orderNo + '">' + details_off + '</a><div></div></td>');
+                        $tr.append('<td>' + item.status + '</td>');
+                        $tr.append('<td style="text-align: right">' + accounting.formatMoney(item.amt) + '</td>');
+
+
+                        $tbody.append($tr);
+                    });
+                    $table.append($tbody);
+
+                });
+            }
+
+            $('#search').click(function() {
+                manageOrders();
+            });
+
+            $('#orders').on('click', '.details', function(e) {
+                e.preventDefault();
+                var $this = $(this);
+                var rawList = $this.data('source');
+                var orderList = decodeURIComponent(rawList);
+                orderList = JSON.parse(orderList);
+                var $td = $(this).parent();
+                var $div = $td.find('div');
+                if ($div.html()) {
+                    $this.text(details_off);
+                    $div.html('');
+                } else {
+                    $this.text(details_on);
+                    var $table = $('<table/>').addClass('table');
+                    $('<thead/>').append('<tr><th>No</th><th>Name</th><th style="text-align: right">Price</th><th>Qty</th><th style="text-align: right">Total</th></tr>').appendTo($table);
+                    var $tbody = $('<tbody/>');
+                    $.each(orderList, function(idx, item) {
+                        $tbody.append('<tr><td>' + (idx + 1) +
+                            '</td><td>' + item.M.name.S +
+                            '</td><td style="text-align: right">' + accounting.formatMoney(item.M.amt.N) +
+                            '</td><td>' + item.M.qty.N +
+                            '</td><td style="text-align: right">' + accounting.formatMoney(item.M.amt.N * item.M.qty.N) + '</td></tr>');
+                        $tbody.appendTo($table);
+                    });
+                    $div.append($table);
+                }
+
+            })
+
+
+
+        });
+    </script>
+
+</body>
+
+</html>
