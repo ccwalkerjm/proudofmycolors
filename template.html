@@ -1,0 +1,109 @@
+<form class="form-horizontal">
+  <input type="hidden" id="customerId" value="" />
+  <input type="hidden" id="domainKey" value="" />
+  <input type="hidden" id="orderNo" value="" />
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="status">Status:</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="status" readonly>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="trackingNo">Tracking Number:</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="trackingNo" placeholder="USPS Tracking Number">
+    </div>
+  </div>
+
+
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="items_amt">Items Amount:</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="items_amt" readonly>
+    </div>
+  </div>
+
+
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="tax_amt">Tax Amount:</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="tax_amt" readonly>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="ship_amt">Shipping Amount:</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="ship_amt" readonly>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="amt">Total Amount:</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="amt" readonly>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="created">Time Created:</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="created" readonly>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="timeUpdated">Updated Time:</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="timeUpdated" readonly>
+    </div>
+  </div>
+
+<h4>Shipping Information</h4>
+
+<div class="form-group">
+  <label class="control-label col-sm-2" for="shipping-name">Name:</label>
+  <div class="col-sm-10">
+    <input type="text" class="form-control" id="shipping-name" readonly>
+  </div>
+</div>
+<div class="form-group">
+  <label class="control-label col-sm-2" for="shipping-street">Street Name:</label>
+  <div class="col-sm-10">
+    <input type="text" class="form-control" id="shipping-street" readonly>
+  </div>
+</div>
+
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="shipping-city">City:</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="shipping-city" readonly>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="shipping-state">State:</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="shipping-state" readonly>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="shipping-zip">Zip Code:</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="shipping-zip" readonly>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="shipping-country">Country:</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="shipping-country" readonly>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="shipping-countryCode">Country Code:</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="shipping-countryCode" readonly>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-sm-2">Items:</label>
+    <div class="col-sm-10">
+      <table id="items"></table>
+    </div>
+  </div>
+</form>

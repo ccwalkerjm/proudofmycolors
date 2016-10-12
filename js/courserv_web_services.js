@@ -478,15 +478,42 @@ var courserv_web_service = (function() {
                     for(var i = 0; i < payload.Items.length; i++){
                       var order = {};
                       order.amt = getN(payload.Items[i].amt);
+                      order.trackingNo = getS(payload.Items[i].trackingNo);
                       order.status = getS(payload.Items[i].status);
                       order.created =parseInt(getN(payload.Items[i].created));
-                      order.items = JSON.stringify(payload.Items[i].items.L);
+                      order.timeUpdated =parseInt(getN(payload.Items[i].timeUpdated));
+                      order.items = payload.Items[i].items.L;
                       order.orderNo = getS(payload.Items[i].orderNo);
+                      order.shippingAddress = payload.Items[i].shippingAddress.M;
+                      order.items_amt = getN(payload.Items[i].items_amt);
+                      order.customerId = getS(payload.Items[i].customerId);
+                      order.ship_amt = getN(payload.Items[i].ship_amt);
+                      order.tax_amt = getN(payload.Items[i].tax_amt);
                       orders.push(order);
                     }
                 }
                 callback(null, orders);
             }
+        });
+    };
+
+
+    //update order
+    courserv_web_service.prototype.initTracking = function(x, callback) {
+        var jsonRequest = {};
+        jsonRequest.request = {};
+        jsonRequest.request.cmd = 'initTracking';
+        jsonRequest.request.domainKey = x.domainKey;
+        jsonRequest.request.orderNo = x.orderNo;
+        jsonRequest.request.trackingNo = x.trackingNo;
+
+        jsonRequest.auth = _getAuth();
+        var params = {
+            FunctionName: 'courserv_manage_site',
+            Payload: JSON.stringify(jsonRequest)
+        };
+        _lambda.invoke(params, function(err, data) {
+            callback(err,data);
         });
     };
 

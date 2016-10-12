@@ -179,7 +179,7 @@
     <script src="/js/aws/amazon-cognito-identity.min.js"></script>
     <script src="/js/aws/aws-sdk-2.3.19.min.js"></script>
     <!--Iron Rock Custom Library-->
-    <script src="http://127.0.0.1:8891/assets/js/courserv_web_services.js"></script>
+    <script src="/js/courserv_web_services.js"></script>
     <script src="/js/index.js"></script>
     <script type="text/javascript">
         $(document).ready(function() {
@@ -211,7 +211,7 @@
                         //created
                         var dt = new Date(item.created);
                         $tr.append('<td>' + moment(dt).format('YYYY-MM-DD HH:mm') + '</td>');
-                        $tr.append('<td><a class="details" href="#" data-source="' + encodeURIComponent(item.items) + '" id="' + item.orderNo + '">' + details_off + '</a><div></div></td>');
+                        $tr.append('<td><a class="details" href="#" data-source="' + encodeURIComponent(JSON.stringify(item.items)) + '" id="' + item.orderNo + '">' + details_off + '</a><div></div></td>');
                         $tr.append('<td>' + item.status + '</td>');
                         $tr.append('<td style="text-align: right">' + accounting.formatMoney(item.amt) + '</td>');
 

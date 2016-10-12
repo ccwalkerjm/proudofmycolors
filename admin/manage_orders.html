@@ -181,7 +181,26 @@
     <!-- Modals -->
     <div id="productModal" class="modal fade" role="dialog"></div>
     <div class="loadingModal"></div>
+    <!-- Modal -->
+<div id="orderModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
 
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title"></h4>
+      </div>
+      <div class="modal-body">
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="submit" class="btn btn-primary">Submit</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
     <!-- Le javascript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
@@ -201,10 +220,18 @@
     <script src="/js/aws/amazon-cognito-identity.min.js"></script>
     <script src="/js/aws/aws-sdk-2.3.19.min.js"></script>
     <!--Iron Rock Custom Library-->
-    <script src="http://127.0.0.1:8891/assets/js/courserv_web_services.js"></script>
+    <script src="/js/courserv_web_services.js"></script>
     <script src="/js/index.js"></script>
     <script type="text/javascript">
         $(document).ready(function() {
+            const orderDetail ='<form class="form-horizontal"> <input type="hidden" id="customerId" value="" /> <input type="hidden" id="domainKey" value="" /> <input type="hidden" id="orderNo" value="" /><div class="form-group"> <label class="control-label col-sm-2" for="status">Status:</label><div class="col-sm-10"> <input type="text" class="form-control" id="status" readonly></div></div><div class="form-group"> <label class="control-label col-sm-2" for="trackingNo">Tracking Number:</label><div class="col-sm-10"> <input type="text" class="form-control" id="trackingNo" placeholder="USPS Tracking Number"></div></div><div class="form-group"> <label class="control-label col-sm-2" for="items_amt">Items Amount:</label><div class="col-sm-10"> <input type="text" class="form-control" id="items_amt" readonly></div></div><div class="form-group"> <label class="control-label col-sm-2" for="tax_amt">Tax Amount:</label><div class="col-sm-10"> <input type="text" class="form-control" id="tax_amt" readonly></div></div><div class="form-group"> <label class="control-label col-sm-2" for="ship_amt">Shipping Amount:</label><div class="col-sm-10"> <input type="text" class="form-control" id="ship_amt" readonly></div></div><div class="form-group"> <label class="control-label col-sm-2" for="amt">Total Amount:</label><div class="col-sm-10"> <input type="text" class="form-control" id="amt" readonly></div></div><div class="form-group"> <label class="control-label col-sm-2" for="created">Time Created:</label><div class="col-sm-10"> <input type="text" class="form-control" id="created" readonly></div></div><div class="form-group"> <label class="control-label col-sm-2" for="timeUpdated">Updated Time:</label><div class="col-sm-10"> <input type="text" class="form-control" id="timeUpdated" readonly></div></div><h4>Shipping Information</h4><div class="form-group"> <label class="control-label col-sm-2" for="shipping-name">Name:</label><div class="col-sm-10"> <input type="text" class="form-control" id="shipping-name" readonly></div></div><div class="form-group"> <label class="control-label col-sm-2" for="shipping-street">Street Name:</label><div class="col-sm-10"> <input type="text" class="form-control" id="shipping-street" readonly></div></div><div class="form-group"> <label class="control-label col-sm-2" for="shipping-city">City:</label><div class="col-sm-10"> <input type="text" class="form-control" id="shipping-city" readonly></div></div><div class="form-group"> <label class="control-label col-sm-2" for="shipping-state">State:</label><div class="col-sm-10"> <input type="text" class="form-control" id="shipping-state" readonly></div></div><div class="form-group"> <label class="control-label col-sm-2" for="shipping-zip">Zip Code:</label><div class="col-sm-10"> <input type="text" class="form-control" id="shipping-zip" readonly></div></div><div class="form-group"> <label class="control-label col-sm-2" for="shipping-country">Country:</label><div class="col-sm-10"> <input type="text" class="form-control" id="shipping-country" readonly></div></div><div class="form-group"> <label class="control-label col-sm-2" for="shipping-countryCode">Country Code:</label><div class="col-sm-10"> <input type="text" class="form-control" id="shipping-countryCode" readonly></div></div><div class="form-group"> <label class="control-label col-sm-2">Items:</label><div class="col-sm-10"><table id="items"></table></div></div></form>';
+            const STATUS_PENDING = "PENDING";
+            const STATUS_PAID_NOT_DELIVERED = "PAID_NOT_DELIVERED";
+            const STATUS_WAITING_PICKUP = "WAITING_PICKUP";
+            const STATUS_IN_TRANSIT = "IN_TRANSIT";
+            const STATUS_DELIVERED = "DELIVERED";
+            const STATUS_CANCELLED = "CANCELLED";
+
             var details_on = ">>>>>>>";
             var details_off = "Goods ET-AL";
             var fromDate = new Date(); //.toISOString().slice(0,10);
@@ -243,6 +270,9 @@
                     items.sort(function(a, b) {
                         return parseFloat(b.created) - parseFloat(a.created);
                     });
+
+                    _orders = items;
+
                     var $table = $('#orders').empty();
                     var $thead = $('<thead/>').append('<tr><th  class="col-md-2">Date/Time</th><th class="col-md-6">Goods</th><th  class="col-md-2">Status</th><th  class="col-md-2" style="text-align: right">Cost</th></tr>');
                     $table.append($thead);
@@ -252,7 +282,7 @@
                         //created
                         var dt = new Date(item.created);
                         $tr.append('<td>' + moment(dt).format('YYYY-MM-DD HH:mm') + '</td>');
-                        $tr.append('<td><a class="details" href="#" data-source="' + encodeURIComponent(item.items) + '" id="' + item.orderNo + '">' + details_off + '</a><div></div></td>');
+                        $tr.append('<td><a class="details" href="#" id="' + item.orderNo + '">' + details_off + '</a><div></div></td>');
                         $tr.append('<td>' + item.status + '</td>');
                         $tr.append('<td style="text-align: right">' + accounting.formatMoney(item.amt) + '</td>');
 
@@ -271,32 +301,73 @@
             $('#orders').on('click', '.details', function(e) {
                 e.preventDefault();
                 var $this = $(this);
-                var rawList = $this.data('source');
-                var orderList = decodeURIComponent(rawList);
-                orderList = JSON.parse(orderList);
-                var $td = $(this).parent();
-                var $div = $td.find('div');
-                if ($div.html()) {
-                    $this.text(details_off);
-                    $div.html('');
-                } else {
-                    $this.text(details_on);
-                    var $table = $('<table/>').addClass('table');
-                    $('<thead/>').append('<tr><th>No</th><th>Name</th><th style="text-align: right">Price</th><th>Qty</th><th style="text-align: right">Total</th></tr>').appendTo($table);
-                    var $tbody = $('<tbody/>');
-                    $.each(orderList, function(idx, item) {
-                        $tbody.append('<tr><td>' + (idx + 1) +
-                            '</td><td>' + item.M.name.S +
-                            '</td><td style="text-align: right">' + accounting.formatMoney(item.M.amt.N) +
-                            '</td><td>' + item.M.qty.N +
-                            '</td><td style="text-align: right">' + accounting.formatMoney(item.M.amt.N * item.M.qty.N) + '</td></tr>');
-                        $tbody.appendTo($table);
-                    });
-                    $div.append($table);
-                }
+                var orderNo = e.target.id;
 
+                var selectOrder = _orders.find(function(x) {
+                    return x.orderNo === orderNo;
+                });
+
+                  var $modal = $('#orderModal');
+
+                  var $body = $modal.find('.modal-body').html(orderDetail) ;
+                  $modal.find('.modal-title').html('Order Details');
+
+                  var $table = $modal.find('#items').addClass('table');
+                  $('<thead/>').append('<tr><th>No</th><th>Name</th><th style="text-align: right">Price</th><th>Qty</th><th style="text-align: right">Total</th></tr>').appendTo($table);
+                  var $tbody = $('<tbody/>');
+
+                  $.each(selectOrder.items, function(idx, x) {
+                      $tbody.append('<tr><td>' + (idx + 1) +
+                          '</td><td>' + x.M.name.S +
+                          '</td><td style="text-align: right">' + accounting.formatMoney(x.M.amt.N) +
+                          '</td><td>' + x.M.qty.N +
+                          '</td><td style="text-align: right">' + accounting.formatMoney(x.M.amt.N * x.M.qty.N) + '</td></tr>');
+                      $tbody.appendTo($table);
+                  });
+
+
+                  $body.find('#amt').val(accounting.formatMoney(selectOrder.amt));
+
+                  var created = new Date(selectOrder.created);
+                  var updated = new Date(selectOrder.timeUpdated);
+                  $body.find('#created').val(created);
+                  $body.find('#items_amt').val(accounting.formatMoney(selectOrder.items_amt));
+                  $body.find('#customerId').val(selectOrder.customerId);
+                  $body.find('#domainKey').val(selectOrder.domainKey);
+                  $body.find('#orderNo').val(selectOrder.orderNo);
+                  $body.find('#status').val(selectOrder.status);
+                  $body.find('#trackingNo').val(selectOrder.trackingNo);
+                  $body.find('#timeUpdated').val(updated);
+                  $body.find('#ship_amt').val(accounting.formatMoney(selectOrder.ship_amt));
+                  $body.find('#tax_amt').val(accounting.formatMoney(selectOrder.tax_amt));
+                  $body.find('#shipping-city').val(selectOrder.shippingAddress.city.S);
+                  $body.find('#shipping-country').val(selectOrder.shippingAddress.country.S);
+                  $body.find('#shipping-countryCode').val(selectOrder.shippingAddress.countryCode.S);
+                  $body.find('#shipping-name').val(selectOrder.shippingAddress.name.S);
+                  $body.find('#shipping-state').val(selectOrder.shippingAddress.state.S);
+                  $body.find('#shipping-street').val(selectOrder.shippingAddress.street.S);
+                  $body.find('#shipping-zip').val(selectOrder.shippingAddress.zip.N);
+
+//STATUS_PAID_NOT_DELIVERED
+                  var $trackingNo = $body.find('#trackingNo');
+                  $trackingNo.prop("readonly",selectOrder.status !== STATUS_PAID_NOT_DELIVERED );
+
+                  $modal.modal('show');
             })
 
+$('#orderModal').on('click','#submit',function(){
+  //domainKey, trackingNo
+  var $modal = $('#orderModal');
+  var req = {};
+  req.domainKey = g_domainKey;
+  req.orderNo = $modal.find('#orderNo').val();
+  req.trackingNo = $modal.find('#trackingNo').val();
+
+  g_courserv_web_service.initTracking(req,function(err,data){
+    $modal.modal('hide');
+    manageOrders();
+  });
+})
 
 
         });
