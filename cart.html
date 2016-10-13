@@ -201,21 +201,16 @@
             //set checkout---get secure token
             $("#set-checkout").click(function(e) {
                 setLoadingState(true);
-                g_courserv_web_service.paypalCheckout("SetExpressCheckout", getShoppingCart(), g_domainKey, function(err, data) {
+                g_courserv_web_service.paypalCheckout("SetExpressCheckout", getShoppingCart(), g_domainKey, function(err, resp) {
                     setLoadingState(false);
                     if (err) {
                         return display(err.message, true);
                     }
-                    var tokenData = JSON.parse(data);
-                    if (tokenData.errorMessage) {
-                        return display(tokenData.errorMessage, true);
+                    resp = JSON.parse(resp);
+                    if (resp.errorMessage) {
+                        return display(resp.errorMessage, true);
                     }
-                    console.log(tokenData);
-                    if (tokenData.TOKEN)
-                        location.assign('https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_express-checkout&token=' + tokenData.TOKEN);
-                    else {
-                        alert(data);
-                    }
+                    location.assign(resp.redirectUrl);
                 });
             });
 
