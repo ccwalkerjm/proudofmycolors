@@ -195,10 +195,9 @@
                 data.customerId = customerId;
                 obj.paypalCheckout("GetExpressCheckoutDetails", data, g_domainKey, function(err, resp) {
                     setLoadingState(false);
-                    var orderDetails = JSON.parse(resp);
-                    console.log(orderDetails);
-                    if (orderDetails.ACK == "Success") {
-                        _customerDetails = orderDetails;
+                    console.log(resp);
+                    if (resp.ACK == "Success") {
+                        _customerDetails = resp;
                         displayDetails();
                     }
                 });
@@ -236,9 +235,8 @@
                 dl.appendTo(details);
                 var items = $('<table/>').addClass('table').append("<thead><tr><th>Description</th><th>Price</th><th>Quantity</th><th>Tax</th></tr></thread>");
                 var $tbody = $('<tbody/>').appendTo(items);
-                for (var i = 0; i < _customerDetails.objects.length; i++) {
-                    $tbody.append('<tr><td>' + _customerDetails.objects[i].NAME + '</td><td>' + accounting.formatMoney(_customerDetails.objects[i].AMT) + '</td><td>' + _customerDetails.objects[i].QTY + '</td><td>' + _customerDetails.objects[
-                            i].TAXAMT +
+                for (var i = 0; i < _customerDetails.items.length; i++) {
+                    $tbody.append('<tr><td>' + _customerDetails.items[i].NAME + '</td><td>' + accounting.formatMoney(_customerDetails.items[i].AMT) + '</td><td>' + _customerDetails.items[i].QTY + '</td><td>' + _customerDetails.items[i].TAXAMT +
                         '</td></tr>');
                 }
                 items.appendTo(details);
@@ -246,9 +244,8 @@
 
             $('#details').on('click', '#confirmOrder', function() {
                 setLoadingState(true);
-                g_courserv_web_service.paypalCheckout("DoExpressCheckoutPayment", _customerDetails,g_domainKey, function(err, resp) {
+                g_courserv_web_service.paypalCheckout("DoExpressCheckoutPayment", _customerDetails, g_domainKey, function(err, confirmInfo) {
                     setLoadingState(false);
-                    var confirmInfo = JSON.parse(resp);
                     console.log(confirmInfo);
                     if (confirmInfo.ACK == "Success") {
                         emptyShoppingCart();
