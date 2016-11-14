@@ -1,8 +1,7 @@
 //product details
-var g_product_details = '<div class=modal-dialog><div class=modal-content><div class=modal-header><button class=close type=button data-dismiss=modal>×</button><h4 class=modal-title></h4></div><div class=modal-body><div class=row id=productRowId><div class=col-md-12><div class=heading-title><input type=hidden id=productId><h3><span class=item_name id=productName>Trinidad and Tobago Disc Flag Tshirt</span></h3></div><div class=row><div class="col-md-6 col-sm-6"><img id=productImg></div><div class="col-md-6 col-sm-6"><div class=single-desc><form><table id=productDetails><tr class=hidden-xs><td><strong>Availability</strong><td>:<td id=availability>In Stock<tr><td colspan=3><span class="item_price price"></span><tr><td><strong>Size</strong><td>:<td><select class="form-control item_size"></select><tr><td><strong>Quantity</strong><td>:<td><input type=number class="form-control item_Quantity"value=1><tr><td colspan=3><button class="btn btn-primary btn-sm item_add"type=button>Add to Cart</button></table></form></div></div></div></div><div class=row><div class="col-md-6 content-detail"><div class="panel panel-default"><div class=panel-heading><h3 class=panel-title>Details</h3></div><div class=panel-body id=productDescription></div></div></div></div></div></div><div class=modal-footer><button class="btn btn-default"type=button data-dismiss=modal>Close</button></div></div></div>';
+var g_product_details = '<div class=modal-dialog><div class=modal-content><div class=modal-header><button class=close type=button data-dismiss=modal>×</button><h4 class=modal-title></h4></div><div class=modal-body><div class=row id=productRowId><div class=col-md-12><div class=heading-title><input type=hidden id=productId><h3><span class=item_name id=productName>Trinidad and Tobago Disc Flag Tshirt</span></h3></div> <img id=productImg align="middle"></div><div class=row><div class="col-md-6"><div class=single-desc><form><table id=productDetails><tr class=hidden-xs><td><strong>Availability</strong></td><td>:</td><td id=availability>In Stock</td></tr><tr><td colspan=3><span class="item_price price"></span></td></tr><tr><td><strong>Size</strong></td><td>:</td><td><select class="form-control item_size"></select></td></tr><tr><td><strong>Quantity</strong></td><td>:</td><td><input type=number class="form-control item_Quantity" value=1></td></tr><tr><td colspan=3><button class="btn btn-primary btn-sm item_add" type=button>Add to Cart</button></td></tr></table></form></div></div><div class="col-md-6 content-detail"><div class="panel panel-default"><div class=panel-heading><h3 class=panel-title>Details</h3></div><div class=panel-body id=productDescription></div></div></div></div></div></div><div class=modal-footer><button class="btn btn-default" type=button data-dismiss=modal>Close</button></div></div></div>';
 var _productModal = $('#productModal');
 var g_domainKey = "f2464c5a-ad53-40ab-bb29-b368ba2d7eb1";
-//var g_domainKey = "cd7db889-f966-4098-95ed-4b9b07d9ca0b";
 
 //backend service
 var g_courserv_web_service; // = new courserv_web_service()
@@ -34,6 +33,39 @@ g_valid_countries.push({
     "code": "MX",
     "name": "Mexico"
 });
+g_valid_countries.push({
+    "code": "BRB",
+    "name": "Barbados"
+});
+g_valid_countries.push({
+    "code": "GUY",
+    "name": "Guyana"
+});
+g_valid_countries.push({
+    "code": "HTI",
+    "name": "Haiti"
+});
+g_valid_countries.push({
+    "code": "DOM",
+    "name": "Dominican Republic"
+});
+g_valid_countries.push({
+    "code": "GRD",
+    "name": "Grenada"
+});
+g_valid_countries.push({
+    "code": "PRI",
+    "name": "Puerto Rico"
+});
+g_valid_countries.push({
+    "code": "TTO",
+    "name": "Trinidad and Tobago"
+});
+g_valid_countries.push({
+    "code": "GBR",
+    "name": "United Kingdom"
+});
+
 
 
 var _$message;
