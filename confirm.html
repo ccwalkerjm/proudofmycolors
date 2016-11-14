@@ -171,7 +171,7 @@
     <script src="/js/aws/moment.min.js"></script>
     <script src="/js/aws/aws-cognito-sdk.min.js"></script>
     <script src="/js/aws/amazon-cognito-identity.min.js"></script>
-    <script src="/js/aws/aws-sdk-2.3.19.min.js"></script>
+    <script src="/js/aws/aws-sdk.min.js"></script>
     <!--Iron Rock Custom Library-->
     <script src="/js/courserv_web_services.js"></script>
     <script src="/js/index.js"></script>
@@ -195,6 +195,7 @@
                 data.customerId = customerId;
                 obj.paypalCheckout("GetExpressCheckoutDetails", data, g_domainKey, function(err, resp) {
                     setLoadingState(false);
+                    resp =  ConvertToJson(resp);
                     console.log(resp);
                     if (resp.ACK == "Success") {
                         _customerDetails = resp;
@@ -244,8 +245,9 @@
 
             $('#details').on('click', '#confirmOrder', function() {
                 setLoadingState(true);
-                g_courserv_web_service.paypalCheckout("DoExpressCheckoutPayment", _customerDetails, g_domainKey, function(err, confirmInfo) {
+                g_courserv_web_service.paypalCheckout("DoExpressCheckoutPayment", _customerDetails, g_domainKey, function(err, resp) {
                     setLoadingState(false);
+                    var confirmInfo =  ConvertToJson(resp);
                     console.log(confirmInfo);
                     if (confirmInfo.ACK == "Success") {
                         emptyShoppingCart();
@@ -253,7 +255,7 @@
                         $('#details').find('#confirmedInstructions').html(
                             '<p>Thank your for your Business. Shipping details will be emailed to you shortly. A confirmation email is also emailed to you so that you can officially become one of our distinquished members.  A member has many priviledegs including the ability to easily track your goods.</p>'
                         )
-                    }
+                    }else if(confirmInfo.errorMessage) alert(confirmInfo.errorMessage);
                 });
             });
 

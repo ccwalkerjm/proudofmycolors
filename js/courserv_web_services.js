@@ -58,6 +58,22 @@ var courserv_web_service = (function() {
         return auth;
     };
 
+    //process response from lambda
+    function processLambdaData(err, resp, callback) {
+        if (err) return;
+        resp = JSON.parse(resp.Payload);
+        if (resp && resp.errorMessage) {
+            //transform errorMessage
+            var newMessage = resp.errorMessage;
+            err = new Error(newMessage);
+            resp = null;
+        }
+        if (resp == 'null') {
+            resp = null;
+        }
+        callback(err, resp);
+    }
+
     //set Credentials
     var _setCredentials = function(session, callback) {
         if (session && session.isValid()) {
@@ -265,16 +281,23 @@ var courserv_web_service = (function() {
         _cognitoUser.authenticateUser(authenticationDetails, {
             onSuccess: function(result) {
                 _setCredentials(result, function(err) {
-                    callback(err, $this);
+                    callback(null, false, $this);
                 });
             },
             onFailure: function(err) {
                 //_cognitoUser = null;
-                callback(err);
+                callback(err, $this);
+            },
+            newPasswordRequired: function(userAttributes, requiredAttributes) {
+                callback(null, true, this, userAttributes, requiredAttributes);
             }
         });
     };
 
+    //completeChallenge
+    courserv_web_service.prototype.completeChallenge = function(newPassword, user, $this) {
+        _cognitoUser.completeNewPasswordChallenge(newPassword, user, $this);
+    };
 
     //change password for logon user
     courserv_web_service.prototype.changePassword = function(oldPassword, newPassword, callback) {
@@ -284,6 +307,10 @@ var courserv_web_service = (function() {
         });
     };
 
+    //completeChallenge
+    courserv_web_service.prototype.completeChallenge = function(newPassword, user, $this) {
+        _cognitoUser.completeNewPasswordChallenge(newPassword, user, $this);
+    };
 
     //forgot password
     courserv_web_service.prototype.forgotPassword = function(username, callback) {
@@ -329,30 +356,35 @@ var courserv_web_service = (function() {
             Payload: JSON.stringify(jsonRequest)
         };
         _lambda.invoke(params, function(err, data) {
-            if (err) {
-                callback(err);
-            } else {
+            processLambdaData(err, data, function(newErr, payload) {
+                if (newErr) return callback(newErr);
                 var item = {};
-                if (data.Payload && data.Payload !=='null') {
-                    data = JSON.parse(data.Payload);
-                    if (data.errorMessage) return callback(new Error(data.errorMessage));
-                    if (!data.Item) return callback(new Error("No Data"));
-                    item.name = getS(data.Item.name);
-                    item.description = getS(data.Item.description);
-                    item.domainKey = getS(data.Item.domainKey);
-                    item.bucket = getS(data.Item.bucket);
-                    item.type = getS(data.Item.type);
-                    item.prefix = getS(data.Item.prefix);
-                    if (data.Item.paypalCredentials) {
-                        item.paypal = {};
-                        item.paypal.username = data.Item.paypalCredentials.M.username.S;
-                        item.paypal.password = data.Item.paypalCredentials.M.password.S;
-                        item.paypal.signature = data.Item.paypalCredentials.M.signature.S;
-                        item.paypal.live = data.Item.paypalCredentials.M.live.BOOL;
+                item.name = getS(payload.Item.name);
+                item.description = getS(payload.Item.description);
+                item.domainKey = getS(payload.Item.domainKey);
+                item.bucket = getS(payload.Item.bucket);
+                item.type = getS(payload.Item.type);
+                item.prefix = getS(payload.Item.prefix);
+                if (payload.Item.paypalCredentials) {
+                    item.paypal = {};
+                    item.paypal.username = payload.Item.paypalCredentials.M.username.S;
+                    item.paypal.password = payload.Item.paypalCredentials.M.password.S;
+                    item.paypal.signature = payload.Item.paypalCredentials.M.signature.S;
+                    item.paypal.live = payload.Item.paypalCredentials.M.live.BOOL;
+                }
+                item.emailAddresses = [];
+                if (payload.Item.emailForwarderList) {
+                    for (var j = 0; j < payload.Item.emailForwarderList.L.length; j++) {
+                        var emailAddress = {};
+                        emailAddress.local_part = payload.Item.emailForwarderList.L[j].M.local_part.S;
+                        emailAddress.toAddresses = payload.Item.emailForwarderList.L[j].M.toAddresses ? payload.Item.emailForwarderList.L[j].M.toAddresses.S : "";
+                        emailAddress.catchAll = payload.Item.emailForwarderList.L[j].M.catchAll.BOOL;
+                        item.emailAddresses.push(emailAddress);
                     }
                 }
                 callback(null, item);
-            }
+            });
+
         });
     };
 
@@ -367,11 +399,10 @@ var courserv_web_service = (function() {
             Payload: JSON.stringify(jsonRequest)
         };
         _lambda.invoke(params, function(err, data) {
-            if (err) {
-                callback(err);
-            } else {
-                callback(null, data.Payload);
-            }
+            processLambdaData(err, data, function(newErr, newResp) {
+                if (newResp === null) newResp = [];
+                callback(newErr, newResp);
+            });
         });
     };
 
@@ -386,11 +417,9 @@ var courserv_web_service = (function() {
             Payload: JSON.stringify(jsonRequest)
         };
         _lambda.invoke(params, function(err, data) {
-            if (err) {
-                callback(err);
-            } else {
-                callback(null, data.Payload);
-            }
+            processLambdaData(err, data, function(newErr, newResp) {
+                callback(newErr, newResp);
+            });
         });
     };
 
@@ -406,16 +435,9 @@ var courserv_web_service = (function() {
             Payload: JSON.stringify(jsonRequest)
         };
         _lambda.invoke(params, function(err, data) {
-            if (err) {
-                callback(err);
-            } else {
-                var role;
-                if (data.Payload && data.Payload !=='null') {
-                    role = JSON.parse(data.Payload);
-                    if (role.errorMessage) return callback(new Error(role.errorMessage));
-                }
-                callback(null, role);
-            }
+            processLambdaData(err, data, function(newErr, newResp) {
+                callback(newErr, newResp);
+            });
         });
     };
 
@@ -432,30 +454,26 @@ var courserv_web_service = (function() {
             Payload: JSON.stringify(jsonRequest)
         };
         _lambda.invoke(params, function(err, data) {
-            if (err) {
-                callback(err);
-            } else {
-                var orders=[];
-                if (data.Payload && data.Payload !=='null') {
-                    var payload = JSON.parse(data.Payload);
-                    if (payload.errorMessage) return callback(new Error(payload.errorMessage));
-                    for(var i = 0; i < payload.Items.length; i++){
-                      var order = {};
-                      order.amt = getN(payload.Items[i].amt);
-                      order.status = getS(payload.Items[i].status);
-                      order.created =parseInt(getN(payload.Items[i].created));
-                      order.items = JSON.stringify(payload.Items[i].items.L);
-                      order.orderNo = getS(payload.Items[i].orderNo);
-                      orders.push(order);
-                    }
+            processLambdaData(err, data, function(newErr, payload) {
+                if (newErr) return callback(newErr);
+                var orders = [];
+                if (payload === null) payload = [];
+                for (var i = 0; i < payload.Items.length; i++) {
+                    var order = {};
+                    order.amt = getN(payload.Items[i].amt);
+                    order.status = getS(payload.Items[i].status);
+                    order.created = parseInt(getN(payload.Items[i].created));
+                    order.items = JSON.stringify(payload.Items[i].items.L);
+                    order.orderNo = getS(payload.Items[i].orderNo);
+                    orders.push(order);
                 }
                 callback(null, orders);
-            }
+            });
         });
     };
 
     //manage orders
-    courserv_web_service.prototype.manageOrders = function(domainKey,dateFrom, dateTo, callback) {
+    courserv_web_service.prototype.manageOrders = function(domainKey, dateFrom, dateTo, callback) {
         var jsonRequest = {};
         jsonRequest.request = {};
         jsonRequest.request.cmd = 'manageOrders';
@@ -468,55 +486,42 @@ var courserv_web_service = (function() {
             Payload: JSON.stringify(jsonRequest)
         };
         _lambda.invoke(params, function(err, data) {
-            if (err) {
-                callback(err);
-            } else {
-                var orders=[];
-                if (data.Payload && data.Payload !=='null') {
-                    var payload = JSON.parse(data.Payload);
-                    if (payload.errorMessage) return callback(new Error(payload.errorMessage));
-                    for(var i = 0; i < payload.Items.length; i++){
-                      var order = {};
-                      order.amt = getN(payload.Items[i].amt);
-                      order.trackingNo = getS(payload.Items[i].trackingNo);
-                      order.status = getS(payload.Items[i].status);
-                      order.created =parseInt(getN(payload.Items[i].created));
-                      order.timeUpdated =parseInt(getN(payload.Items[i].timeUpdated));
-                      order.items = payload.Items[i].items.L;
-                      order.orderNo = getS(payload.Items[i].orderNo);
-                      order.shippingAddress = payload.Items[i].shippingAddress.M;
-                      order.items_amt = getN(payload.Items[i].items_amt);
-                      order.customerId = getS(payload.Items[i].customerId);
-                      order.ship_amt = getN(payload.Items[i].ship_amt);
-                      order.tax_amt = getN(payload.Items[i].tax_amt);
-                      orders.push(order);
-                    }
+            processLambdaData(err, data, function(newErr, payload) {
+                if (newErr) return callback(newErr);
+                var orders = [];
+                if (payload === null) payload = [];
+                for (var i = 0; i < payload.Items.length; i++) {
+                    var order = {};
+                    order.amt = getN(payload.Items[i].amt);
+                    order.status = getS(payload.Items[i].status);
+                    order.created = parseInt(getN(payload.Items[i].created));
+                    order.items = JSON.stringify(payload.Items[i].items.L);
+                    order.orderNo = getS(payload.Items[i].orderNo);
+                    orders.push(order);
                 }
                 callback(null, orders);
-            }
+            });
         });
     };
 
-
-    //update order
-    courserv_web_service.prototype.initTracking = function(x, callback) {
+    //update paypal credentials
+    courserv_web_service.prototype.updateEmailForwarder = function(domainKey, emailForwarders, callback) {
         var jsonRequest = {};
         jsonRequest.request = {};
-        jsonRequest.request.cmd = 'initTracking';
-        jsonRequest.request.domainKey = x.domainKey;
-        jsonRequest.request.orderNo = x.orderNo;
-        jsonRequest.request.trackingNo = x.trackingNo;
-
+        jsonRequest.request.cmd = 'updateEmailForwarder';
+        jsonRequest.request.domainKey = domainKey;
+        jsonRequest.request.emailForwarders = emailForwarders;
         jsonRequest.auth = _getAuth();
         var params = {
             FunctionName: 'courserv_manage_site',
             Payload: JSON.stringify(jsonRequest)
         };
         _lambda.invoke(params, function(err, data) {
-            callback(err,data);
+            processLambdaData(err, data, function(newErr, newResp) {
+                callback(newErr, newResp);
+            });
         });
     };
-
 
     //update paypal credentials
     courserv_web_service.prototype.updatePaypal = function(domainKey, paypal, callback) {
@@ -531,11 +536,9 @@ var courserv_web_service = (function() {
             Payload: JSON.stringify(jsonRequest)
         };
         _lambda.invoke(params, function(err, data) {
-            if (err) {
-                callback(err);
-            } else {
-                callback(null, data.Payload);
-            }
+            processLambdaData(err, data, function(newErr, newResp) {
+                callback(newErr, newResp);
+            });
         });
     };
 
@@ -581,11 +584,9 @@ var courserv_web_service = (function() {
             Payload: requestSerialized
         };
         _lambda.invoke(params, function(err, data) {
-            if (err) {
-                callback(err);
-            } else {
-                callback(null, data.Payload);
-            }
+            processLambdaData(err, data, function(newErr, newResp) {
+                callback(newErr, newResp);
+            });
         });
     };
 
@@ -606,7 +607,9 @@ var courserv_web_service = (function() {
             Payload: requestSerialized
         };
         _lambda.invoke(params, function(err, data) {
-            callback(err);
+            processLambdaData(err, data, function(newErr, newResp) {
+                callback(newErr, newResp);
+            });
         });
     };
 
@@ -624,7 +627,9 @@ var courserv_web_service = (function() {
             Payload: requestSerialized
         };
         _lambda.invoke(params, function(err, data) {
-            callback(err);
+            processLambdaData(err, data, function(newErr, newResp) {
+                callback(newErr, newResp);
+            });
         });
     };
 
@@ -643,7 +648,9 @@ var courserv_web_service = (function() {
             Payload: requestSerialized
         };
         _lambda.invoke(params, function(err, data) {
-            callback(err);
+            processLambdaData(err, data, function(newErr, newResp) {
+                callback(newErr, newResp);
+            });
         });
     };
 
@@ -745,11 +752,9 @@ var courserv_web_service = (function() {
             Payload: requestSerialized
         };
         _lambda.invoke(params, function(err, data) {
-            if (err) {
-                callback(err);
-            } else {
-                callback(null, data.Payload);
-            }
+            processLambdaData(err, data, function(newErr, newResp) {
+                callback(newErr, newResp);
+            });
         });
     };
 
@@ -767,7 +772,30 @@ var courserv_web_service = (function() {
             Payload: requestSerialized
         };
         _lambda.invoke(params, function(err, data) {
-            callback(err);
+            processLambdaData(err, data, function(newErr, newResp) {
+                callback(newErr, newResp);
+            });
+        });
+    };
+
+    //get emails
+    courserv_web_service.prototype.listEmails = function(emailAddress, lastKey, callback) {
+        var jsonRequest = {};
+        jsonRequest.request = {
+            'cmd': 'listEmails',
+            'emailAddress': emailAddress,
+            'lastKey': lastKey
+        };
+        jsonRequest.auth = _getAuth();
+        var requestSerialized = JSON.stringify(jsonRequest);
+        var params = {
+            FunctionName: 'courserv_manage_site',
+            Payload: requestSerialized
+        };
+        _lambda.invoke(params, function(err, data) {
+            processLambdaData(err, data, function(newErr, newResp) {
+                callback(newErr, newResp);
+            });
         });
     };
 

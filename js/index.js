@@ -507,7 +507,7 @@ function initPage(callback) {
 
         if ($this.getUsername()) {
             $this.getRole(g_domainKey, function(err, role) {
-                loadMenuItems($this.getUsername(), role);
+                loadMenuItems($this.getProfile().email, role);
                 if (callback && typeof callback == "function") {
                     callback(null, $this);
                 }
@@ -523,7 +523,7 @@ function initPage(callback) {
     });
 
 
-    function loadMenuItems(username, role) {
+    function loadMenuItems(displayedName, role) {
         //not signed in
         var menu_item = $('#menu_items').empty();
         //<li class="active">
@@ -536,8 +536,8 @@ function initPage(callback) {
         var accountStatus = $('<div/>').addClass('hidden-xs');
         var accountHeader = $('<h4/>');
         var visible_xs = $('<div/>').addClass("visible-xs");
-        if (username) {
-            accountHeader.html('<a href="/admin/changePassword.html">' + username + '</a>');
+        if (displayedName) {
+            accountHeader.html('<a href="/admin/changePassword.html">' + displayedName + '</a>');
             accountHeader.appendTo(accountStatus);
             accountStatus.append('<p><a href="#" id="logout">Logout</a><p>');
             visible_xs.html('<a href="#" id="logout" class="btn btn-primary"><i class="fa fa-sign-out"></i></a>');

@@ -216,7 +216,7 @@
     <script src="/js/aws/moment.min.js"></script>
     <script src="/js/aws/aws-cognito-sdk.min.js"></script>
     <script src="/js/aws/amazon-cognito-identity.min.js"></script>
-    <script src="/js/aws/aws-sdk-2.3.19.min.js"></script>
+    <script src="/js/aws/aws-sdk.min.js"></script>
     <!--Iron Rock Custom Library-->
     <script src="/js/courserv_web_services.js"></script>
     <script src="/js/index.js"></script>
@@ -266,17 +266,37 @@
 
 
             $("#login").click(function(e) {
+                var newPasswordText =
+                    '<form class="form-horizontal"> <div class="form-group"> <label class="control-label col-sm-2" for="phone_number">Phone Number:</label> <div class="col-sm-10"> <input type="number" class="form-control" id="phone_number" placeholder="Enter Phone Number"> </div></div><div class="form-group"> <label class="control-label col-sm-2" for="gender">Gender:</label> <div class="col-sm-10"> <select type="number" class="form-control" id="gender"> <option value="male">Male</option> <option value="female">Female</option> </select> </div></div><div class="form-group"> <label class="control-label col-sm-2" for="birthdate">Date of Birth:</label> <div class="col-sm-10"> <input type="date" class="form-control" id="birthdate" placeholder="Enter Date of Birth"> </div></div><div class="form-group"> <label class="control-label col-sm-2" for="password">Password:</label> <div class="col-sm-10"> <input type="password" class="form-control" id="password" placeholder="Enter password"> </div></div><div class="form-group"> <label class="control-label col-sm-2" for="confirmPassword">Confirm Password:</label> <div class="col-sm-10"> <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm password"> </div></div></form>';
                 setLoadingState(true);
                 var username = $("#login_username").val();
                 var password = $("#login_password").val();
                 g_courserv_web_service.signoff();
-                g_courserv_web_service.signin(username, password, function(err, obj) {
+                g_courserv_web_service.signin(username, password, function(err, checkNewUser, $this, userAttributes, requiredAttributes) {
                     setLoadingState(false);
                     if (err) {
-                        setLoadingState(false);
                         display(err.message, true);
                     } else {
-                        location.href = "/index.html";
+                        if (!checkNewUser) location.href = "/index.html";
+                        else {
+                            bootbox.dialog({
+                                title: "Set New Password",
+                                message: newPasswordText,
+                                buttons: {
+                                    success: {
+                                        label: "Confirm",
+                                        className: "btn-success",
+                                        callback: function() {
+                                            var newPassword = $('#password').val();
+                                            var confirmPassword = $('#confirmPassword').val();
+                                            if (!newPassword || newPassword != confirmPassword) return false;
+                                            var user = [];
+                                            g_courserv_web_service.completeChallenge(newPassword, user, $this);
+                                        }
+                                    }
+                                }
+                            });
+                        }
                     }
                 });
             });

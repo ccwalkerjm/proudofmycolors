@@ -132,7 +132,7 @@
                             <tbody>
                             </tbody>
                         </table>
-                        <a href="/order.html" class="btn btn-default">Continue Shopping</a>
+                        <a href="/products.html" class="btn btn-default">Continue Shopping</a>
                         <button type="button" class="btn btn-primary pull-right" id="set-checkout">Next</button>
                     </div>
                 </div>
@@ -185,7 +185,7 @@
     <script src="/js/aws/moment.min.js"></script>
     <script src="/js/aws/aws-cognito-sdk.min.js"></script>
     <script src="/js/aws/amazon-cognito-identity.min.js"></script>
-    <script src="/js/aws/aws-sdk-2.3.19.min.js"></script>
+    <script src="/js/aws/aws-sdk.min.js"></script>
     <!--Iron Rock Custom Library-->
     <script src="/js/courserv_web_services.js"></script>
     <script src="/js/index.js"></script>
@@ -205,8 +205,7 @@
                     setLoadingState(false);
                     if (err) {
                         return display(err.message, true);
-                    }
-                    resp = JSON.parse(resp);
+                    }                    
                     if (resp.errorMessage) {
                         return display(resp.errorMessage, true);
                     }
