@@ -222,11 +222,12 @@
     <script src="/js/index.js"></script>
 
     <script type="text/javascript">
+        const _ENCODED_MESSAGE =
+            'PHAgaWQ9Im1lc3NhZ2UtY2FwdGlvbiI+WW91ciBwZXJzb25hbCBJbmZvcm1hdGlvbiBpcyB1c2VkIHN0cmljdGx5IHRvIHBlcnNvbmFsaXplIGFuZCBpbXByb3ZlIG91ciBzZXJ2aWNlcyB0byB5b3UuPC9wPgo8Zm9ybSBjbGFzcz0iZm9ybS1ob3Jpem9udGFsIj4KICAgIDxkaXYgY2xhc3M9ImZvcm0tZ3JvdXAiPgogICAgICAgIDxsYWJlbCBjbGFzcz0iY29udHJvbC1sYWJlbCBjb2wtc20tNCIgZm9yPSJnaXZlbl9uYW1lIj5GaXJzdCBOYW1lOjwvbGFiZWw+CiAgICAgICAgPGRpdiBjbGFzcz0iY29sLXNtLTgiPgogICAgICAgICAgICA8c3BhbiBjbGFzcz0iZm9ybS1jb250cm9sIiBpZD0iZ2l2ZW5fbmFtZSI+PC9zcGFuPgogICAgICAgIDwvZGl2PgogICAgPC9kaXY+CiAgICA8ZGl2IGNsYXNzPSJmb3JtLWdyb3VwIj4KICAgICAgICA8bGFiZWwgY2xhc3M9ImNvbnRyb2wtbGFiZWwgY29sLXNtLTQiIGZvcj0iZmFtaWx5X25hbWUiPkxhc3QgTmFtZTo8L2xhYmVsPgogICAgICAgIDxkaXYgY2xhc3M9ImNvbC1zbS04Ij4KICAgICAgICAgICAgPHNwYW4gY2xhc3M9ImZvcm0tY29udHJvbCIgaWQ9ImZhbWlseV9uYW1lIj48L3NwYW4+CiAgICAgICAgPC9kaXY+CiAgICA8L2Rpdj4KICAgIDxkaXYgY2xhc3M9ImZvcm0tZ3JvdXAiPgogICAgICAgIDxsYWJlbCBjbGFzcz0iY29udHJvbC1sYWJlbCBjb2wtc20tNCIgZm9yPSJlbWFpbCI+RW1hbGwgQWRkcmVzczo8L2xhYmVsPgogICAgICAgIDxkaXYgY2xhc3M9ImNvbC1zbS04Ij4KICAgICAgICAgICAgPHNwYW4gY2xhc3M9ImZvcm0tY29udHJvbCIgaWQ9ImVtYWlsIj48L3NwYW4+CiAgICAgICAgPC9kaXY+CiAgICA8L2Rpdj4KICAgIDxkaXYgY2xhc3M9ImZvcm0tZ3JvdXAiPgogICAgICAgIDxsYWJlbCBjbGFzcz0iY29udHJvbC1sYWJlbCBjb2wtc20tNCIgZm9yPSJwaG9uZV9udW1iZXIiPlBob25lIE51bWJlcjo8L2xhYmVsPgogICAgICAgIDxkaXYgY2xhc3M9ImNvbC1zbS04Ij4KICAgICAgICAgICAgPGlucHV0IHR5cGU9Im51bWJlciIgY2xhc3M9ImZvcm0tY29udHJvbCIgaWQ9InBob25lX251bWJlciIgcGxhY2Vob2xkZXI9IkVudGVyIFBob25lIE51bWJlciI+CiAgICAgICAgPC9kaXY+CiAgICA8L2Rpdj4KICAgIDxkaXYgY2xhc3M9ImZvcm0tZ3JvdXAiPgogICAgICAgIDxsYWJlbCBjbGFzcz0iY29udHJvbC1sYWJlbCBjb2wtc20tNCIgZm9yPSJnZW5kZXIiPkdlbmRlcjo8L2xhYmVsPgogICAgICAgIDxkaXYgY2xhc3M9ImNvbC1zbS04Ij4KICAgICAgICAgICAgPHNlbGVjdCB0eXBlPSJudW1iZXIiIGNsYXNzPSJmb3JtLWNvbnRyb2wiIGlkPSJnZW5kZXIiPgogICAgICAgICAgICAgIDxvcHRpb24gdmFsdWU9Im1hbGUiPk1hbGU8L29wdGlvbj4KICAgICAgICAgICAgICA8b3B0aW9uIHZhbHVlPSJmZW1hbGUiPkZlbWFsZTwvb3B0aW9uPgogICAgICAgICAgICA8L3NlbGVjdD4KICAgICAgICA8L2Rpdj4KICAgIDwvZGl2PgogICAgPGRpdiBjbGFzcz0iZm9ybS1ncm91cCI+CiAgICAgICAgPGxhYmVsIGNsYXNzPSJjb250cm9sLWxhYmVsIGNvbC1zbS00IiBmb3I9ImJpcnRoZGF0ZSI+RGF0ZSBvZiBCaXJ0aDo8L2xhYmVsPgogICAgICAgIDxkaXYgY2xhc3M9ImNvbC1zbS04Ij4KICAgICAgICAgICAgPGlucHV0IHR5cGU9ImRhdGUiIGNsYXNzPSJmb3JtLWNvbnRyb2wiIGlkPSJiaXJ0aGRhdGUiIHBsYWNlaG9sZGVyPSJFbnRlciBEYXRlIG9mIEJpcnRoIj4KICAgICAgICA8L2Rpdj4KICAgIDwvZGl2PgogICAgPGRpdiBjbGFzcz0iZm9ybS1ncm91cCI+CiAgICAgICAgPGxhYmVsIGNsYXNzPSJjb250cm9sLWxhYmVsIGNvbC1zbS00IiBmb3I9InBhc3N3b3JkIj5QYXNzd29yZDo8L2xhYmVsPgogICAgICAgIDxkaXYgY2xhc3M9ImNvbC1zbS04Ij4KICAgICAgICAgICAgPGlucHV0IHR5cGU9InBhc3N3b3JkIiBjbGFzcz0iZm9ybS1jb250cm9sIiBpZD0icGFzc3dvcmQiIHBsYWNlaG9sZGVyPSJFbnRlciBwYXNzd29yZCI+CiAgICAgICAgPC9kaXY+CiAgICA8L2Rpdj4KICAgIDxkaXYgY2xhc3M9ImZvcm0tZ3JvdXAiPgogICAgICAgIDxsYWJlbCBjbGFzcz0iY29udHJvbC1sYWJlbCBjb2wtc20tNCIgZm9yPSJjb25maXJtUGFzc3dvcmQiPkNvbmZpcm0gUGFzc3dvcmQ6PC9sYWJlbD4KICAgICAgICA8ZGl2IGNsYXNzPSJjb2wtc20tOCI+CiAgICAgICAgICAgIDxpbnB1dCB0eXBlPSJwYXNzd29yZCIgY2xhc3M9ImZvcm0tY29udHJvbCIgaWQ9ImNvbmZpcm1QYXNzd29yZCIgcGxhY2Vob2xkZXI9IkNvbmZpcm0gcGFzc3dvcmQiPgogICAgICAgIDwvZGl2PgogICAgPC9kaXY+CjwvZm9ybT4K';
         $(document).ready(function() {
             initPage(function(err, obj) {
 
             });
-
             ///login
 
 
@@ -266,11 +267,10 @@
 
 
             $("#login").click(function(e) {
-                var newPasswordText =
-                    '<form class="form-horizontal"> <div class="form-group"> <label class="control-label col-sm-2" for="phone_number">Phone Number:</label> <div class="col-sm-10"> <input type="number" class="form-control" id="phone_number" placeholder="Enter Phone Number"> </div></div><div class="form-group"> <label class="control-label col-sm-2" for="gender">Gender:</label> <div class="col-sm-10"> <select type="number" class="form-control" id="gender"> <option value="male">Male</option> <option value="female">Female</option> </select> </div></div><div class="form-group"> <label class="control-label col-sm-2" for="birthdate">Date of Birth:</label> <div class="col-sm-10"> <input type="date" class="form-control" id="birthdate" placeholder="Enter Date of Birth"> </div></div><div class="form-group"> <label class="control-label col-sm-2" for="password">Password:</label> <div class="col-sm-10"> <input type="password" class="form-control" id="password" placeholder="Enter password"> </div></div><div class="form-group"> <label class="control-label col-sm-2" for="confirmPassword">Confirm Password:</label> <div class="col-sm-10"> <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm password"> </div></div></form>';
                 setLoadingState(true);
                 var username = $("#login_username").val();
                 var password = $("#login_password").val();
+
                 g_courserv_web_service.signoff();
                 g_courserv_web_service.signin(username, password, function(err, checkNewUser, $this, userAttributes, requiredAttributes) {
                     setLoadingState(false);
@@ -279,18 +279,34 @@
                     } else {
                         if (!checkNewUser) location.href = "/index.html";
                         else {
+                            var $message = $('<div/>').html(window.atob(_ENCODED_MESSAGE));
+                            $message.find('#message-caption').html(
+                                'Your personal Information is used strictly to personalize and improve our services to you. Kindly peruse our <a href="#">Privacy Policy</a> and <a href="#">Terms of Use</a>');
+                            $message.find('#given_name').html(userAttributes.given_name);
+                            $message.find('#family_name').html(userAttributes.family_name);
+                            $message.find('#email').html(userAttributes.email);
+
                             bootbox.dialog({
-                                title: "Set New Password",
-                                message: newPasswordText,
+                                title: "Complete your Personal Information",
+                                message: $message.html(),
                                 buttons: {
                                     success: {
                                         label: "Confirm",
                                         className: "btn-success",
                                         callback: function() {
-                                            var newPassword = $('#password').val();
-                                            var confirmPassword = $('#confirmPassword').val();
-                                            if (!newPassword || newPassword != confirmPassword) return false;
-                                            var user = [];
+                                            var newPassword = $('#password', '.bootbox').val();
+                                            var confirmPassword = $('#confirmPassword', '.bootbox').val();
+                                            var gender = $('#gender', '.bootbox').val();
+                                            var birthdate = $('#birthdate', '.bootbox').val();
+                                            var phone_number = $('#phone_number', '.bootbox').val();
+                                            if (!newPassword || newPassword != confirmPassword) {
+                                                alert('Passwords Not Matched');
+                                                return false;
+                                            }
+                                            var user = {};
+                                            user.gender = gender;
+                                            user.birthdate = birthdate;
+                                            user.phone_number = '+' + parseInt(phone_number).toString();
                                             g_courserv_web_service.completeChallenge(newPassword, user, $this);
                                         }
                                     }

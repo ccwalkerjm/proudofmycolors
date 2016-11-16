@@ -203,7 +203,7 @@
                         return parseFloat(b.created) - parseFloat(a.created);
                     });
                     var $table = $('#orders').empty();
-                    var $thead = $('<thead/>').append('<tr><th  class="col-md-2">Date/Time</th><th class="col-md-6">Goods</th><th  class="col-md-2">Status</th><th  class="col-md-2" style="text-align: right">Cost</th></tr>');
+                    var $thead = $('<thead/>').append('<tr><th  class="col-md-3">Date/Time</th><th class="col-md-6">Goods</th><th  class="col-md-2">Status</th><th  class="col-md-1" style="text-align: right">Cost</th></tr>');
                     $table.append($thead);
                     var $tbody = $('<tbody/>');
                     $.each(items, function(idx, item) {
@@ -229,6 +229,7 @@
                 var rawList = $this.data('source');
                 var orderList = decodeURIComponent(rawList);
                 orderList = JSON.parse(orderList);
+                orderList = JSON.parse(orderList);
                 var $td = $(this).parent();
                 var $div = $td.find('div');
                 if ($div.html()) {
@@ -245,8 +246,8 @@
                             '</td><td style="text-align: right">' + accounting.formatMoney(item.M.amt.N) +
                             '</td><td>' + item.M.qty.N +
                             '</td><td style="text-align: right">' + accounting.formatMoney(item.M.amt.N * item.M.qty.N) + '</td></tr>');
-                        $tbody.appendTo($table);
                     });
+                    $tbody.appendTo($table);
                     $div.append($table);
                 }
 

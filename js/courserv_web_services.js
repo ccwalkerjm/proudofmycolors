@@ -286,7 +286,7 @@ var courserv_web_service = (function() {
             },
             onFailure: function(err) {
                 //_cognitoUser = null;
-                callback(err, $this);
+                callback(err);
             },
             newPasswordRequired: function(userAttributes, requiredAttributes) {
                 callback(null, true, this, userAttributes, requiredAttributes);
@@ -493,10 +493,16 @@ var courserv_web_service = (function() {
                 for (var i = 0; i < payload.Items.length; i++) {
                     var order = {};
                     order.amt = getN(payload.Items[i].amt);
+                    order.items_amt = getN(payload.Items[i].items_amt);
+                    order.ship_amt = getN(payload.Items[i].ship_amt);
+                    order.tax_amt = getN(payload.Items[i].tax_amt);
                     order.status = getS(payload.Items[i].status);
                     order.created = parseInt(getN(payload.Items[i].created));
                     order.items = JSON.stringify(payload.Items[i].items.L);
                     order.orderNo = getS(payload.Items[i].orderNo);
+                    order.trackingNo = getS(payload.Items[i].trackingNo);
+                    order.timeUpdated = getS(payload.Items[i].timeUpdated);
+                    order.shippingAddress = payload.Items[i].shippingAddress.M;
                     orders.push(order);
                 }
                 callback(null, orders);
