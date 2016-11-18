@@ -464,7 +464,7 @@ var courserv_web_service = (function() {
                     order.status = getS(payload.Items[i].status);
                     order.created = parseInt(getN(payload.Items[i].created));
                     order.items = JSON.stringify(payload.Items[i].items.L);
-                    order.orderNo = getS(payload.Items[i].orderNo);
+                    order.orderNo = getN(payload.Items[i].orderNo);
                     orders.push(order);
                 }
                 callback(null, orders);
@@ -499,7 +499,7 @@ var courserv_web_service = (function() {
                     order.status = getS(payload.Items[i].status);
                     order.created = parseInt(getN(payload.Items[i].created));
                     order.items = JSON.stringify(payload.Items[i].items.L);
-                    order.orderNo = getS(payload.Items[i].orderNo);
+                    order.orderNo = getN(payload.Items[i].orderNo);
                     order.trackingNo = getS(payload.Items[i].trackingNo);
                     order.timeUpdated = getS(payload.Items[i].timeUpdated);
                     order.shippingAddress = payload.Items[i].shippingAddress.M;
@@ -509,6 +509,28 @@ var courserv_web_service = (function() {
             });
         });
     };
+
+    //manage orders
+    courserv_web_service.prototype.initTracking = function(input, callback) {
+        var jsonRequest = {};
+        jsonRequest.request = {};
+        jsonRequest.request.cmd = 'initTracking';
+        jsonRequest.request.domainKey = input.domainKey;
+        jsonRequest.request.orderNo = input.orderNo;
+        jsonRequest.request.trackingNo = input.trackingNo;
+        jsonRequest.auth = _getAuth();
+        var params = {
+            FunctionName: 'courserv_manage_site',
+            Payload: JSON.stringify(jsonRequest)
+        };
+        _lambda.invoke(params, function(err, data) {
+            processLambdaData(err, data, function(newErr, role) {
+                if (newErr) return callback(newErr);
+                callback(null);
+            });
+        });
+    };
+
 
     //update paypal credentials
     courserv_web_service.prototype.updateEmailForwarder = function(domainKey, emailForwarders, callback) {

@@ -275,14 +275,15 @@
                     _orders = items;
 
                     var $table = $('#orders').empty();
-                    var $thead = $('<thead/>').append('<tr><th  class="col-md-2">Date/Time</th><th class="col-md-6">Goods</th><th  class="col-md-2">Status</th><th  class="col-md-2" style="text-align: right">Cost</th></tr>');
+                    var $thead = $('<thead/>').append('<tr><th class="col-md-1">No</th><th  class="col-md-2">Date</th><th class="col-md-6">Goods</th><th  class="col-md-2">Status</th><th  class="col-md-1" style="text-align: right">Cost</th></tr>');
                     $table.append($thead);
                     var $tbody = $('<tbody/>');
                     $.each(items, function(idx, item) {
                         var $tr = $('<tr/>');
                         //created
                         var dt = new Date(item.created);
-                        $tr.append('<td>' + moment(dt).format('YYYY-MM-DD HH:mm') + '</td>');
+                        $tr.append('<td>' + item.orderNo + '</td>');
+                        $tr.append('<td>' + moment(dt).format('YYYY-MM-DD') + '</td>');
                         $tr.append('<td><a class="details" href="#" id="' + item.orderNo + '">' + details_off + '</a><div></div></td>');
                         $tr.append('<td>' + item.status + '</td>');
                         $tr.append('<td style="text-align: right">' + accounting.formatMoney(item.amt) + '</td>');

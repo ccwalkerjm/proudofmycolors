@@ -210,6 +210,7 @@
                 //comments.appendTo(details);
                 details.append('<div id="confirmedInstructions"></div><button class="btn btn-primary" id="confirmOrder">Kindly Press to confirm the Payment. Note the details below;</button><hr/>');
                 var dl = $('<dl/>').addClass('dl-horizontal');
+                dl.append('<dt>Order No</dt><dd>' + _customerDetails.orderNo + '</dd>');
                 dl.append('<dt></dt><dd><b>Personal Info</b></dd>');
                 dl.append('<dt>First Name</dt><dd>' + _customerDetails.FIRSTNAME + '</dd>');
                 dl.append('<dt>Last Name</dt><dd>' + _customerDetails.LASTNAME + '</dd>');
