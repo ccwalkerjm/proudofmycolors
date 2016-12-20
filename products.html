@@ -76,7 +76,7 @@
         <div class="row">
             <div class="col-md-6 col-sm-6 col-xs-6">
                 <div class="logo">
-                    <img src="img/logos/Proud-O-My-Colours_TEXTONLY-02-02_small.png" class="img-responsive" alt="Proud Of My Colors">
+                    <a href="index.html"><img src="img/logos/Proud-O-My-Colours_TEXTONLY-02-02_small.png" class="img-responsive" alt="Proud Of My Colors"></a>
                 </div>
             </div>
             <div class="col-md-6 col-sm-6 col-xs-6">
@@ -103,22 +103,10 @@
 
         <!-- begin:article -->
         <div class="row">
-            <!-- begin:sidebar -->
-            <div class="col-md-3 col-sm-4 sidebar">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="widget" id="shoppingCartWidget">
-                        </div>
-                        <!-- break -->
-                        <div class="widget" id="shoppingCartCheckout">
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- end:sidebar -->
+
 
             <!-- begin:content -->
-            <div class="col-md-9 col-sm-8 content vertical-line">
+            <div class="col-md-9 col-sm-8">
                 <div class="row">
                     <div class="col-md-12">
                         <h3 id="content-header"></h3>
@@ -145,6 +133,20 @@
                     </div>
                 </div>
             </div>
+            <!-- begin:sidebar -->
+            <div class="col-md-3 col-sm-4 sidebar">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="widget" id="shoppingCartWidget">
+                        </div>
+                        <!-- break -->
+                        <div class="widget" id="shoppingCartCheckout">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end:sidebar -->
+
             <!-- end:content -->
         </div>
         <!-- end:article -->
@@ -286,7 +288,7 @@
                 var productItem = $('<div/>').addClass("thumbnail product-item").data("product_id", item.productId);
                 var img = $("<img/>").addClass("item_thumb").attr("src", item.smallImageName);
                 img.appendTo(productItem);
-                var productName = $('<span/>').addClass("item_name").text(item.productName);
+                var productName = $('<span/>').addClass("item_name").text(item.productName).css("font-weight","bold");
                 productName.appendTo(productItem);
                 var productPrice = $('<span/>').addClass("item_price").text(accounting.formatMoney(item.price));
                 productPrice.appendTo(productItem);
