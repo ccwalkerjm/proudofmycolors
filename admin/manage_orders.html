@@ -331,7 +331,7 @@
                 $body.find('#amt').val(accounting.formatMoney(selectOrder.amt));
 
                 var created = new Date(selectOrder.created);
-                var updated = new Date(selectOrder.timeUpdated);
+                var updated = new Date(selectOrder.timeUpdated || selectOrder.created);
                 $body.find('#created').val(created);
                 $body.find('#items_amt').val(accounting.formatMoney(selectOrder.items_amt));
                 $body.find('#customerId').val(selectOrder.customerId);
