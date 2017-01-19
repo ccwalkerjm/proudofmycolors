@@ -250,6 +250,9 @@ function updateShoppingcartDisplay() {
             //img cell
             var imgCell = $('<td/>');
             var img = $('<img/>').addClass('img-cart').attr('src', x_shopping_cart_list[k].smallImageName);
+            img.attr("data-zoom-image", x_shopping_cart_list[k].xLargeImageName || x_shopping_cart_list[k].largeImageName);
+            img.elevateZoom({zoomWindowPosition:	1, responsive: true});
+
             img.appendTo(imgCell);
             imgCell.appendTo($tr);
 
@@ -462,17 +465,20 @@ function DisplayProductDetail(productId) {
         _productModal.find('#productId').val(JSON.stringify(productItem));
         _productModal.find('#productDescription').html('<p>' + productItem.description + '</p>');
         _productModal.find('#productName').text(productItem.productName);
-        _productModal.find('#productImg').attr("src", productItem.largeImageName);
+        var $img = _productModal.find('#productImg').attr("src", productItem.largeImageName);
+        $img.attr("data-zoom-image", productItem.xLargeImageName || productItem.largeImageName);
+
+        $img.elevateZoom({zoomWindowPosition:	9, responsive: true});
+
         _productModal.find('.item_price').text(accounting.formatMoney(productItem.price));
+
 
         var sizes = _productModal.find('.item_size').empty();
         sizes.append('<option value="S">S</option>');
         sizes.append('<option value="M">M</option>');
         sizes.append('<option value="L">L</option>');
         sizes.append('<option value="XL">XL</option>');
-        if (productItem.category1 == "male") {
-            sizes.append('<option value="XXL">XXL</option>');
-        }
+        sizes.append('<option value="XXL">XXL</option>');
 
         if (productItem.availability === 0) {
             _productModal.find('#availability').text("Out of Stock");

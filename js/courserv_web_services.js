@@ -716,6 +716,7 @@ var courserv_web_service = (function() {
                     result.price = getN(data.Items[i].price);
                     result.smallImageName = getS(data.Items[i].smallImageName);
                     result.largeImageName = getS(data.Items[i].largeImageName);
+                    result.xLargeImageName = getS(data.Items[i].xLargeImageName);
                     result.description = getS(data.Items[i].description);
                     result.availability = getN(data.Items[i].availability);
 
@@ -753,6 +754,7 @@ var courserv_web_service = (function() {
                     result.productName = data.Item.productName.S ? data.Item.productName.S : '';
                     result.smallImageName = data.Item.smallImageName ? data.Item.smallImageName.S : '';
                     result.largeImageName = data.Item.largeImageName ? data.Item.largeImageName.S : '';
+                    result.xLargeImageName = data.Item.xLargeImageName ? data.Item.xLargeImageName.S : '';
                     result.description = getS(data.Item.description);
                     result.category1 = getS(data.Item.category1);
                     result.availability = getN(data.Item.availability);

@@ -9,7 +9,7 @@
     <meta name="author" content="courserv">
     <link rel="shortcut icon" href="img/favicon.png">
 
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
 
     <title>ProudOfMyColors</title>
@@ -242,8 +242,11 @@
             $('#dateFrom').val(fromDate.toISOString().slice(0, 10));
             $('#dateTo').val(toDate.toISOString().slice(0, 10));
 
+            var _products = [];
+
             initPage(function(err, obj) {
                 manageOrders(obj);
+                listProducts(obj);
             });
 
             function manageOrders(obj) {
@@ -275,13 +278,15 @@
                     _orders = items;
 
                     var $table = $('#orders').empty();
-                    var $thead = $('<thead/>').append('<tr><th class="col-md-1">No</th><th  class="col-md-2">Date</th><th class="col-md-6">Goods</th><th  class="col-md-2">Status</th><th  class="col-md-1" style="text-align: right">Cost</th></tr>');
+                    var $thead = $('<thead/>').append(
+                        '<tr><th class="col-md-1">No</th><th  class="col-md-2">Date</th><th class="col-md-6">Goods</th><th  class="col-md-2">Status</th><th  class="col-md-1" style="text-align: right">Cost</th></tr>');
                     $table.append($thead);
                     var $tbody = $('<tbody/>');
                     $.each(items, function(idx, item) {
                         var $tr = $('<tr/>');
                         //created
                         var dt = new Date(item.created);
+
                         $tr.append('<td>' + item.orderNo + '</td>');
                         $tr.append('<td>' + moment(dt).format('YYYY-MM-DD') + '</td>');
                         $tr.append('<td><a class="details" href="#" id="' + item.orderNo + '">' + details_off + '</a><div></div></td>');
@@ -319,8 +324,11 @@
                 var $tbody = $('<tbody/>');
 
                 $.each(JSON.parse(selectOrder.items), function(idx, x) {
+                    var itemProduct = _products.find(function(y) {
+                        return parseInt(y.productId) === parseInt(x.M.productId.N);
+                    });
                     $tbody.append('<tr><td>' + (idx + 1) +
-                        '</td><td>' + x.M.name.S +
+                        '</td><td>' + x.M.name.S + ' Gender:' + itemProduct.category1.toUpperCase() + " Country:" + itemProduct.category0 +
                         '</td><td style="text-align: right">' + accounting.formatMoney(x.M.amt.N) +
                         '</td><td>' + x.M.qty.N +
                         '</td><td style="text-align: right">' + accounting.formatMoney(x.M.amt.N * x.M.qty.N) + '</td></tr>');
@@ -370,6 +378,21 @@
                     manageOrders();
                 });
             })
+
+
+            function listProducts(obj) {
+                obj = obj ? obj : g_courserv_web_service; //
+                setLoadingState(true);
+                g_courserv_web_service.listProducts(g_domainKey, function(err, items) {
+                    setLoadingState(false);
+                    if (err) {
+
+                    } else {
+                        _products = items;
+                    }
+                });
+            }
+
 
 
         });

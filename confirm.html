@@ -119,6 +119,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <h3>Payment Confirmation</h3>
+                        <div class="message"></div>
                         <hr />
                         <div id="details"></div>
                     </div>
@@ -208,7 +209,7 @@
                 var details = $('#details');
                 //var comments = $('<p/>').html('The order details are shown below. An email will be sent with details on how to track the goods.');
                 //comments.appendTo(details);
-                details.append('<div id="confirmedInstructions"></div><button class="btn btn-primary" id="confirmOrder">Kindly Press to confirm the Payment. Note the details below;</button><hr/>');
+                details.append('<div id="confirmedInstructions"></div><button class="btn btn-success" id="confirmOrder">Kindly Press to confirm the Payment. Note the details below;</button><hr/>');
                 var dl = $('<dl/>').addClass('dl-horizontal');
                 dl.append('<dt>Order No</dt><dd>' + _customerDetails.orderNo + '</dd>');
                 dl.append('<dt></dt><dd><b>Personal Info</b></dd>');
@@ -254,9 +255,10 @@
                         emptyShoppingCart();
                         $('#details').find('#confirmOrder').hide();
                         $('#details').find('#confirmedInstructions').html(
-                            '<p>Thank your for your Business. Shipping details will be emailed to you shortly. A confirmation email is also emailed to you so that you can officially become one of our distinquished members.  A member has many priviledegs including the ability to easily track your goods.</p>'
+                            '<p><mark>Thank your for your Business. Shipping details will be emailed to you shortly. A confirmation email is also emailed to you so that you can officially become one of our distinquished members.  A member has many priviledegs including the ability to easily track your goods.</mark></p>'
                         )
-                    }else if(confirmInfo.errorMessage) alert(confirmInfo.errorMessage);
+                        
+                    }else if(confirmInfo.errorMessage) display(confirmInfo.errorMessage, true);
                 });
             });
 
